@@ -1,0 +1,3 @@
+/Users/zsheldon8434/dev/td/towerdefense/build/macos/CMakeFiles/app.dir
+/Users/zsheldon8434/dev/td/towerdefense/build/macos/CMakeFiles/edit_cache.dir
+/Users/zsheldon8434/dev/td/towerdefense/build/macos/CMakeFiles/rebuild_cache.dir
