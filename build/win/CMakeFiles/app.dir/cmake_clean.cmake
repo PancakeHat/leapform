@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.obj.d"
   "CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.obj"
   "CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.obj.d"
+  "CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.obj"
+  "CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.obj.d"
   "CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.obj"
   "CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.obj.d"
   "CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.obj"

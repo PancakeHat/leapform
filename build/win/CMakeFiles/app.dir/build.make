@@ -128,11 +128,26 @@ CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.s"
 	C:\mingw64-msvcrt\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\dev\platformer game\include\rlimgui\imgui_draw.cpp" -o CMakeFiles\app.dir\include\rlimgui\imgui_draw.cpp.s
 
+CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.obj: CMakeFiles/app.dir/flags.make
+CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.obj: CMakeFiles/app.dir/includes_CXX.rsp
+CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.obj: D:/dev/platformer\ game/include/rlimgui/imgui_stdlib.cpp
+CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.obj: CMakeFiles/app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.obj"
+	C:\mingw64-msvcrt\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.obj -MF CMakeFiles\app.dir\include\rlimgui\imgui_stdlib.cpp.obj.d -o CMakeFiles\app.dir\include\rlimgui\imgui_stdlib.cpp.obj -c "D:\dev\platformer game\include\rlimgui\imgui_stdlib.cpp"
+
+CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.i"
+	C:\mingw64-msvcrt\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\dev\platformer game\include\rlimgui\imgui_stdlib.cpp" > CMakeFiles\app.dir\include\rlimgui\imgui_stdlib.cpp.i
+
+CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.s"
+	C:\mingw64-msvcrt\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\dev\platformer game\include\rlimgui\imgui_stdlib.cpp" -o CMakeFiles\app.dir\include\rlimgui\imgui_stdlib.cpp.s
+
 CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.obj: CMakeFiles/app.dir/flags.make
 CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.obj: CMakeFiles/app.dir/includes_CXX.rsp
 CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.obj: D:/dev/platformer\ game/include/rlimgui/imgui_tables.cpp
 CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.obj: CMakeFiles/app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.obj"
 	C:\mingw64-msvcrt\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.obj -MF CMakeFiles\app.dir\include\rlimgui\imgui_tables.cpp.obj.d -o CMakeFiles\app.dir\include\rlimgui\imgui_tables.cpp.obj -c "D:\dev\platformer game\include\rlimgui\imgui_tables.cpp"
 
 CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.i: cmake_force
@@ -147,7 +162,7 @@ CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.obj: CMakeFiles/app.dir/fla
 CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.obj: CMakeFiles/app.dir/includes_CXX.rsp
 CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.obj: D:/dev/platformer\ game/include/rlimgui/imgui_widgets.cpp
 CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.obj: CMakeFiles/app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.obj"
 	C:\mingw64-msvcrt\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.obj -MF CMakeFiles\app.dir\include\rlimgui\imgui_widgets.cpp.obj.d -o CMakeFiles\app.dir\include\rlimgui\imgui_widgets.cpp.obj -c "D:\dev\platformer game\include\rlimgui\imgui_widgets.cpp"
 
 CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.i: cmake_force
@@ -162,7 +177,7 @@ CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.obj: CMakeFiles/app.dir/flags.mak
 CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.obj: CMakeFiles/app.dir/includes_CXX.rsp
 CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.obj: D:/dev/platformer\ game/include/rlimgui/rlImGui.cpp
 CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.obj: CMakeFiles/app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.obj"
 	C:\mingw64-msvcrt\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.obj -MF CMakeFiles\app.dir\include\rlimgui\rlImGui.cpp.obj.d -o CMakeFiles\app.dir\include\rlimgui\rlImGui.cpp.obj -c "D:\dev\platformer game\include\rlimgui\rlImGui.cpp"
 
 CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.i: cmake_force
@@ -179,6 +194,7 @@ app_OBJECTS = \
 "CMakeFiles/app.dir/include/rlimgui/imgui.cpp.obj" \
 "CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.obj" \
 "CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.obj" \
+"CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.obj" \
 "CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.obj" \
 "CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.obj" \
 "CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.obj"
@@ -190,6 +206,7 @@ app.exe: CMakeFiles/app.dir/src/main.cpp.obj
 app.exe: CMakeFiles/app.dir/include/rlimgui/imgui.cpp.obj
 app.exe: CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.obj
 app.exe: CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.obj
+app.exe: CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.obj
 app.exe: CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.obj
 app.exe: CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.obj
 app.exe: CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.obj
@@ -198,7 +215,7 @@ app.exe: D:/dev/platformer\ game/lib/win/libraylib.a
 app.exe: CMakeFiles/app.dir/linkLibs.rsp
 app.exe: CMakeFiles/app.dir/objects1.rsp
 app.exe: CMakeFiles/app.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable app.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable app.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\app.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

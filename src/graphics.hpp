@@ -23,7 +23,14 @@ void LoadSpriteToVector(std::string fileName, std::string id, std::vector<Sprite
 
     Image i = LoadImage(overrideName.c_str());
     if(i.width == 0)
-        i = LoadImage(normalName.c_str());
+    {
+        i = LoadImage(normalName.c_str()); 
+        std::cout << "GAME: Registered texture " << normalName << "\n";
+    }
+    else 
+    {
+        std::cout << "GAME: Registered texture " << overrideName << "\n";
+    }
 
     sprite.width = i.width;
     sprite.height = i.height;
@@ -56,6 +63,32 @@ void DrawSpriteFromVector(std::string id, Vector2 position, Vector2 size, std::v
     Rectangle dest = {position.x, position.y, size.x, size.y};
 
     DrawTexturePro(s.img, src, dest, {0, 0}, 0, WHITE);
+}
+
+void DrawSpriteFromVectorRotation(std::string id, Vector2 position, Vector2 size, std::vector<Sprite> sprites, float rotation)
+{
+    if(id == "")
+        return;
+
+    Sprite s = GetSpriteFromVector(id, sprites);
+
+    Rectangle src = {0, 0, (float)s.width, (float)s.height};
+    Rectangle dest = {position.x + 20, position.y + 20, size.x, size.y};
+
+    DrawTexturePro(s.img, src, dest, {20, 20}, rotation, WHITE);
+}
+
+void DrawSpriteFromVectorAlpha(std::string id, Vector2 position, Vector2 size, std::vector<Sprite> sprites, unsigned char opacity)
+{
+    if(id == "")
+        return;
+
+    Sprite s = GetSpriteFromVector(id, sprites);
+
+    Rectangle src = {0, 0, (float)s.width, (float)s.height};
+    Rectangle dest = {position.x, position.y, size.x, size.y};
+
+    DrawTexturePro(s.img, src, dest, {0, 0}, 0, Color{opacity, opacity, opacity, opacity});
 }
 
 

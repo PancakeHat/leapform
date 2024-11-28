@@ -200,6 +200,30 @@ include/rlimgui/imgui_draw.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.s
 .PHONY : include/rlimgui/imgui_draw.cpp.s
 
+include/rlimgui/imgui_stdlib.obj: include/rlimgui/imgui_stdlib.cpp.obj
+.PHONY : include/rlimgui/imgui_stdlib.obj
+
+# target to build an object file
+include/rlimgui/imgui_stdlib.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.obj
+.PHONY : include/rlimgui/imgui_stdlib.cpp.obj
+
+include/rlimgui/imgui_stdlib.i: include/rlimgui/imgui_stdlib.cpp.i
+.PHONY : include/rlimgui/imgui_stdlib.i
+
+# target to preprocess a source file
+include/rlimgui/imgui_stdlib.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.i
+.PHONY : include/rlimgui/imgui_stdlib.cpp.i
+
+include/rlimgui/imgui_stdlib.s: include/rlimgui/imgui_stdlib.cpp.s
+.PHONY : include/rlimgui/imgui_stdlib.s
+
+# target to generate assembly for a file
+include/rlimgui/imgui_stdlib.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.s
+.PHONY : include/rlimgui/imgui_stdlib.cpp.s
+
 include/rlimgui/imgui_tables.obj: include/rlimgui/imgui_tables.cpp.obj
 .PHONY : include/rlimgui/imgui_tables.obj
 
@@ -314,6 +338,9 @@ help:
 	@echo ... include/rlimgui/imgui_draw.obj
 	@echo ... include/rlimgui/imgui_draw.i
 	@echo ... include/rlimgui/imgui_draw.s
+	@echo ... include/rlimgui/imgui_stdlib.obj
+	@echo ... include/rlimgui/imgui_stdlib.i
+	@echo ... include/rlimgui/imgui_stdlib.s
 	@echo ... include/rlimgui/imgui_tables.obj
 	@echo ... include/rlimgui/imgui_tables.i
 	@echo ... include/rlimgui/imgui_tables.s
