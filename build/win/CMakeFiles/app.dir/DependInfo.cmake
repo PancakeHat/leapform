@@ -8,6 +8,12 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "D:/dev/platformer game/include/rlimgui/imgui.cpp" "CMakeFiles/app.dir/include/rlimgui/imgui.cpp.obj" "gcc" "CMakeFiles/app.dir/include/rlimgui/imgui.cpp.obj.d"
+  "D:/dev/platformer game/include/rlimgui/imgui_demo.cpp" "CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.obj" "gcc" "CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.obj.d"
+  "D:/dev/platformer game/include/rlimgui/imgui_draw.cpp" "CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.obj" "gcc" "CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.obj.d"
+  "D:/dev/platformer game/include/rlimgui/imgui_tables.cpp" "CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.obj" "gcc" "CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.obj.d"
+  "D:/dev/platformer game/include/rlimgui/imgui_widgets.cpp" "CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.obj" "gcc" "CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.obj.d"
+  "D:/dev/platformer game/include/rlimgui/rlImGui.cpp" "CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.obj" "gcc" "CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.obj.d"
   "D:/dev/platformer game/src/main.cpp" "CMakeFiles/app.dir/src/main.cpp.obj" "gcc" "CMakeFiles/app.dir/src/main.cpp.obj.d"
   )
 

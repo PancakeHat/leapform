@@ -163,25 +163,20 @@ CMakeFiles/app.dir/src/main.cpp.obj: D:\dev\platformer\ game\src\main.cpp \
  C:/mingw64-msvcrt/include/c++/14.2.0/bits/ostream.tcc \
  C:/mingw64-msvcrt/include/c++/14.2.0/istream \
  C:/mingw64-msvcrt/include/c++/14.2.0/bits/istream.tcc \
- C:/mingw64-msvcrt/include/c++/14.2.0/cmath \
- C:/mingw64-msvcrt/x86_64-w64-mingw32/include/math.h \
- C:/mingw64-msvcrt/include/c++/14.2.0/bits/specfun.h \
- C:/mingw64-msvcrt/include/c++/14.2.0/limits \
- C:/mingw64-msvcrt/include/c++/14.2.0/tr1/gamma.tcc \
- C:/mingw64-msvcrt/include/c++/14.2.0/tr1/special_function_util.h \
- C:/mingw64-msvcrt/include/c++/14.2.0/tr1/bessel_function.tcc \
- C:/mingw64-msvcrt/include/c++/14.2.0/tr1/beta_function.tcc \
- C:/mingw64-msvcrt/include/c++/14.2.0/tr1/ell_integral.tcc \
- C:/mingw64-msvcrt/include/c++/14.2.0/tr1/exp_integral.tcc \
- C:/mingw64-msvcrt/include/c++/14.2.0/tr1/hypergeometric.tcc \
- C:/mingw64-msvcrt/include/c++/14.2.0/tr1/legendre_function.tcc \
- C:/mingw64-msvcrt/include/c++/14.2.0/tr1/modified_bessel_func.tcc \
- C:/mingw64-msvcrt/include/c++/14.2.0/tr1/poly_hermite.tcc \
- C:/mingw64-msvcrt/include/c++/14.2.0/tr1/poly_laguerre.tcc \
- C:/mingw64-msvcrt/include/c++/14.2.0/tr1/riemann_zeta.tcc \
+ C:/mingw64-msvcrt/include/c++/14.2.0/algorithm \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_algo.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/algorithmfwd.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_heap.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/uniform_int_dist.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_tempbuf.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/ranges_algo.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/ranges_algobase.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/pstl/glue_algorithm_defs.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/pstl/execution_defs.h \
  C:/mingw64-msvcrt/include/c++/14.2.0/format \
  C:/mingw64-msvcrt/include/c++/14.2.0/array \
  C:/mingw64-msvcrt/include/c++/14.2.0/charconv \
+ C:/mingw64-msvcrt/include/c++/14.2.0/limits \
  C:/mingw64-msvcrt/include/c++/14.2.0/locale \
  C:/mingw64-msvcrt/include/c++/14.2.0/bits/locale_facets_nonio.h \
  C:/mingw64-msvcrt/include/c++/14.2.0/ctime \
@@ -195,12 +190,55 @@ CMakeFiles/app.dir/src/main.cpp.obj: D:\dev\platformer\ game\src\main.cpp \
  C:/mingw64-msvcrt/include/c++/14.2.0/span \
  C:/mingw64-msvcrt/include/c++/14.2.0/variant \
  C:/mingw64-msvcrt/include/c++/14.2.0/bits/parse_numbers.h \
- C:/mingw64-msvcrt/include/c++/14.2.0/bits/ranges_algobase.h \
  C:/mingw64-msvcrt/include/c++/14.2.0/bits/unicode.h \
  C:/mingw64-msvcrt/include/c++/14.2.0/cstdint \
- C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_algo.h \
- C:/mingw64-msvcrt/include/c++/14.2.0/bits/algorithmfwd.h \
- C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_heap.h \
- C:/mingw64-msvcrt/include/c++/14.2.0/bits/uniform_int_dist.h \
- C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_tempbuf.h \
- C:/mingw64-msvcrt/include/c++/14.2.0/bits/unicode-data.h
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/unicode-data.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/filesystem \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/fs_fwd.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/chrono.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/ratio \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/fs_path.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/iomanip \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/quoted_string.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/sstream \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/sstream.tcc \
+ C:/mingw64-msvcrt/include/c++/14.2.0/codecvt \
+ C:/mingw64-msvcrt/include/c++/14.2.0/ext/concurrence.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/shared_ptr.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/shared_ptr_base.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/allocated_ptr.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/unique_ptr.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/ext/aligned_buffer.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/align.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/fs_dir.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/fs_ops.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/fstream \
+ C:/mingw64-msvcrt/include/c++/14.2.0/x86_64-w64-mingw32/bits/basic_file.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++io.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/fstream.tcc \
+ C:/mingw64-msvcrt/include/c++/14.2.0/cmath \
+ C:/mingw64-msvcrt/x86_64-w64-mingw32/include/math.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/specfun.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/tr1/gamma.tcc \
+ C:/mingw64-msvcrt/include/c++/14.2.0/tr1/special_function_util.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/tr1/bessel_function.tcc \
+ C:/mingw64-msvcrt/include/c++/14.2.0/tr1/beta_function.tcc \
+ C:/mingw64-msvcrt/include/c++/14.2.0/tr1/ell_integral.tcc \
+ C:/mingw64-msvcrt/include/c++/14.2.0/tr1/exp_integral.tcc \
+ C:/mingw64-msvcrt/include/c++/14.2.0/tr1/hypergeometric.tcc \
+ C:/mingw64-msvcrt/include/c++/14.2.0/tr1/legendre_function.tcc \
+ C:/mingw64-msvcrt/include/c++/14.2.0/tr1/modified_bessel_func.tcc \
+ C:/mingw64-msvcrt/include/c++/14.2.0/tr1/poly_hermite.tcc \
+ C:/mingw64-msvcrt/include/c++/14.2.0/tr1/poly_laguerre.tcc \
+ C:/mingw64-msvcrt/include/c++/14.2.0/tr1/riemann_zeta.tcc \
+ D:/dev/PLATFO~2/include/rlimgui/rlImGui.h \
+ D:/dev/PLATFO~2/include/rlimgui/extras/IconsFontAwesome6.h \
+ D:/dev/PLATFO~2/include/rlimgui/imgui.h \
+ D:/dev/PLATFO~2/include/rlimgui/imconfig.h \
+ C:/mingw64-msvcrt/lib/gcc/x86_64-w64-mingw32/14.2.0/include/float.h \
+ C:/mingw64-msvcrt/x86_64-w64-mingw32/include/float.h \
+ C:/mingw64-msvcrt/x86_64-w64-mingw32/include/string.h \
+ C:/mingw64-msvcrt/x86_64-w64-mingw32/include/sec_api/string_s.h \
+ C:/mingw64-msvcrt/x86_64-w64-mingw32/include/assert.h \
+ D:\dev\platformer\ game\src\editor.hpp \
+ D:/dev/PLATFO~2/include/rlimgui/imgui_stdlib.h

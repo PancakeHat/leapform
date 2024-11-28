@@ -128,6 +128,150 @@ app/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/build
 .PHONY : app/fast
 
+include/rlimgui/imgui.obj: include/rlimgui/imgui.cpp.obj
+.PHONY : include/rlimgui/imgui.obj
+
+# target to build an object file
+include/rlimgui/imgui.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui.cpp.obj
+.PHONY : include/rlimgui/imgui.cpp.obj
+
+include/rlimgui/imgui.i: include/rlimgui/imgui.cpp.i
+.PHONY : include/rlimgui/imgui.i
+
+# target to preprocess a source file
+include/rlimgui/imgui.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui.cpp.i
+.PHONY : include/rlimgui/imgui.cpp.i
+
+include/rlimgui/imgui.s: include/rlimgui/imgui.cpp.s
+.PHONY : include/rlimgui/imgui.s
+
+# target to generate assembly for a file
+include/rlimgui/imgui.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui.cpp.s
+.PHONY : include/rlimgui/imgui.cpp.s
+
+include/rlimgui/imgui_demo.obj: include/rlimgui/imgui_demo.cpp.obj
+.PHONY : include/rlimgui/imgui_demo.obj
+
+# target to build an object file
+include/rlimgui/imgui_demo.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.obj
+.PHONY : include/rlimgui/imgui_demo.cpp.obj
+
+include/rlimgui/imgui_demo.i: include/rlimgui/imgui_demo.cpp.i
+.PHONY : include/rlimgui/imgui_demo.i
+
+# target to preprocess a source file
+include/rlimgui/imgui_demo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.i
+.PHONY : include/rlimgui/imgui_demo.cpp.i
+
+include/rlimgui/imgui_demo.s: include/rlimgui/imgui_demo.cpp.s
+.PHONY : include/rlimgui/imgui_demo.s
+
+# target to generate assembly for a file
+include/rlimgui/imgui_demo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.s
+.PHONY : include/rlimgui/imgui_demo.cpp.s
+
+include/rlimgui/imgui_draw.obj: include/rlimgui/imgui_draw.cpp.obj
+.PHONY : include/rlimgui/imgui_draw.obj
+
+# target to build an object file
+include/rlimgui/imgui_draw.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.obj
+.PHONY : include/rlimgui/imgui_draw.cpp.obj
+
+include/rlimgui/imgui_draw.i: include/rlimgui/imgui_draw.cpp.i
+.PHONY : include/rlimgui/imgui_draw.i
+
+# target to preprocess a source file
+include/rlimgui/imgui_draw.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.i
+.PHONY : include/rlimgui/imgui_draw.cpp.i
+
+include/rlimgui/imgui_draw.s: include/rlimgui/imgui_draw.cpp.s
+.PHONY : include/rlimgui/imgui_draw.s
+
+# target to generate assembly for a file
+include/rlimgui/imgui_draw.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.s
+.PHONY : include/rlimgui/imgui_draw.cpp.s
+
+include/rlimgui/imgui_tables.obj: include/rlimgui/imgui_tables.cpp.obj
+.PHONY : include/rlimgui/imgui_tables.obj
+
+# target to build an object file
+include/rlimgui/imgui_tables.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.obj
+.PHONY : include/rlimgui/imgui_tables.cpp.obj
+
+include/rlimgui/imgui_tables.i: include/rlimgui/imgui_tables.cpp.i
+.PHONY : include/rlimgui/imgui_tables.i
+
+# target to preprocess a source file
+include/rlimgui/imgui_tables.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.i
+.PHONY : include/rlimgui/imgui_tables.cpp.i
+
+include/rlimgui/imgui_tables.s: include/rlimgui/imgui_tables.cpp.s
+.PHONY : include/rlimgui/imgui_tables.s
+
+# target to generate assembly for a file
+include/rlimgui/imgui_tables.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.s
+.PHONY : include/rlimgui/imgui_tables.cpp.s
+
+include/rlimgui/imgui_widgets.obj: include/rlimgui/imgui_widgets.cpp.obj
+.PHONY : include/rlimgui/imgui_widgets.obj
+
+# target to build an object file
+include/rlimgui/imgui_widgets.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.obj
+.PHONY : include/rlimgui/imgui_widgets.cpp.obj
+
+include/rlimgui/imgui_widgets.i: include/rlimgui/imgui_widgets.cpp.i
+.PHONY : include/rlimgui/imgui_widgets.i
+
+# target to preprocess a source file
+include/rlimgui/imgui_widgets.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.i
+.PHONY : include/rlimgui/imgui_widgets.cpp.i
+
+include/rlimgui/imgui_widgets.s: include/rlimgui/imgui_widgets.cpp.s
+.PHONY : include/rlimgui/imgui_widgets.s
+
+# target to generate assembly for a file
+include/rlimgui/imgui_widgets.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.s
+.PHONY : include/rlimgui/imgui_widgets.cpp.s
+
+include/rlimgui/rlImGui.obj: include/rlimgui/rlImGui.cpp.obj
+.PHONY : include/rlimgui/rlImGui.obj
+
+# target to build an object file
+include/rlimgui/rlImGui.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.obj
+.PHONY : include/rlimgui/rlImGui.cpp.obj
+
+include/rlimgui/rlImGui.i: include/rlimgui/rlImGui.cpp.i
+.PHONY : include/rlimgui/rlImGui.i
+
+# target to preprocess a source file
+include/rlimgui/rlImGui.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.i
+.PHONY : include/rlimgui/rlImGui.cpp.i
+
+include/rlimgui/rlImGui.s: include/rlimgui/rlImGui.cpp.s
+.PHONY : include/rlimgui/rlImGui.s
+
+# target to generate assembly for a file
+include/rlimgui/rlImGui.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.s
+.PHONY : include/rlimgui/rlImGui.cpp.s
+
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
@@ -161,6 +305,24 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... app
+	@echo ... include/rlimgui/imgui.obj
+	@echo ... include/rlimgui/imgui.i
+	@echo ... include/rlimgui/imgui.s
+	@echo ... include/rlimgui/imgui_demo.obj
+	@echo ... include/rlimgui/imgui_demo.i
+	@echo ... include/rlimgui/imgui_demo.s
+	@echo ... include/rlimgui/imgui_draw.obj
+	@echo ... include/rlimgui/imgui_draw.i
+	@echo ... include/rlimgui/imgui_draw.s
+	@echo ... include/rlimgui/imgui_tables.obj
+	@echo ... include/rlimgui/imgui_tables.i
+	@echo ... include/rlimgui/imgui_tables.s
+	@echo ... include/rlimgui/imgui_widgets.obj
+	@echo ... include/rlimgui/imgui_widgets.i
+	@echo ... include/rlimgui/imgui_widgets.s
+	@echo ... include/rlimgui/rlImGui.obj
+	@echo ... include/rlimgui/rlImGui.i
+	@echo ... include/rlimgui/rlImGui.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
