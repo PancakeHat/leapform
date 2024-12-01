@@ -10,13 +10,15 @@ file(GLOB IMGUISOURCES
     ${CMAKE_SOURCE_DIR}/include/rlimgui/*.cpp
 )
 
-# if(WIN32)
-#     add_executable(app WIN32 src/main.cpp ${IMGUISOURCES})
-# else()
-#     add_executable(app src/main.cpp ${IMGUISOURCES})
-# endif()
-
-add_executable(app src/main.cpp ${IMGUISOURCES})
+# Set up executable
+if(WIN32)
+    message("Setting up Windows executable...")
+    set(CMAKE_EXE_LINKER_FLAGS "-static -static-libstdc++ -static-libgcc")
+    add_definitions(-D_THREAD_SAFE)
+    add_executable(app WIN32 src/main.cpp ${IMGUISOURCES})
+else()
+    add_executable(app src/main.cpp ${IMGUISOURCES})
+endif()
 
 # Include directories
 include_directories(${CMAKE_SOURCE_DIR}/include/)
@@ -24,7 +26,7 @@ include_directories(${CMAKE_SOURCE_DIR}/include/rlimgui)
 
 # Copy assests to binary directory
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
-file(COPY maps DESTINATION ${CMAKE_BINARY_DIR})
+# file(COPY maps DESTINATION ${CMAKE_BINARY_DIR})
 
 # Link with MacOS libraries
 if(APPLE)
@@ -41,8 +43,6 @@ endif()
 
 # Link with Windows libraries
 if(WIN32)
-    message("Building for Windows")
-
-    SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mwindows")
+    message("Building for Windows...")
     target_link_libraries(app ${CMAKE_SOURCE_DIR}/lib/win/libraylib.a winmm gdi32)
 endif()

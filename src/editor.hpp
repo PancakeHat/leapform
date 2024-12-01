@@ -45,6 +45,7 @@ bool mapOpen = false;
 
 const char* buf1 = new char;
 const char* buf2 = new char;
+const char* buf3 = new char;
 
 char filenamebuf[32] = "";
 std::string filename = "";
@@ -55,8 +56,10 @@ std::string loadfilenamesubmit = "";
 bool failedOpenFind = false;
 
 bool tileSelectorChecked[7];
-bool entitySelectorChecked[4];
+bool entitySelectorChecked[8];
 bool pickingHoldBuffer = false;
+
+int saveIndicatorCountdown = 0;
 
 std::vector<Tile> mapTiles;
 std::vector<Entity> mapEntities;
@@ -139,7 +142,10 @@ int Editor(bool& editorOpen, std::vector<Sprite> sprites)
         if(IsKeyPressed(KEY_O))
             loadWindow = true;
         if(IsKeyPressed(KEY_Q))
+        {
             editorOpen = false;
+            SetWindowTitle("window");
+        }
 
     BeginDrawing();
         ClearBackground(BLACK);
@@ -148,6 +154,14 @@ int Editor(bool& editorOpen, std::vector<Sprite> sprites)
         {
             renderTiles(mapTiles, sprites);
             RenderEntities(mapEntities, sprites);
+
+            for(Entity e : mapEntities)
+            {
+                if(placingMode == 1)
+                    DrawCircle(e.pos.x + 20, e.pos.y + 20, 4, MAROON);
+                // DrawTriangle({ e.pos.x + 10, e.pos.y + 30 }, { e.pos.x + 30, e.pos.y + 30 }, { e.pos.x + 20, e.pos.y + 10 }, MAROON);
+            }
+
             if(!ImGui::GetIO().WantCaptureMouse)
             {
                 if(!pickingSpawnPoint)
@@ -171,7 +185,7 @@ int Editor(bool& editorOpen, std::vector<Sprite> sprites)
                 if(ImGui::BeginMenu("Editor"))
                 {
                     if(ImGui::MenuItem("Help")) { helpWindow = true; }
-                    if(ImGui::MenuItem("Close", "Ctrl+Q")) { editorOpen = false; }
+                    if(ImGui::MenuItem("Close", "Ctrl+Q")) { editorOpen = false; SetWindowTitle("window"); }
 
                     ImGui::EndMenu();
                 }
@@ -230,6 +244,13 @@ int Editor(bool& editorOpen, std::vector<Sprite> sprites)
             if(loadWindow) { LoadWindow(); }
             if(infoWindow) { InfoWindow(); }
         rlImGuiEnd();
+
+        if(saveIndicatorCountdown > 0)
+        {
+            // DrawText(std::format("Saved to ./maps/{}.map", filename).c_str(), 10, 20, 15, GREEN);
+            DrawOutlinedText(std::format("Saved to ./maps/{}.map", filename).c_str(), 5, 20, 20, DARKGREEN, 1, BLACK);
+            saveIndicatorCountdown--;
+        }
     EndDrawing();
 
     return 0;
@@ -249,6 +270,7 @@ uint8_t GetTileType(bool *array, int length)
 
 void HelpWindow()
 {
+    ImGui::SetNextWindowSize({0, 0});
     ImGui::Begin("Editor Help", &helpWindow);
 
     ImGui::Text("Welcome to the map editor!");
@@ -261,6 +283,7 @@ void HelpWindow()
     ImGui::SeparatorText("Map paramaters");
     ImGui::Text("       Map ID: the ID used by the game to find the map");
     ImGui::Text("       Next Map ID: the ID of the map loaded after entering a door");
+    ImGui::Text("       Background ID: the ID of the background the map should use");
     ImGui::Text("       File Name: the name of the file to save the map to (Doesn't need to include .map)");
     ImGui::SeparatorText("Navigating the editor");
     ImGui::Text("       Left click to place");
@@ -270,6 +293,10 @@ void HelpWindow()
     ImGui::Text("       Tiles > Open Tile Window to pick tiles");
     ImGui::Text("       Entities > Open Entity Window to pick entities");
     ImGui::Text("       Entities > Choose Spawn Point to place spawn");
+    ImGui::SeparatorText("Placement Icon");
+    ImGui::Text("       If the placement icon is a square, you are in Tile Mode");
+    ImGui::Text("       If the placement icon is a circle, you are in Entity Mode");
+    ImGui::Text("       The little red circles that appear in Entity Mode are the origin of each entity");
 
     ImGui::End();
 }
@@ -283,13 +310,17 @@ void EditorLoadMap(std::string fileName)
     std::cout << std::format("EDITOR: Loaded map {} from ./maps/{}.map\n", map.mapID, fileName);
     mapOpen = true;
     filename = loadfilename;
+    
+    SetWindowTitle(std::format("Map Editor - ./maps/{}.map", fileName).c_str());
 
     buf1 = map.mapID.c_str();
     buf2 = map.nextMapID.c_str();
+    buf3 = map.backgroundID.c_str();
 }
 
 void LoadWindow()
 {
+    ImGui::SetNextWindowSize({0, 0});
     ImGui::Begin("Open Map", &loadWindow);
 
     if(ImGui::InputText("File Name", loadfilenamebuf, IM_ARRAYSIZE(loadfilenamebuf)))
@@ -323,6 +354,7 @@ void LoadWindow()
 
 void InfoWindow()
 {
+    ImGui::SetNextWindowSize({0, 0});
     ImGui::Begin("Edit Map Info", &infoWindow);
 
     if(ImGui::InputText("Map ID", (char*)buf1, 32))
@@ -332,6 +364,10 @@ void InfoWindow()
     if(ImGui::InputText("Next Map ID", (char*)buf2, 32))
     {
         map.nextMapID = buf2;
+    }
+    if(ImGui::InputText("Background ID", (char*)buf3, 32))
+    {
+        map.backgroundID = buf3;
     }
     if(ImGui::Button("Apply"))
     {
@@ -352,6 +388,7 @@ void SaveMap(std::string fileName)
 
     file << map.mapID << "\n";
     file << map.nextMapID << "\n";
+    file << map.backgroundID << "\n";
     file << map.playerSpawn.x << "\n";
     file << map.playerSpawn.y << "\n";
 
@@ -374,11 +411,13 @@ void SaveMap(std::string fileName)
 
     file.close();
 
+    saveIndicatorCountdown = 90;
     std::cout << "Saved map " << map.mapID << std::format(" to ./maps/{}.map\n", fileName);
 }
 
 void SaveWindow()
 {
+    ImGui::SetNextWindowSize({0, 0});
     ImGui::Begin("Save Map", &saveWindow);
 
     if(ImGui::InputText("File Name", filenamebuf, IM_ARRAYSIZE(filenamebuf)))
@@ -397,7 +436,14 @@ void SaveWindow()
 void PlaceEntity()
 {
     RemoveEntityFromVectorByPos(tilePosition, mapEntities);
-    mapEntities.push_back({GetTileType(entitySelectorChecked, sizeof(entitySelectorChecked)), tilePosition, {40, 40}, 0});
+    if(GetTileType(entitySelectorChecked, sizeof(entitySelectorChecked)) == 5)
+    {
+        mapEntities.push_back({5, tilePosition, {160, 160}, 0});
+    }
+    else
+    {
+        mapEntities.push_back({GetTileType(entitySelectorChecked, sizeof(entitySelectorChecked)), tilePosition, {40, 40}, 0});
+    }
 }
 
 void RemoveEntity()
@@ -415,11 +461,14 @@ void SetAllArrayFalse(bool *array, int length)
 
 void EntityWindow()
 {
+    ImGui::SetNextWindowSize({0, 0});
     ImGui::Begin("Entity Selector", &entityWindow);
 
     if(ImGui::Checkbox("Powerup", &entitySelectorChecked[0])) { SetAllArrayFalse(entitySelectorChecked, sizeof(entitySelectorChecked)); entitySelectorChecked[0] = true; }
     if(ImGui::Checkbox("Demon", &entitySelectorChecked[2])) { SetAllArrayFalse(entitySelectorChecked, sizeof(entitySelectorChecked)); entitySelectorChecked[2] = true; }
     if(ImGui::Checkbox("Powerup Generator", &entitySelectorChecked[3])) { SetAllArrayFalse(entitySelectorChecked, sizeof(entitySelectorChecked)); entitySelectorChecked[3] = true; }
+    if(ImGui::Checkbox("Boss Demon", &entitySelectorChecked[4])) { SetAllArrayFalse(entitySelectorChecked, sizeof(entitySelectorChecked)); entitySelectorChecked[4] = true; }
+    if(ImGui::Checkbox("Boss Alter", &entitySelectorChecked[5])) { SetAllArrayFalse(entitySelectorChecked, sizeof(entitySelectorChecked)); entitySelectorChecked[5] = true; }
 
     ImGui::End();
 }
@@ -433,6 +482,7 @@ void PickSpawnPoint()
 
 void TileSelectorWindow()
 {
+    ImGui::SetNextWindowSize({0, 0});
     ImGui::Begin("Tile Selector", &tileSelectorWindow);
 
     if(ImGui::Checkbox("Block", &tileSelectorChecked[0])) { SetAllArrayFalse(tileSelectorChecked, sizeof(tileSelectorChecked)); tileSelectorChecked[0] = true; }
@@ -451,6 +501,7 @@ void TileSelectorWindow()
 
 void CreateMapWindow()
 {
+    ImGui::SetNextWindowSize({0, 0});
     ImGui::Begin("Create Map", &createMapWindow);
 
     if(ImGui::InputText("Map ID", (char*)buf1, 32))
@@ -460,6 +511,10 @@ void CreateMapWindow()
     if(ImGui::InputText("Next Map ID", (char*)buf2, 32))
     {
         map.nextMapID = buf2;
+    }
+    if(ImGui::InputText("Background ID", (char*)buf3, 32))
+    {
+        map.backgroundID = buf3;
     }
     if(ImGui::Button("Create"))
     {
@@ -485,6 +540,8 @@ void CreateNewMap()
     std::cout << "EDITOR: Created map " << map.mapID << "\n";
     createMapWindow = false;
     mapOpen = true;
+
+    SetWindowTitle("Map Editor - Unsaved");
 
     mapTiles.clear();
     mapEntities.clear();

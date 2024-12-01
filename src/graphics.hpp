@@ -41,6 +41,14 @@ void LoadSpriteToVector(std::string fileName, std::string id, std::vector<Sprite
     sprites.push_back(sprite);
 }
 
+void DrawOutlinedText(const char *text, int posX, int posY, int fontSize, Color color, int outlineSize, Color outlineColor) {
+    DrawText(text, posX - outlineSize, posY - outlineSize, fontSize, outlineColor);
+    DrawText(text, posX + outlineSize, posY - outlineSize, fontSize, outlineColor);
+    DrawText(text, posX - outlineSize, posY + outlineSize, fontSize, outlineColor);
+    DrawText(text, posX + outlineSize, posY + outlineSize, fontSize, outlineColor);
+    DrawText(text, posX, posY, fontSize, color);
+}
+
 Sprite GetSpriteFromVector(std::string id, std::vector<Sprite> sprites)
 {
     for(Sprite sprite : sprites)

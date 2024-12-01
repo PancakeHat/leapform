@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <format>
 #include <filesystem>
+#include <cmath>
 #include <fstream>
 
 #pragma once
@@ -44,12 +45,23 @@ bool operator ==(Tile& x, const Tile& y)
     return (x.pos.x == y.pos.x && x.pos.y == y.pos.y && x.type == y.type);
 }
 
+Vector2 operator *(Vector2& x, int y)
+{
+    return {x.x * y, x.y * y};
+}
+
+Vector2 operator /(Vector2& x, int y)
+{
+    return {x.x / y, x.y / y};
+}
+
 struct Map {
     uint8_t tiles[300];
     Vector2 playerSpawn;
     std::vector<Entity> entities;
     std::string mapID;
     std::string nextMapID;
+    std::string backgroundID;
 };
 
 
@@ -202,6 +214,7 @@ Map LoadMapFromFile(std::string fileName)
 
     std::getline(file, map.mapID);
     std::getline(file, map.nextMapID);
+    std::getline(file, map.backgroundID);
     std::getline(file, px);
     std::getline(file, py);
     std::getline(file, rawTiles);
@@ -293,6 +306,10 @@ void RenderEntities(std::vector<Entity> entities, std::vector<Sprite> sprites)
             case 2: id = "platform"; break;
             case 3: id = "demon"; break;
             case 4: id = "powerup_generator"; break;
+            case 5: id = "boss_demon"; break;
+            case 6: id = "boss_alter"; break;
+            case 7: id = "warning"; break;
+            case 8: id = "laser"; break;
             default: id = ""; break;
         }
 
@@ -317,11 +334,71 @@ void RenderEntities(std::vector<Entity> entities, std::vector<Sprite> sprites)
             else
                 DrawSpriteFromVector("demon", e.pos, e.size, sprites);
         }
+        else if(e.type == 5)
+        {
+            if(e.target.x == 5)
+                DrawSpriteFromVector("boss_demon", e.pos, e.size, sprites);
+            else if(e.target.x == 4)
+                DrawSpriteFromVector("boss_demon", {e.pos.x + (160 - (100 + (e.target.y))) / 2, e.pos.y}, {100 + (e.target.y), 100 + (e.target.y)}, sprites);
+            else if(e.target.x == 3)
+                DrawSpriteFromVector("boss_demon", {e.pos.x + (160 - (80 + (e.target.y / 3))) / 2, e.pos.y}, {80 + (e.target.y / 3), 80 + (e.target.y / 3)}, sprites);
+            else if(e.target.x == 2)
+                DrawSpriteFromVector("boss_demon", {e.pos.x + (160 - (60 + (e.target.y / 3))) / 2, e.pos.y}, {60 + (e.target.y / 3), 60 + (e.target.y / 3)}, sprites);
+            else if(e.target.x == 1)
+                DrawSpriteFromVector("boss_demon", {e.pos.x + (160 - (40 + (e.target.y / 3))) / 2, e.pos.y}, {40 + (e.target.y / 3), 40 + (e.target.y / 3)}, sprites);
+            else if(e.target.x == 0)
+                DrawSpriteFromVector("boss_demon", {e.pos.x + (160 - (0 + (e.target.y * 0.6f))) / 2, e.pos.y}, {0 + (e.target.y * 0.6f), 0 + (e.target.y * 0.6f)}, sprites);
+            else
+                DrawSpriteFromVector("boss_demon", e.pos, e.size, sprites);
+        }
+        else if(e.type == 6)
+        {
+            DrawSpriteFromVector("boss_alter", {e.pos.x + 20, e.pos.y}, e.size, sprites);
+        }
+        else if(e.type == 7)
+        {
+            if(e.ticks % 30 < 15)
+                DrawSpriteFromVector("warning", e.pos, e.size, sprites);
+        }
         else
         {
             DrawSpriteFromVector(id, e.pos, e.size, sprites);
         }
     }
+}
+
+int IndexOfFirstEntityOfType(uint8_t type, std::vector<Entity> entities)
+{
+    for(int i = 0; i < entities.size(); i++)
+    {
+        if(entities[i].type == type)
+            return i;
+    }
+
+    return -1;
+}
+
+// long ass function name
+int IndexOfFirstEntityWithTypeAndTargetY(uint8_t type, int id, std::vector<Entity> entities)
+{
+    for(int i = 0; i < entities.size(); i++)
+    {
+        if(entities[i].target.y == id && entities[i].type == type)
+            return i;
+    }
+
+    return -1;
+}
+
+int LaserFindHandlerWithID(uint8_t id, std::vector<Entity> entities)
+{
+    for(int i = 0; i < entities.size(); i++)
+    {
+        if(entities[i].target.y == id && entities[i].type == 8)
+            return i;
+    }
+
+    return -1;
 }
 
 bool checkBoxCollison(Vector2 posA, Vector2 sizeA, Vector2 posB, Vector2 sizeB)
@@ -332,6 +409,22 @@ bool checkBoxCollison(Vector2 posA, Vector2 sizeA, Vector2 posB, Vector2 sizeB)
         posA.y + sizeA.y > posB.y
     ) { return true; }
     else { return false; }
+}
+
+bool CheckBoxCircleCollision(Vector2 circleCenter, float circleRadius, Vector2 rectPos, Vector2 rectSize)
+{
+    Vector2 circleDistance;
+    circleDistance.x = abs(circleCenter.x - rectPos.x);
+    circleDistance.y = abs(circleCenter.y - rectPos.y);
+
+    if(circleDistance.x > (rectSize.x / 2 + circleRadius)) { return false; }
+    if(circleDistance.y > (rectSize.y / 2 + circleRadius)) { return false; }
+
+    if(circleDistance.x <= (rectSize.x / 2)) { return true; }
+    if(circleDistance.y <= (rectSize.y / 2)) { return true; }
+
+    float cornerDistance = pow((circleDistance.x - rectSize.x / 2), 2) + pow((circleDistance.y - rectSize.y / 2), 2);
+    return (cornerDistance <= (pow(circleRadius, 2)));
 }
 
 void LoadMap(std::string mapID, std::vector<Map>& maps, std::vector<Tile> *tiles, std::vector<Entity>& entities, Map &loadedMap)
