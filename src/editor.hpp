@@ -68,9 +68,12 @@ Map map = {{}, {1, 13}, {}, "", ""};
 Vector2 mousePosition;
 Vector2 tilePosition;
 
+RenderTexture2D editorScreen;
 
 void EditorInit()
 {
+    editorScreen = LoadRenderTexture(800, 600);
+
     SetAllArrayFalse(tileSelectorChecked, sizeof(tileSelectorChecked));
     tileSelectorChecked[0] = true;
 
@@ -80,8 +83,11 @@ void EditorInit()
 
 int Editor(bool& editorOpen, std::vector<Sprite> sprites)
 {
-    mousePosition = GetMousePosition();
-    tilePosition = { float(40 * ((int)(mousePosition.x / 40))), float(40 * ((int)(mousePosition.y / 40))) };
+    // mousePosition = GetMousePosition();
+    mousePosition = {GetMousePosition().x / 800, GetMousePosition().y / 600};
+    std::cout << mousePosition.x << ", " << mousePosition.y << "\n";
+    Vector2 tSize = {40, 40};
+    tilePosition = { float(tSize.x * ((int)(mousePosition.x / tSize.x))), float(tSize.y * ((int)(mousePosition.y / tSize.y))) };
 
     if(mapOpen)
     {
@@ -114,6 +120,10 @@ int Editor(bool& editorOpen, std::vector<Sprite> sprites)
             }
             if(GetMouseWheelMove() != 0) 
                 placingMode = !placingMode;
+            if(IsKeyPressed(KEY_ONE)) 
+                placingMode = 0;
+            if(IsKeyPressed(KEY_TWO))
+                placingMode = 1;
         }
 
         if(IsKeyDown(KEY_LEFT_CONTROL))
@@ -147,7 +157,8 @@ int Editor(bool& editorOpen, std::vector<Sprite> sprites)
             SetWindowTitle("window");
         }
 
-    BeginDrawing();
+    // BeginDrawing();
+    BeginTextureMode(editorScreen);
         ClearBackground(BLACK);
 
         if(mapOpen)
@@ -178,6 +189,18 @@ int Editor(bool& editorOpen, std::vector<Sprite> sprites)
             if(!pickingSpawnPoint)
                 DrawCircleLines(map.playerSpawn.x * 40 + 20, map.playerSpawn.y * 40 + 20, 10, GREEN);
         }
+
+        if(saveIndicatorCountdown > 0)
+        {
+            // DrawText(std::format("Saved to ./maps/{}.map", filename).c_str(), 10, 20, 15, GREEN);
+            DrawOutlinedText(std::format("Saved to ./maps/{}.map", filename).c_str(), 5, 20, 20, DARKGREEN, 1, BLACK);
+            saveIndicatorCountdown--;
+        }
+    // EndDrawing();
+    EndTextureMode();
+
+    BeginDrawing();
+        DrawSpriteDirect(editorScreen.texture, {0, 0}, {(float)GetScreenWidth(), (float)GetScreenHeight()});
 
         rlImGuiBegin();
             if(ImGui::BeginMainMenuBar()) 
@@ -244,13 +267,6 @@ int Editor(bool& editorOpen, std::vector<Sprite> sprites)
             if(loadWindow) { LoadWindow(); }
             if(infoWindow) { InfoWindow(); }
         rlImGuiEnd();
-
-        if(saveIndicatorCountdown > 0)
-        {
-            // DrawText(std::format("Saved to ./maps/{}.map", filename).c_str(), 10, 20, 15, GREEN);
-            DrawOutlinedText(std::format("Saved to ./maps/{}.map", filename).c_str(), 5, 20, 20, DARKGREEN, 1, BLACK);
-            saveIndicatorCountdown--;
-        }
     EndDrawing();
 
     return 0;
@@ -270,7 +286,7 @@ uint8_t GetTileType(bool *array, int length)
 
 void HelpWindow()
 {
-    ImGui::SetNextWindowSize({0, 0});
+    // ImGui::SetNextWindowSize({0, 0});
     ImGui::Begin("Editor Help", &helpWindow);
 
     ImGui::Text("Welcome to the map editor!");

@@ -73,6 +73,14 @@ void DrawSpriteFromVector(std::string id, Vector2 position, Vector2 size, std::v
     DrawTexturePro(s.img, src, dest, {0, 0}, 0, WHITE);
 }
 
+void DrawSpriteDirect(Texture2D img, Vector2 position, Vector2 size)
+{
+    Rectangle src = {0, 0, (float)img.width, (float)-img.height};
+    Rectangle dest = {position.x, position.y, size.x, size.y};
+
+    DrawTexturePro(img, src, dest, {0, 0}, 0, WHITE);
+}
+
 void DrawSpriteFromVectorRotation(std::string id, Vector2 position, Vector2 size, std::vector<Sprite> sprites, float rotation)
 {
     if(id == "")

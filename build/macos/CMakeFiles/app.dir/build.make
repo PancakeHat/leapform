@@ -53,10 +53,10 @@ RM = /Applications/CMake.app/Contents/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/zsheldon8434/dev/td/towerdefense
+CMAKE_SOURCE_DIR = /Users/zsheldon8434/dev/boi/platformer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/zsheldon8434/dev/td/towerdefense/build/macos
+CMAKE_BINARY_DIR = /Users/zsheldon8434/dev/boi/platformer/build/macos
 
 # Include any dependencies generated for this target.
 include CMakeFiles/app.dir/depend.make
@@ -70,31 +70,143 @@ include CMakeFiles/app.dir/progress.make
 include CMakeFiles/app.dir/flags.make
 
 CMakeFiles/app.dir/src/main.cpp.o: CMakeFiles/app.dir/flags.make
-CMakeFiles/app.dir/src/main.cpp.o: /Users/zsheldon8434/dev/td/towerdefense/src/main.cpp
+CMakeFiles/app.dir/src/main.cpp.o: /Users/zsheldon8434/dev/boi/platformer/src/main.cpp
 CMakeFiles/app.dir/src/main.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/zsheldon8434/dev/td/towerdefense/build/macos/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/app.dir/src/main.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/main.cpp.o -MF CMakeFiles/app.dir/src/main.cpp.o.d -o CMakeFiles/app.dir/src/main.cpp.o -c /Users/zsheldon8434/dev/td/towerdefense/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/zsheldon8434/dev/boi/platformer/build/macos/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/app.dir/src/main.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/src/main.cpp.o -MF CMakeFiles/app.dir/src/main.cpp.o.d -o CMakeFiles/app.dir/src/main.cpp.o -c /Users/zsheldon8434/dev/boi/platformer/src/main.cpp
 
 CMakeFiles/app.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app.dir/src/main.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zsheldon8434/dev/td/towerdefense/src/main.cpp > CMakeFiles/app.dir/src/main.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zsheldon8434/dev/boi/platformer/src/main.cpp > CMakeFiles/app.dir/src/main.cpp.i
 
 CMakeFiles/app.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/main.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zsheldon8434/dev/td/towerdefense/src/main.cpp -o CMakeFiles/app.dir/src/main.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zsheldon8434/dev/boi/platformer/src/main.cpp -o CMakeFiles/app.dir/src/main.cpp.s
+
+CMakeFiles/app.dir/include/rlimgui/imgui.cpp.o: CMakeFiles/app.dir/flags.make
+CMakeFiles/app.dir/include/rlimgui/imgui.cpp.o: /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui.cpp
+CMakeFiles/app.dir/include/rlimgui/imgui.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/zsheldon8434/dev/boi/platformer/build/macos/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/app.dir/include/rlimgui/imgui.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/include/rlimgui/imgui.cpp.o -MF CMakeFiles/app.dir/include/rlimgui/imgui.cpp.o.d -o CMakeFiles/app.dir/include/rlimgui/imgui.cpp.o -c /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui.cpp
+
+CMakeFiles/app.dir/include/rlimgui/imgui.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app.dir/include/rlimgui/imgui.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui.cpp > CMakeFiles/app.dir/include/rlimgui/imgui.cpp.i
+
+CMakeFiles/app.dir/include/rlimgui/imgui.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/include/rlimgui/imgui.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui.cpp -o CMakeFiles/app.dir/include/rlimgui/imgui.cpp.s
+
+CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.o: CMakeFiles/app.dir/flags.make
+CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.o: /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_demo.cpp
+CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/zsheldon8434/dev/boi/platformer/build/macos/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.o -MF CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.o.d -o CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.o -c /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_demo.cpp
+
+CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_demo.cpp > CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.i
+
+CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_demo.cpp -o CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.s
+
+CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.o: CMakeFiles/app.dir/flags.make
+CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.o: /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_draw.cpp
+CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/zsheldon8434/dev/boi/platformer/build/macos/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.o -MF CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.o.d -o CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.o -c /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_draw.cpp
+
+CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_draw.cpp > CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.i
+
+CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_draw.cpp -o CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.s
+
+CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.o: CMakeFiles/app.dir/flags.make
+CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.o: /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_stdlib.cpp
+CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/zsheldon8434/dev/boi/platformer/build/macos/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.o -MF CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.o.d -o CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.o -c /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_stdlib.cpp
+
+CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_stdlib.cpp > CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.i
+
+CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_stdlib.cpp -o CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.s
+
+CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.o: CMakeFiles/app.dir/flags.make
+CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.o: /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_tables.cpp
+CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/zsheldon8434/dev/boi/platformer/build/macos/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.o -MF CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.o.d -o CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.o -c /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_tables.cpp
+
+CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_tables.cpp > CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.i
+
+CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_tables.cpp -o CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.s
+
+CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.o: CMakeFiles/app.dir/flags.make
+CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.o: /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_widgets.cpp
+CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/zsheldon8434/dev/boi/platformer/build/macos/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.o -MF CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.o.d -o CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.o -c /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_widgets.cpp
+
+CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_widgets.cpp > CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.i
+
+CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_widgets.cpp -o CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.s
+
+CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.o: CMakeFiles/app.dir/flags.make
+CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.o: /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/rlImGui.cpp
+CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.o: CMakeFiles/app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/zsheldon8434/dev/boi/platformer/build/macos/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.o -MF CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.o.d -o CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.o -c /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/rlImGui.cpp
+
+CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/rlImGui.cpp > CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.i
+
+CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/rlImGui.cpp -o CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.s
 
 # Object files for target app
 app_OBJECTS = \
-"CMakeFiles/app.dir/src/main.cpp.o"
+"CMakeFiles/app.dir/src/main.cpp.o" \
+"CMakeFiles/app.dir/include/rlimgui/imgui.cpp.o" \
+"CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.o" \
+"CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.o" \
+"CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.o" \
+"CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.o" \
+"CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.o" \
+"CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.o"
 
 # External object files for target app
 app_EXTERNAL_OBJECTS =
 
 app: CMakeFiles/app.dir/src/main.cpp.o
+app: CMakeFiles/app.dir/include/rlimgui/imgui.cpp.o
+app: CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.o
+app: CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.o
+app: CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.o
+app: CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.o
+app: CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.o
+app: CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.o
 app: CMakeFiles/app.dir/build.make
-app: /Users/zsheldon8434/dev/td/towerdefense/lib/macos/libraylib.a
+app: /Users/zsheldon8434/dev/boi/platformer/lib/macos/libraylib.a
 app: CMakeFiles/app.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/zsheldon8434/dev/td/towerdefense/build/macos/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable app"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/zsheldon8434/dev/boi/platformer/build/macos/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable app"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/app.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -106,6 +218,6 @@ CMakeFiles/app.dir/clean:
 .PHONY : CMakeFiles/app.dir/clean
 
 CMakeFiles/app.dir/depend:
-	cd /Users/zsheldon8434/dev/td/towerdefense/build/macos && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/zsheldon8434/dev/td/towerdefense /Users/zsheldon8434/dev/td/towerdefense /Users/zsheldon8434/dev/td/towerdefense/build/macos /Users/zsheldon8434/dev/td/towerdefense/build/macos /Users/zsheldon8434/dev/td/towerdefense/build/macos/CMakeFiles/app.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/zsheldon8434/dev/boi/platformer/build/macos && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/zsheldon8434/dev/boi/platformer /Users/zsheldon8434/dev/boi/platformer /Users/zsheldon8434/dev/boi/platformer/build/macos /Users/zsheldon8434/dev/boi/platformer/build/macos /Users/zsheldon8434/dev/boi/platformer/build/macos/CMakeFiles/app.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/app.dir/depend
 

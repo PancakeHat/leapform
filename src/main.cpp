@@ -36,6 +36,7 @@ int frames = 0;
 int main()
 {
 
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(SCREENWIDTH, SCREENHEIGHT, "window");
     SetTargetFPS(60);
 
@@ -87,6 +88,9 @@ int main()
 
     char debugBuf[32] = "";
     std::string debugLoadMapID;
+
+    RenderTexture2D screen = LoadRenderTexture(SCREENWIDTH, SCREENHEIGHT);
+
 
     while(!WindowShouldClose())
     {
@@ -157,7 +161,8 @@ int main()
 
             checkPlayerWorldCollsions(*tiles, position, playerVelocity, canJump, playerJumping, downVelocity, loadedMap, entities, poweredUp, playerPhysics);
 
-            BeginDrawing();
+            // BeginDrawing();
+            BeginTextureMode(screen);
                 ClearBackground(GRAY);
 
                 DrawSpriteFromVector(loadedMap.backgroundID, {0, 0}, {800, 600}, backgrounds);
@@ -195,6 +200,11 @@ int main()
                     DrawText(std::format("Background ID: {}", loadedMap.backgroundID).c_str(), 10, 100, 16, BLACK);
                     DrawText(std::format("Frame: {}", frames).c_str(), 10, 115, 16, BLACK);
                 }
+            // EndDrawing();
+            EndTextureMode();
+
+            BeginDrawing();
+                DrawSpriteDirect(screen.texture, {0, 0}, {(float)GetScreenWidth(), (float)GetScreenHeight()});
 
                 rlImGuiBegin();
                     if(debugMode)
@@ -302,7 +312,7 @@ void checkPlayerWorldCollsions(std::vector<Tile>& tiles, Vector2& playerpos, Vec
         }
         else if(tile.type == 3 || tile.type == 4 || tile.type == 5 || tile.type == 6)
         {
-            if(checkBoxCollison(playerpos, {40, 40}, tile.pos, {40, 40}))
+            if(checkBoxCollison(playerpos, {40, 40}, {tile.pos.x + 10, tile.pos.y + 10}, {20, 20}))
             {
                 LoadMap(currentMap.mapID, maps, &tiles, entities, currentMap);
                 playerpos = {currentMap.playerSpawn.x * 40, currentMap.playerSpawn.y * 40};

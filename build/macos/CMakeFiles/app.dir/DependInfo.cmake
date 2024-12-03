@@ -8,7 +8,14 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/zsheldon8434/dev/td/towerdefense/src/main.cpp" "CMakeFiles/app.dir/src/main.cpp.o" "gcc" "CMakeFiles/app.dir/src/main.cpp.o.d"
+  "/Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui.cpp" "CMakeFiles/app.dir/include/rlimgui/imgui.cpp.o" "gcc" "CMakeFiles/app.dir/include/rlimgui/imgui.cpp.o.d"
+  "/Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_demo.cpp" "CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.o" "gcc" "CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.o.d"
+  "/Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_draw.cpp" "CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.o" "gcc" "CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.o.d"
+  "/Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_stdlib.cpp" "CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.o" "gcc" "CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.o.d"
+  "/Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_tables.cpp" "CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.o" "gcc" "CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.o.d"
+  "/Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_widgets.cpp" "CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.o" "gcc" "CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.o.d"
+  "/Users/zsheldon8434/dev/boi/platformer/include/rlimgui/rlImGui.cpp" "CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.o" "gcc" "CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.o.d"
+  "/Users/zsheldon8434/dev/boi/platformer/src/main.cpp" "CMakeFiles/app.dir/src/main.cpp.o" "gcc" "CMakeFiles/app.dir/src/main.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
