@@ -10,7 +10,8 @@
 #include "editor.hpp"
 #include <filesystem>
 #include <stdio.h>
-#include <stdlib.h> 
+#include <stdlib.h>
+#include "fileio.hpp"
 
 #define SCREENWIDTH 800
 #define SCREENHEIGHT 600
@@ -24,6 +25,7 @@ std::vector<Sprite> sprites;
 std::vector<Sprite> backgrounds;
 std::vector<Entity> entities;
 std::vector<Map> maps;
+std::vector<Pack> packs;
 Map loadedMap;
 
 int fadeoutCounter;
@@ -35,6 +37,8 @@ int frames = 0;
 
 int main()
 {
+    RegisterAllPacks("./packs", packs);
+    return 0;
 
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(SCREENWIDTH, SCREENHEIGHT, "window");

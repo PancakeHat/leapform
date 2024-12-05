@@ -1409,9 +1409,12 @@ CMakeFiles/app.dir/src/main.cpp.obj: D:/dev/platformer\ game/src/main.cpp \
   D:/dev/platformer\ game/include/rlimgui/imgui_stdlib.h \
   D:/dev/platformer\ game/include/rlimgui/rlImGui.h \
   D:/dev/platformer\ game/src/editor.hpp \
+  D:/dev/platformer\ game/src/fileio.hpp \
   D:/dev/platformer\ game/src/graphics.hpp \
   D:/dev/platformer\ game/src/maps.hpp
 
+
+D:/dev/platformer\ game/src/fileio.hpp:
 
 D:/dev/platformer\ game/src/editor.hpp:
 

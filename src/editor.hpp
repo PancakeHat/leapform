@@ -10,6 +10,7 @@
 #include "rlimgui/imgui_stdlib.h"
 #include <fstream>
 #include <filesystem>
+#include "fileio.hpp"
 
 #pragma once
 
@@ -83,8 +84,7 @@ void EditorInit()
 
 int Editor(bool& editorOpen, std::vector<Sprite> sprites)
 {
-    // mousePosition = GetMousePosition();
-    mousePosition = {GetMousePosition().x / 800, GetMousePosition().y / 600};
+    mousePosition = {800 * (GetMousePosition().x / GetScreenWidth()), 600 * (GetMousePosition().y / GetScreenHeight())};
     std::cout << mousePosition.x << ", " << mousePosition.y << "\n";
     Vector2 tSize = {40, 40};
     tilePosition = { float(tSize.x * ((int)(mousePosition.x / tSize.x))), float(tSize.y * ((int)(mousePosition.y / tSize.y))) };

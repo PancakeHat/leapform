@@ -241,4 +241,5 @@ CMakeFiles/app.dir/src/main.cpp.obj: D:\dev\platformer\ game\src\main.cpp \
  C:/mingw64-msvcrt/x86_64-w64-mingw32/include/sec_api/string_s.h \
  C:/mingw64-msvcrt/x86_64-w64-mingw32/include/assert.h \
  D:\dev\platformer\ game\src\editor.hpp \
- D:/dev/PLATFO~2/include/rlimgui/imgui_stdlib.h
+ D:/dev/PLATFO~2/include/rlimgui/imgui_stdlib.h \
+ D:\dev\platformer\ game\src\fileio.hpp

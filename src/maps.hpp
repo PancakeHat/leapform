@@ -25,6 +25,13 @@ struct Entity {
     Vector2 target;
 };
 
+struct Pack {
+    std::string name;
+    std::string mapDir;
+    std::string assetDir;
+    std::filesystem::path rootDir;
+};
+
 bool operator ==(const Entity& x, const Entity& y)
 {
     return (x.pos.x == y.pos.x && x.pos.y == y.pos.y && x.type == y.type);
@@ -114,67 +121,6 @@ void MakeMapFromTiles(std::vector<Tile> tiles, Map& map)
     }
 }
 
-Entity DeserializeEntity(std::string entityString)
-{
-    int index = 0;
-    std::string buf = "";
-    Entity entity;
-
-    while(entityString[index] != ',')
-    {
-        buf += entityString[index];
-        index++;
-    }
-    entity.type = std::stoi(buf);
-    buf = "";
-    index++;
-
-    while(entityString[index] != ',')
-    {
-        buf += entityString[index];
-        index++;
-    }
-    entity.pos.x = std::stoi(buf);
-    buf = "";
-    index++;
-
-    while(entityString[index] != ',')
-    {
-        buf += entityString[index];
-        index++;
-    }
-    entity.pos.y = std::stoi(buf);
-    buf = "";
-    index++;
-
-    while(entityString[index] != ',')
-    {
-        buf += entityString[index];
-        index++;
-    }
-    entity.size.x = std::stoi(buf);
-    buf = "";
-    index++;
-
-    while(entityString[index] != ';')
-    {
-        buf += entityString[index];
-        index++;
-    }
-    entity.size.y = std::stoi(buf);
-    buf = "";
-    index++;
-
-    entity.ticks = 1; // stop events from insta-triggering
-    entity.target = {0, 0};
-    return entity;
-}
-
-std::string SerializeEntity(Entity entity)
-{
-    return std::format("{},{},{},{},{};", entity.type, entity.pos.x, entity.pos.y, entity.size.x, entity.size.y);
-}
-
 void makeTilesFromMap(Map map, std::vector<Tile> *tiles)
 {
     tiles->clear();
@@ -190,76 +136,6 @@ void makeTilesFromMap(Map map, std::vector<Tile> *tiles)
             tiles->push_back(t);
         }   
     }
-}
-
-
-Map LoadMapFromFile(std::string fileName)
-{
-    Map map;
-
-    std::string rawTiles;
-    std::string px;
-    std::string py;
-    std::vector<std::string> savedEntities;
-    std::string eBuff;
-
-    // std::ifstream file(std::format("./maps/{}.map", fileName));
-
-    std::ifstream file(fileName);
-    if(!file.is_open())
-    {
-        std::cerr << fileName << "\n";
-        return map;
-    }
-
-    std::getline(file, map.mapID);
-    std::getline(file, map.nextMapID);
-    std::getline(file, map.backgroundID);
-    std::getline(file, px);
-    std::getline(file, py);
-    std::getline(file, rawTiles);
-
-    while(std::getline(file, eBuff))
-    {
-        savedEntities.push_back(eBuff);
-        eBuff = "";
-    }
-
-    file.close();
-
-    map.playerSpawn = {(float)std::stoi(px), (float)std::stoi(py)};
-
-    std::string currentBit = "";
-    int virtualIndex = 0;
-    for(int i = 0; i < rawTiles.length(); i++)
-    {
-        if(rawTiles[i] != ',' && rawTiles[i] != ';')
-        {
-            currentBit += rawTiles[i];
-        }
-        else if(rawTiles[i] == ';')
-        {
-            break;
-        }
-        else if(rawTiles[i] == ',')
-        {
-            map.tiles[virtualIndex] = std::stoi(currentBit);
-            currentBit = "";
-            virtualIndex++;
-        }
-    }
-
-    for(std::string s : savedEntities)
-    {
-        map.entities.push_back(DeserializeEntity(s));
-    }
-
-    return map;
-}
-
-Map LoadMapFromFilePathShorthand(std::string fileName)
-{
-    return LoadMapFromFile(std::format("./maps/{}.map", fileName));
 }
 
 void renderTiles(std::vector<Tile> tiles, std::vector<Sprite> sprites)
@@ -445,19 +321,4 @@ void LoadMapToVector(Map map, std::vector<Map>& maps)
 {
     std::cout << "GAME: Registered map " << map.mapID << "\n";
     maps.push_back(map);
-}
-
-void RegisterMapsInDir(std::string mapDir, std::vector<Map>& maps)
-{
-    maps.clear();
-
-    for(const auto & entry : std::filesystem::directory_iterator(mapDir))
-    {
-        std::string s = entry.path().string();
-        std::replace( s.begin(), s.end(), '\\', '/');
-        if(s[s.length() - 4] == '.' && s[s.length() - 3] == 'm' && s[s.length() - 2] == 'a' && s[s.length() - 1] == 'p')
-        {
-            LoadMapToVector(LoadMapFromFile(s), maps);
-        }
-    }
 }
