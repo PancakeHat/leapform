@@ -18,19 +18,9 @@ void LoadSpriteToVector(std::string fileName, std::string id, std::vector<Sprite
     Sprite sprite;
     sprite.id = id;
 
-    std::string overrideName = "./override/" + fileName;
-    std::string normalName = "./assets/" + fileName;
+    std::string normalName = fileName;
 
-    Image i = LoadImage(overrideName.c_str());
-    if(i.width == 0)
-    {
-        i = LoadImage(normalName.c_str()); 
-        std::cout << "GAME: Registered texture " << normalName << "\n";
-    }
-    else 
-    {
-        std::cout << "GAME: Registered texture " << overrideName << "\n";
-    }
+    Image i = LoadImage(normalName.c_str()); 
 
     sprite.width = i.width;
     sprite.height = i.height;
@@ -40,6 +30,34 @@ void LoadSpriteToVector(std::string fileName, std::string id, std::vector<Sprite
 
     sprites.push_back(sprite);
 }
+
+// void LoadSpriteToVector(std::string fileName, std::string id, std::vector<Sprite>& sprites)
+// {
+//     Sprite sprite;
+//     sprite.id = id;
+
+//     std::string overrideName = "./override/" + fileName;
+//     std::string normalName = "./assets/" + fileName;
+
+//     Image i = LoadImage(overrideName.c_str());
+//     if(i.width == 0)
+//     {
+//         i = LoadImage(normalName.c_str()); 
+//         std::cout << "GAME: Registered texture " << normalName << "\n";
+//     }
+//     else 
+//     {
+//         std::cout << "GAME: Registered texture " << overrideName << "\n";
+//     }
+
+//     sprite.width = i.width;
+//     sprite.height = i.height;
+
+//     sprite.img = LoadTextureFromImage(i);
+//     UnloadImage(i);
+
+//     sprites.push_back(sprite);
+// }
 
 void DrawOutlinedText(const char *text, int posX, int posY, int fontSize, Color color, int outlineSize, Color outlineColor) {
     DrawText(text, posX - outlineSize, posY - outlineSize, fontSize, outlineColor);

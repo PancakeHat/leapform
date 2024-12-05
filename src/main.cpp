@@ -26,6 +26,7 @@ std::vector<Sprite> backgrounds;
 std::vector<Entity> entities;
 std::vector<Map> maps;
 std::vector<Pack> packs;
+Pack loadedPack;
 Map loadedMap;
 
 int fadeoutCounter;
@@ -37,12 +38,18 @@ int frames = 0;
 
 int main()
 {
+    std::cout << "GAME: Starting game\n";
+    SetTraceLogLevel(TraceLogLevel::LOG_ERROR);
+
     RegisterAllPacks("./packs", packs);
-    return 0;
 
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(SCREENWIDTH, SCREENHEIGHT, "window");
     SetTargetFPS(60);
+
+    // LoadSpritesFromDir("./assets", sprites);
+    LoadPackToGame("Default Pack", packs, maps, sprites, loadedPack);
+    // return 0;
 
     rlImGuiSetup(true);
 
@@ -51,30 +58,7 @@ int main()
 
     srand(time(0));
 
-    // Load sprites
-    LoadSpriteToVector("tile_basic.png", "tile_basic", sprites);
-    LoadSpriteToVector("player.png", "player", sprites);
-    LoadSpriteToVector("door.png", "door", sprites);
-    LoadSpriteToVector("spike.png", "spike", sprites);
-    LoadSpriteToVector("powerup.png", "powerup", sprites);
-    LoadSpriteToVector("powerup_platform.png", "platform", sprites);
-    LoadSpriteToVector("player_powered.png", "player_poweredup", sprites);
-    LoadSpriteToVector("boss_door.png", "boss_door", sprites);
-    LoadSpriteToVector("demon.png", "demon", sprites);
-    LoadSpriteToVector("demon_angry.png", "demon_angry", sprites);
-    LoadSpriteToVector("powerup_generator.png", "powerup_generator", sprites);
-    LoadSpriteToVector("boss_demon.png", "boss_demon", sprites);
-    LoadSpriteToVector("boss_alter.png", "boss_alter", sprites);
-    LoadSpriteToVector("shield.png", "shield", sprites);
-    LoadSpriteToVector("warning.png", "warning", sprites);
-    LoadSpriteToVector("laser.png", "laser", sprites);
-
-    // Load Backgrounds
-    LoadSpriteToVector("background_cave.png", "cave", backgrounds);
-    LoadSpriteToVector("background_boss.png", "boss", backgrounds);
-
-    // Load maps in maps folder
-    RegisterMapsInDir("./maps", maps);
+    // TODO: make debug stuff and map editor work with pack system
 
     // Load first map
     LoadMap("map0", maps, tiles, entities, loadedMap);
@@ -177,7 +161,7 @@ int main()
                 if(!poweredUp)
                     DrawSpriteFromVector("player", position, {40, 40}, sprites);
                 else
-                    DrawSpriteFromVector("player_poweredup", position, {40, 40}, sprites);
+                    DrawSpriteFromVector("player_powered", position, {40, 40}, sprites);
 
 
                 if(IndexOfFirstEntityOfType(6, entities) != -1 && entities[IndexOfFirstEntityOfType(6, entities)].target.y > 0)

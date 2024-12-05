@@ -4226,6 +4226,7 @@ CMakeFiles/app.dir/src/main.cpp.o
  /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_stdlib.h
  /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/rlImGui.h
  /Users/zsheldon8434/dev/boi/platformer/src/editor.hpp
+ /Users/zsheldon8434/dev/boi/platformer/src/fileio.hpp
  /Users/zsheldon8434/dev/boi/platformer/src/graphics.hpp
  /Users/zsheldon8434/dev/boi/platformer/src/maps.hpp
 

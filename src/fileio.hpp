@@ -12,6 +12,17 @@
 
 #pragma once
 
+bool StringEndsIn(std::string str, std::string ending)
+{
+    for(int i = 0; i < ending.length(); i++)
+    {
+        if(ending[i] != str[str.length() - ending.length() + i])
+            return false;
+    }
+
+    return true;
+}
+
 Entity DeserializeEntity(std::string entityString)
 {
     int index = 0;
@@ -71,6 +82,44 @@ Entity DeserializeEntity(std::string entityString)
 std::string SerializeEntity(Entity entity)
 {
     return std::format("{},{},{},{},{};", entity.type, entity.pos.x, entity.pos.y, entity.size.x, entity.size.y);
+}
+
+std::string RemoveFileEnding(std::string name)
+{
+    std::string n = name;
+    for(int i = name.length() - 1; i > 0; i--)
+    {
+        if(n[i] == '.')
+        {
+            n.pop_back();
+            return n;
+        }
+        n.pop_back();
+    }
+
+    return "";
+}
+
+void LoadSpritesFromDir(std::string spriteDir, std::vector<Sprite>& sprites)
+{
+    if(StringEndsIn(spriteDir, "#default"))
+        spriteDir = "./assets";
+
+    sprites.clear();
+
+    for(const auto & entry : std::filesystem::directory_iterator(spriteDir))
+    {
+        std::string s = entry.path().string();
+        std::replace( s.begin(), s.end(), '\\', '/');
+        if(StringEndsIn(s, ".png"))
+        {
+            std::string id = s;
+            id.erase(id.begin(), id.begin() + (spriteDir + "/").length());
+            id = RemoveFileEnding(id);
+            LoadSpriteToVector(s, id, sprites);
+            std::cout << "GAME: Loaded sprite " << id << "\n";
+        }
+    }
 }
 
 Pack LoadPackFromFile(std::string fileName)
@@ -166,15 +215,22 @@ Map LoadMapFromFilePathShorthand(std::string fileName)
     return LoadMapFromFile(std::format("./maps/{}.map", fileName));
 }
 
-bool StringEndsIn(std::string str, std::string ending)
+void RegisterMapsInDir(std::string mapDir, std::vector<Map>& maps)
 {
-    for(int i = 0; i < ending.length(); i++)
-    {
-        if(ending[i] != str[str.length() - ending.length() + i])
-            return false;
-    }
+    if(StringEndsIn(mapDir, "#default"))
+        mapDir = "./maps";
 
-    return true;
+    maps.clear();
+
+    for(const auto & entry : std::filesystem::directory_iterator(mapDir))
+    {
+        std::string s = entry.path().string();
+        std::replace( s.begin(), s.end(), '\\', '/');
+        if(s[s.length() - 4] == '.' && s[s.length() - 3] == 'm' && s[s.length() - 2] == 'a' && s[s.length() - 1] == 'p')
+        {
+            LoadMapToVector(LoadMapFromFile(s), maps);
+        }
+    }
 }
 
 void RegisterAllPacks(std::string packDir, std::vector<Pack>& packs)
@@ -196,23 +252,22 @@ void RegisterAllPacks(std::string packDir, std::vector<Pack>& packs)
             if(StringEndsIn(s, ".pack"))
             {
                 packs.push_back(LoadPackFromFile(s));
-                std::cout << "GAME: Loaded pack " << packs.back().name << "\n";
+                std::cout << "GAME: Registered pack " << packs.back().name << "\n";
             }
         }
     }
 }
 
-void RegisterMapsInDir(std::string mapDir, std::vector<Map>& maps)
+void LoadPackToGame(std::string packName, std::vector<Pack> packs, std::vector<Map>& maps, std::vector<Sprite>& sprites, Pack& currentPack)
 {
-    maps.clear();
-
-    for(const auto & entry : std::filesystem::directory_iterator(mapDir))
+    for(Pack p : packs)
     {
-        std::string s = entry.path().string();
-        std::replace( s.begin(), s.end(), '\\', '/');
-        if(s[s.length() - 4] == '.' && s[s.length() - 3] == 'm' && s[s.length() - 2] == 'a' && s[s.length() - 1] == 'p')
+        if(p.name == packName)
         {
-            LoadMapToVector(LoadMapFromFile(s), maps);
+            std::cout << "GAME: Loading pack " << p.name << "\n";
+            LoadSpritesFromDir(p.rootDir.string() + p.assetDir, sprites);
+            RegisterMapsInDir(p.rootDir.string() + p.mapDir, maps);
+            currentPack = p;
         }
     }
 }

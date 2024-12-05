@@ -4218,6 +4218,7 @@ CMakeFiles/app.dir/src/main.cpp.o: /Users/zsheldon8434/dev/boi/platformer/src/ma
   /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_stdlib.h \
   /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/rlImGui.h \
   /Users/zsheldon8434/dev/boi/platformer/src/editor.hpp \
+  /Users/zsheldon8434/dev/boi/platformer/src/fileio.hpp \
   /Users/zsheldon8434/dev/boi/platformer/src/graphics.hpp \
   /Users/zsheldon8434/dev/boi/platformer/src/maps.hpp
 
@@ -6191,6 +6192,8 @@ CMakeFiles/app.dir/src/main.cpp.o: /Users/zsheldon8434/dev/boi/platformer/src/ma
 /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_widgets.cpp:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__algorithm/pstl_backends/cpu_backends/libdispatch.h:
+
+/Users/zsheldon8434/dev/boi/platformer/src/fileio.hpp:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__type_traits/extent.h:
 

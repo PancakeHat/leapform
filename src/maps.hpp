@@ -179,7 +179,7 @@ void RenderEntities(std::vector<Entity> entities, std::vector<Sprite> sprites)
         {
             case 0: id = ""; break;
             case 1: id = "powerup"; break;
-            case 2: id = "platform"; break;
+            case 2: id = "powerup_platform"; break;
             case 3: id = "demon"; break;
             case 4: id = "powerup_generator"; break;
             case 5: id = "boss_demon"; break;

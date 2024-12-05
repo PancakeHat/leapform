@@ -990,4 +990,5 @@ CMakeFiles/app.dir/src/main.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.1.sdk/usr/include/_assert.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.1.sdk/usr/include/_static_assert.h \
   /Users/zsheldon8434/dev/boi/platformer/src/editor.hpp \
-  /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_stdlib.h
+  /Users/zsheldon8434/dev/boi/platformer/include/rlimgui/imgui_stdlib.h \
+  /Users/zsheldon8434/dev/boi/platformer/src/fileio.hpp

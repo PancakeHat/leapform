@@ -85,7 +85,6 @@ void EditorInit()
 int Editor(bool& editorOpen, std::vector<Sprite> sprites)
 {
     mousePosition = {800 * (GetMousePosition().x / GetScreenWidth()), 600 * (GetMousePosition().y / GetScreenHeight())};
-    std::cout << mousePosition.x << ", " << mousePosition.y << "\n";
     Vector2 tSize = {40, 40};
     tilePosition = { float(tSize.x * ((int)(mousePosition.x / tSize.x))), float(tSize.y * ((int)(mousePosition.y / tSize.y))) };
 
