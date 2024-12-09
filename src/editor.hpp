@@ -44,9 +44,11 @@ bool infoWindow = false;
 bool placingMode = 0;
 bool mapOpen = false;
 
-const char* buf1 = new char;
-const char* buf2 = new char;
-const char* buf3 = new char;
+std::string buf1 = "";
+std::string buf2 = "";
+std::string buf3 = "";
+
+std::string packName = "";
 
 char filenamebuf[32] = "";
 std::string filename = "";
@@ -192,7 +194,7 @@ int Editor(bool& editorOpen, std::vector<Sprite> sprites)
         if(saveIndicatorCountdown > 0)
         {
             // DrawText(std::format("Saved to ./maps/{}.map", filename).c_str(), 10, 20, 15, GREEN);
-            DrawOutlinedText(std::format("Saved to ./maps/{}.map", filename).c_str(), 5, 20, 20, DARKGREEN, 1, BLACK);
+            DrawOutlinedText(std::format("Saved to ./{}.map", filename).c_str(), 5, 20, 20, DARKGREEN, 1, BLACK);
             saveIndicatorCountdown--;
         }
     // EndDrawing();
@@ -322,11 +324,11 @@ void EditorLoadMap(std::string fileName)
     makeTilesFromMap(map, &mapTiles);
     mapEntities = map.entities;
 
-    std::cout << std::format("EDITOR: Loaded map {} from ./maps/{}.map\n", map.mapID, fileName);
+    std::cout << std::format("EDITOR: Loaded map {} from ./{}.map\n", map.mapID, fileName);
     mapOpen = true;
     filename = loadfilename;
     
-    SetWindowTitle(std::format("Map Editor - ./maps/{}.map", fileName).c_str());
+    SetWindowTitle(std::format("Map Editor - ./{}.map", fileName).c_str());
 
     buf1 = map.mapID.c_str();
     buf2 = map.nextMapID.c_str();
@@ -344,7 +346,7 @@ void LoadWindow()
     }
     if(ImGui::Button("Open"))
     {
-        std::filesystem::path mapPath = std::format("./maps/{}.map", loadfilename);
+        std::filesystem::path mapPath = std::format("./{}.map", loadfilename);
         if(std::filesystem::exists(mapPath))
         {
             EditorLoadMap(loadfilename);
@@ -354,7 +356,7 @@ void LoadWindow()
         else
         {
             failedOpenFind = true;
-            std::cout << std::format("EDITOR: Failed to find ./maps/{}.map\n", loadfilename);
+            std::cout << std::format("EDITOR: Failed to find ./{}.map\n", loadfilename);
         }
 
         loadfilenamesubmit = loadfilename;
@@ -362,7 +364,7 @@ void LoadWindow()
     }
 
     if(failedOpenFind)
-        ImGui::TextColored(ImVec4{255, 0, 0, 255}, std::format("Could not find file ./maps/{}.map", loadfilenamesubmit).c_str());
+        ImGui::TextColored(ImVec4{255, 0, 0, 255}, std::format("Could not find file ./{}.map", loadfilenamesubmit).c_str());
 
     ImGui::End();
 }
@@ -372,15 +374,15 @@ void InfoWindow()
     ImGui::SetNextWindowSize({0, 0});
     ImGui::Begin("Edit Map Info", &infoWindow);
 
-    if(ImGui::InputText("Map ID", (char*)buf1, 32))
+    if(ImGui::InputText("Map ID", &buf1, 32))
     {
         map.mapID = buf1;
     }
-    if(ImGui::InputText("Next Map ID", (char*)buf2, 32))
+    if(ImGui::InputText("Next Map ID", &buf2, 32))
     {
         map.nextMapID = buf2;
     }
-    if(ImGui::InputText("Background ID", (char*)buf3, 32))
+    if(ImGui::InputText("Background ID", &buf3, 32))
     {
         map.backgroundID = buf3;
     }
@@ -394,12 +396,8 @@ void InfoWindow()
 
 void SaveMap(std::string fileName)
 {
-    std::filesystem::path mapDir = "./maps";
-    if(!std::filesystem::exists(mapDir))
-        std::filesystem::create_directory(mapDir);
-
     std::ofstream file;
-    file.open(std::format("./maps/{}.map", fileName));
+    file.open(std::format("./{}.map", fileName));
 
     file << map.mapID << "\n";
     file << map.nextMapID << "\n";
@@ -427,7 +425,7 @@ void SaveMap(std::string fileName)
     file.close();
 
     saveIndicatorCountdown = 90;
-    std::cout << "Saved map " << map.mapID << std::format(" to ./maps/{}.map\n", fileName);
+    std::cout << "Saved map " << map.mapID << std::format(" to ./{}.map\n", fileName);
 }
 
 void SaveWindow()
@@ -519,15 +517,15 @@ void CreateMapWindow()
     ImGui::SetNextWindowSize({0, 0});
     ImGui::Begin("Create Map", &createMapWindow);
 
-    if(ImGui::InputText("Map ID", (char*)buf1, 32))
+    if(ImGui::InputText("Map ID", &buf1, 32))
     {
         map.mapID = buf1;
     }
-    if(ImGui::InputText("Next Map ID", (char*)buf2, 32))
+    if(ImGui::InputText("Next Map ID", &buf2, 32))
     {
         map.nextMapID = buf2;
     }
-    if(ImGui::InputText("Background ID", (char*)buf3, 32))
+    if(ImGui::InputText("Background ID", &buf3, 32))
     {
         map.backgroundID = buf3;
     }

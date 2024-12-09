@@ -1189,6 +1189,7 @@ CMakeFiles/app.dir/src/main.cpp.obj: D:/dev/platformer\ game/src/main.cpp \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/cpp_type_traits.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/cxxabi_forced.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/cxxabi_init_exception.h \
+  C:/mingw64-msvcrt/include/c++/14.2.0/bits/deque.tcc \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/enable_special_members.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/exception.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/exception_defines.h \
@@ -1219,6 +1220,7 @@ CMakeFiles/app.dir/src/main.cpp.obj: D:/dev/platformer\ game/src/main.cpp \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/move.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/nested_exception.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/new_allocator.h \
+  C:/mingw64-msvcrt/include/c++/14.2.0/bits/node_handle.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/ostream.tcc \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/ostream_insert.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/parse_numbers.h \
@@ -1233,23 +1235,40 @@ CMakeFiles/app.dir/src/main.cpp.obj: D:/dev/platformer\ game/src/main.cpp \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/ranges_cmp.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/ranges_util.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/refwrap.h \
+  C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex.h \
+  C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex.tcc \
+  C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_automaton.h \
+  C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_automaton.tcc \
+  C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_compiler.h \
+  C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_compiler.tcc \
+  C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_constants.h \
+  C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_error.h \
+  C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_executor.h \
+  C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_executor.tcc \
+  C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_scanner.h \
+  C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_scanner.tcc \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/requires_hosted.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/shared_ptr.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/shared_ptr_base.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/specfun.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/sstream.tcc \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/std_abs.h \
+  C:/mingw64-msvcrt/include/c++/14.2.0/bits/std_function.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_algo.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_algobase.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_bvector.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_construct.h \
+  C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_deque.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_function.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_heap.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_iterator.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_iterator_base_funcs.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_iterator_base_types.h \
+  C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_map.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_pair.h \
+  C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_stack.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_tempbuf.h \
+  C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_tree.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_uninitialized.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_vector.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/streambuf.tcc \
@@ -1265,6 +1284,7 @@ CMakeFiles/app.dir/src/main.cpp.obj: D:/dev/platformer\ game/src/main.cpp \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/utility.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/vector.tcc \
   C:/mingw64-msvcrt/include/c++/14.2.0/bits/version.h \
+  C:/mingw64-msvcrt/include/c++/14.2.0/bitset \
   C:/mingw64-msvcrt/include/c++/14.2.0/cctype \
   C:/mingw64-msvcrt/include/c++/14.2.0/cerrno \
   C:/mingw64-msvcrt/include/c++/14.2.0/charconv \
@@ -1282,6 +1302,7 @@ CMakeFiles/app.dir/src/main.cpp.obj: D:/dev/platformer\ game/src/main.cpp \
   C:/mingw64-msvcrt/include/c++/14.2.0/cwctype \
   C:/mingw64-msvcrt/include/c++/14.2.0/debug/assertions.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/debug/debug.h \
+  C:/mingw64-msvcrt/include/c++/14.2.0/deque \
   C:/mingw64-msvcrt/include/c++/14.2.0/exception \
   C:/mingw64-msvcrt/include/c++/14.2.0/ext/aligned_buffer.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/ext/alloc_traits.h \
@@ -1309,8 +1330,10 @@ CMakeFiles/app.dir/src/main.cpp.obj: D:/dev/platformer\ game/src/main.cpp \
   C:/mingw64-msvcrt/include/c++/14.2.0/pstl/glue_algorithm_defs.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/pstl/pstl_config.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/ratio \
+  C:/mingw64-msvcrt/include/c++/14.2.0/regex \
   C:/mingw64-msvcrt/include/c++/14.2.0/span \
   C:/mingw64-msvcrt/include/c++/14.2.0/sstream \
+  C:/mingw64-msvcrt/include/c++/14.2.0/stack \
   C:/mingw64-msvcrt/include/c++/14.2.0/stdexcept \
   C:/mingw64-msvcrt/include/c++/14.2.0/stdlib.h \
   C:/mingw64-msvcrt/include/c++/14.2.0/streambuf \
@@ -1409,9 +1432,11 @@ CMakeFiles/app.dir/src/main.cpp.obj: D:/dev/platformer\ game/src/main.cpp \
   D:/dev/platformer\ game/include/rlimgui/imgui_stdlib.h \
   D:/dev/platformer\ game/include/rlimgui/rlImGui.h \
   D:/dev/platformer\ game/src/editor.hpp \
+  D:/dev/platformer\ game/src/errors.hpp \
   D:/dev/platformer\ game/src/fileio.hpp \
   D:/dev/platformer\ game/src/graphics.hpp \
-  D:/dev/platformer\ game/src/maps.hpp
+  D:/dev/platformer\ game/src/maps.hpp \
+  D:/dev/platformer\ game/src/menu.hpp
 
 
 D:/dev/platformer\ game/src/fileio.hpp:
@@ -1434,8 +1459,6 @@ C:/mingw64-msvcrt/include/c++/14.2.0/x86_64-w64-mingw32/bits/error_constants.h:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/x86_64-w64-mingw32/bits/ctype_inline.h:
 
-C:/mingw64-msvcrt/include/c++/14.2.0/x86_64-w64-mingw32/bits/ctype_base.h:
-
 C:/mingw64-msvcrt/include/c++/14.2.0/x86_64-w64-mingw32/bits/basic_file.h:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/x86_64-w64-mingw32/bits/atomic_word.h:
@@ -1446,7 +1469,9 @@ C:/mingw64-msvcrt/include/c++/14.2.0/typeinfo:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/system_error:
 
-C:/mingw64-msvcrt/include/c++/14.2.0/sstream:
+C:/mingw64-msvcrt/include/c++/14.2.0/stack:
+
+C:/mingw64-msvcrt/include/c++/14.2.0/regex:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/istream:
 
@@ -1462,9 +1487,13 @@ C:/mingw64-msvcrt/include/c++/14.2.0/format:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/filesystem:
 
+C:/mingw64-msvcrt/include/c++/14.2.0/deque:
+
 C:/mingw64-msvcrt/include/c++/14.2.0/ctime:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/codecvt:
+
+C:/mingw64-msvcrt/include/c++/14.2.0/bitset:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/bits/unique_ptr.h:
 
@@ -1476,11 +1505,29 @@ C:/mingw64-msvcrt/include/c++/14.2.0/bits/streambuf.tcc:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_tempbuf.h:
 
+C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_deque.h:
+
 C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_bvector.h:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/bits/sstream.tcc:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/bits/shared_ptr.h:
+
+C:/mingw64-msvcrt/include/c++/14.2.0/sstream:
+
+C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_scanner.tcc:
+
+C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_compiler.tcc:
+
+C:/mingw64-msvcrt/include/c++/14.2.0/x86_64-w64-mingw32/bits/ctype_base.h:
+
+C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_compiler.h:
+
+C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_automaton.h:
+
+C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex.tcc:
+
+C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex.h:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/bits/quoted_string.h:
 
@@ -1498,15 +1545,21 @@ C:/mingw64-msvcrt/include/c++/14.2.0/bits/locale_conv.h:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/bits/locale_classes.h:
 
+C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_executor.h:
+
 C:/mingw64-msvcrt/include/c++/14.2.0/bits/ios_base.h:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/bits/fs_fwd.h:
+
+C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_automaton.tcc:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/bits/fs_dir.h:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/bits/exception_ptr.h:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/bits/enable_special_members.h:
+
+C:/mingw64-msvcrt/include/c++/14.2.0/bits/deque.tcc:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/bits/cxxabi_init_exception.h:
 
@@ -1525,6 +1578,10 @@ C:/mingw64-msvcrt/include/c++/14.2.0/bits/fs_ops.h:
 C:/mingw64-msvcrt/include/c++/14.2.0/bits/algorithmfwd.h:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/array:
+
+C:/mingw64-msvcrt/include/c++/14.2.0/bits/std_function.h:
+
+C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_constants.h:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/algorithm:
 
@@ -1573,6 +1630,8 @@ C:/mingw64-msvcrt/include/c++/14.2.0/numbers:
 C:/mingw64-msvcrt/include/c++/14.2.0/iosfwd:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/ext/string_conversions.h:
+
+C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_executor.tcc:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/ext/alloc_traits.h:
 
@@ -1860,6 +1919,8 @@ C:/mingw64-msvcrt/include/c++/14.2.0/bits/uses_allocator_args.h:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/pstl/pstl_config.h:
 
+C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_stack.h:
+
 C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_iterator.h:
 
 C:/mingw64-msvcrt/x86_64-w64-mingw32/include/_timeval.h:
@@ -1933,6 +1994,8 @@ C:/mingw64-msvcrt/lib/gcc/x86_64-w64-mingw32/14.2.0/include/hresetintrin.h:
 C:/mingw64-msvcrt/lib/gcc/x86_64-w64-mingw32/14.2.0/include/cldemoteintrin.h:
 
 C:/mingw64-msvcrt/lib/gcc/x86_64-w64-mingw32/14.2.0/include/wmmintrin.h:
+
+D:/dev/platformer\ game/src/menu.hpp:
 
 C:/mingw64-msvcrt/lib/gcc/x86_64-w64-mingw32/14.2.0/include/fxsrintrin.h:
 
@@ -2016,6 +2079,8 @@ C:/mingw64-msvcrt/include/c++/14.2.0/type_traits:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/tr1/poly_hermite.tcc:
 
+C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_error.h:
+
 C:/mingw64-msvcrt/include/c++/14.2.0/bits/memoryfwd.h:
 
 C:/mingw64-msvcrt/lib/gcc/x86_64-w64-mingw32/14.2.0/include/avx512ifmaintrin.h:
@@ -2023,6 +2088,8 @@ C:/mingw64-msvcrt/lib/gcc/x86_64-w64-mingw32/14.2.0/include/avx512ifmaintrin.h:
 C:/mingw64-msvcrt/include/c++/14.2.0/span:
 
 C:/mingw64-msvcrt/lib/gcc/x86_64-w64-mingw32/14.2.0/include/avx512vlbwintrin.h:
+
+C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_scanner.h:
 
 C:/mingw64-msvcrt/include/c++/14.2.0/bits/ranges_algo.h:
 
@@ -2135,6 +2202,8 @@ C:/mingw64-msvcrt/x86_64-w64-mingw32/include/string.h:
 C:/mingw64-msvcrt/x86_64-w64-mingw32/include/namespaceapi.h:
 
 D:/dev/platformer\ game/src/maps.hpp:
+
+D:/dev/platformer\ game/src/errors.hpp:
 
 C:/mingw64-msvcrt/x86_64-w64-mingw32/include/swprintf.inl:
 

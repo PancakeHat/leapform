@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "errors.hpp"
+#include <format>
 
 #pragma once
 
@@ -12,8 +14,7 @@ struct Sprite {
     int height;
 };
 
-// Add a file with the same name to ./override/ to mod in textures
-void LoadSpriteToVector(std::string fileName, std::string id, std::vector<Sprite>& sprites)
+void LoadSpriteToVector(std::string fileName, std::string id, std::vector<Sprite>& sprites, ErrorHandler& eh)
 {
     Sprite sprite;
     sprite.id = id;
@@ -21,6 +22,11 @@ void LoadSpriteToVector(std::string fileName, std::string id, std::vector<Sprite
     std::string normalName = fileName;
 
     Image i = LoadImage(normalName.c_str()); 
+
+    if(i.width == 0)
+    {
+        ThrowNewError(std::format("Failed to load sprite {}", id), ERROR_NONFATAL, true, eh);
+    }
 
     sprite.width = i.width;
     sprite.height = i.height;

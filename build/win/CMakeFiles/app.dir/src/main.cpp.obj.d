@@ -163,16 +163,17 @@ CMakeFiles/app.dir/src/main.cpp.obj: D:\dev\platformer\ game\src\main.cpp \
  C:/mingw64-msvcrt/include/c++/14.2.0/bits/ostream.tcc \
  C:/mingw64-msvcrt/include/c++/14.2.0/istream \
  C:/mingw64-msvcrt/include/c++/14.2.0/bits/istream.tcc \
- C:/mingw64-msvcrt/include/c++/14.2.0/algorithm \
- C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_algo.h \
- C:/mingw64-msvcrt/include/c++/14.2.0/bits/algorithmfwd.h \
- C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_heap.h \
- C:/mingw64-msvcrt/include/c++/14.2.0/bits/uniform_int_dist.h \
- C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_tempbuf.h \
- C:/mingw64-msvcrt/include/c++/14.2.0/bits/ranges_algo.h \
- C:/mingw64-msvcrt/include/c++/14.2.0/bits/ranges_algobase.h \
- C:/mingw64-msvcrt/include/c++/14.2.0/pstl/glue_algorithm_defs.h \
- C:/mingw64-msvcrt/include/c++/14.2.0/pstl/execution_defs.h \
+ D:\dev\platformer\ game\src\errors.hpp \
+ D:/dev/PLATFO~2/include/rlimgui/rlImGui.h \
+ D:/dev/PLATFO~2/include/rlimgui/extras/IconsFontAwesome6.h \
+ D:/dev/PLATFO~2/include/rlimgui/imgui.h \
+ D:/dev/PLATFO~2/include/rlimgui/imconfig.h \
+ C:/mingw64-msvcrt/lib/gcc/x86_64-w64-mingw32/14.2.0/include/float.h \
+ C:/mingw64-msvcrt/x86_64-w64-mingw32/include/float.h \
+ C:/mingw64-msvcrt/x86_64-w64-mingw32/include/string.h \
+ C:/mingw64-msvcrt/x86_64-w64-mingw32/include/sec_api/string_s.h \
+ C:/mingw64-msvcrt/x86_64-w64-mingw32/include/assert.h \
+ D:/dev/PLATFO~2/include/rlimgui/imgui_stdlib.h \
  C:/mingw64-msvcrt/include/c++/14.2.0/format \
  C:/mingw64-msvcrt/include/c++/14.2.0/array \
  C:/mingw64-msvcrt/include/c++/14.2.0/charconv \
@@ -190,9 +191,19 @@ CMakeFiles/app.dir/src/main.cpp.obj: D:\dev\platformer\ game\src\main.cpp \
  C:/mingw64-msvcrt/include/c++/14.2.0/span \
  C:/mingw64-msvcrt/include/c++/14.2.0/variant \
  C:/mingw64-msvcrt/include/c++/14.2.0/bits/parse_numbers.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/ranges_algobase.h \
  C:/mingw64-msvcrt/include/c++/14.2.0/bits/unicode.h \
  C:/mingw64-msvcrt/include/c++/14.2.0/cstdint \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_algo.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/algorithmfwd.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_heap.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/uniform_int_dist.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_tempbuf.h \
  C:/mingw64-msvcrt/include/c++/14.2.0/bits/unicode-data.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/algorithm \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/ranges_algo.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/pstl/glue_algorithm_defs.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/pstl/execution_defs.h \
  C:/mingw64-msvcrt/include/c++/14.2.0/filesystem \
  C:/mingw64-msvcrt/include/c++/14.2.0/bits/fs_fwd.h \
  C:/mingw64-msvcrt/include/c++/14.2.0/bits/chrono.h \
@@ -231,15 +242,29 @@ CMakeFiles/app.dir/src/main.cpp.obj: D:\dev\platformer\ game\src\main.cpp \
  C:/mingw64-msvcrt/include/c++/14.2.0/x86_64-w64-mingw32/bits/basic_file.h \
  C:/mingw64-msvcrt/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++io.h \
  C:/mingw64-msvcrt/include/c++/14.2.0/bits/fstream.tcc \
- D:/dev/PLATFO~2/include/rlimgui/rlImGui.h \
- D:/dev/PLATFO~2/include/rlimgui/extras/IconsFontAwesome6.h \
- D:/dev/PLATFO~2/include/rlimgui/imgui.h \
- D:/dev/PLATFO~2/include/rlimgui/imconfig.h \
- C:/mingw64-msvcrt/lib/gcc/x86_64-w64-mingw32/14.2.0/include/float.h \
- C:/mingw64-msvcrt/x86_64-w64-mingw32/include/float.h \
- C:/mingw64-msvcrt/x86_64-w64-mingw32/include/string.h \
- C:/mingw64-msvcrt/x86_64-w64-mingw32/include/sec_api/string_s.h \
- C:/mingw64-msvcrt/x86_64-w64-mingw32/include/assert.h \
  D:\dev\platformer\ game\src\editor.hpp \
- D:/dev/PLATFO~2/include/rlimgui/imgui_stdlib.h \
- D:\dev\platformer\ game\src\fileio.hpp
+ D:\dev\platformer\ game\src\fileio.hpp \
+ C:/mingw64-msvcrt/include/c++/14.2.0/regex \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bitset \
+ C:/mingw64-msvcrt/include/c++/14.2.0/stack \
+ C:/mingw64-msvcrt/include/c++/14.2.0/deque \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_deque.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/deque.tcc \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_stack.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/std_function.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_tree.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/node_handle.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/stl_map.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_constants.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_error.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_automaton.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_automaton.tcc \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_scanner.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_scanner.tcc \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_compiler.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_compiler.tcc \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex.tcc \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_executor.h \
+ C:/mingw64-msvcrt/include/c++/14.2.0/bits/regex_executor.tcc \
+ D:\dev\platformer\ game\src\menu.hpp

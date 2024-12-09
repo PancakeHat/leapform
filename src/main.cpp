@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "fileio.hpp"
+#include "errors.hpp"
+#include "menu.hpp"
 
 #define SCREENWIDTH 800
 #define SCREENHEIGHT 600
@@ -29,39 +31,40 @@ std::vector<Pack> packs;
 Pack loadedPack;
 Map loadedMap;
 
+ErrorHandler errors;
+
 int fadeoutCounter;
 
 bool inMapEditor = false;
+bool inMainMenu = true;
 bool debugMode = false;
 
 int frames = 0;
 
 int main()
 {
+    ForceErrorHandlerOverride(true, errors);
     std::cout << "GAME: Starting game\n";
     SetTraceLogLevel(TraceLogLevel::LOG_ERROR);
 
-    RegisterAllPacks("./packs", packs);
+    RegisterAllPacks("./packs", packs, errors);
 
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(SCREENWIDTH, SCREENHEIGHT, "window");
     SetTargetFPS(60);
 
-    // LoadSpritesFromDir("./assets", sprites);
-    LoadPackToGame("Default Pack", packs, maps, sprites, loadedPack);
-    // return 0;
+    LoadPackToGame("Default Pack", packs, maps, sprites, backgrounds, loadedPack, errors);
 
     rlImGuiSetup(true);
 
     SetExitKey(-1);
     EditorInit();
+    MenuInit();
 
     srand(time(0));
 
-    // TODO: make debug stuff and map editor work with pack system
-
     // Load first map
-    LoadMap("map0", maps, tiles, entities, loadedMap);
+    LoadMap(loadedPack.firstMapID, maps, tiles, entities, loadedMap, errors);
 
     Vector2 position = {loadedMap.playerSpawn.x * 40, loadedMap.playerSpawn.y * 40};
     Vector2 playerVelocity = {0, 0};
@@ -75,126 +78,159 @@ int main()
     int jumpKey = KEY_UP;
 
     char debugBuf[32] = "";
+    char packnameBuf[48] = "";
     std::string debugLoadMapID;
+    std::string debugLoadPackName;
 
+    // the texture we render to then scale
     RenderTexture2D screen = LoadRenderTexture(SCREENWIDTH, SCREENHEIGHT);
-
 
     while(!WindowShouldClose())
     {
-        if(!inMapEditor)
+        if(!inMapEditor && !inMainMenu)
         {
-            playerVelocity = {0, 0};
-            if(!ImGui::GetIO().WantCaptureMouse)
+            if(!errors.activeError)
             {
-                if(playerPhysics)
+                playerVelocity = {0, 0};
+                if(!ImGui::GetIO().WantCaptureMouse)
                 {
-                    if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) { position.x += 4; playerVelocity.x = 1; }
-                    if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) { position.x -= 4; playerVelocity.x = -1; }
-                    if (IsKeyDown(KEY_UP)) { if(canJump) { playerJumping = true; jumpTime = 0; jumpKey = KEY_UP; } }
-                    if (IsKeyDown(KEY_W)) { if(canJump) { playerJumping = true; jumpTime = 0; jumpKey = KEY_W; } }
-                    if (IsKeyUp(jumpKey)) {if(playerJumping && jumpTime >= 24) {playerJumping = false; downVelocity = 0; } }
-                }
-                if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S))
-                {
-                    if(poweredUp)
+                    if(playerPhysics)
                     {
-                        entities.push_back({2, {position.x - 80, position.y + 45}, {200, 40}, 0});
+                        if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) { position.x += 4; playerVelocity.x = 1; }
+                        if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) { position.x -= 4; playerVelocity.x = -1; }
+                        if (IsKeyDown(KEY_UP)) { if(canJump) { playerJumping = true; jumpTime = 0; jumpKey = KEY_UP; } }
+                        if (IsKeyDown(KEY_W)) { if(canJump) { playerJumping = true; jumpTime = 0; jumpKey = KEY_W; } }
+                        if (IsKeyUp(jumpKey)) {if(playerJumping && jumpTime >= 24) {playerJumping = false; downVelocity = 0; } }
+                    }
+                    if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S))
+                    {
+                        if(poweredUp)
+                        {
+                            entities.push_back({2, {position.x - 80, position.y + 45}, {200, 40}, 0});
+                            poweredUp = false;
+                        }
+                    }
+                    if (IsKeyPressed(KEY_R)) 
+                    { 
+                        LoadMap(loadedMap.mapID, maps, tiles, entities, loadedMap, errors); 
+                        position = {loadedMap.playerSpawn.x * 40, loadedMap.playerSpawn.y * 40 - 40}; 
                         poweredUp = false;
                     }
+                    if (IsKeyPressed(KEY_GRAVE)) { debugMode = !debugMode; }
+                    if (IsKeyPressed(KEY_M)) { inMapEditor = true; SetWindowTitle("Map Editor"); }
                 }
-                if (IsKeyPressed(KEY_R)) 
-                { 
-                    LoadMap(loadedMap.mapID, maps, tiles, entities, loadedMap); 
-                    position = {loadedMap.playerSpawn.x * 40, loadedMap.playerSpawn.y * 40 - 40}; 
-                    poweredUp = false;
-                }
-                if (IsKeyPressed(KEY_GRAVE)) { debugMode = !debugMode; }
-                if (IsKeyPressed(KEY_M)) { inMapEditor = true; SetWindowTitle("Map Editor"); }
-            }
 
-            if(playerPhysics)
-            {
-                if(downVelocity > 1) canJump = false;
-
-                if(playerJumping)
+                if(playerPhysics)
                 {
-                    canJump = false;
+                    if(downVelocity > 1) canJump = false;
 
-                    int change = 10 - jumpTime / 4;
-                    if(change < 1) change = 1;
-                    position.y -= change;
-                    jumpTime++;
-
-                    if(jumpTime == 40)
+                    if(playerJumping)
                     {
-                        playerJumping = false;
-                        downVelocity = 0;
+                        canJump = false;
+
+                        int change = 10 - jumpTime / 4;
+                        if(change < 1) change = 1;
+                        position.y -= change;
+                        jumpTime++;
+
+                        if(jumpTime == 40)
+                        {
+                            playerJumping = false;
+                            downVelocity = 0;
+                        }
+                    }
+
+                    if(!playerJumping)
+                    {
+                        downVelocity += 1;
+                        if(downVelocity > 10) downVelocity = 10;
+                        position.y += downVelocity; 
+                        playerVelocity.y = 1;
                     }
                 }
 
-                if(!playerJumping)
+                for(int i = 0; i < entities.size(); i++)
                 {
-                    downVelocity += 1;
-                    if(downVelocity > 10) downVelocity = 10;
-                    position.y += downVelocity; 
-                    playerVelocity.y = 1;
+                    entities[i].ticks++;
                 }
+
+                checkPlayerWorldCollsions(*tiles, position, playerVelocity, canJump, playerJumping, downVelocity, loadedMap, entities, poweredUp, playerPhysics);
+
+                // BeginDrawing();
+                BeginTextureMode(screen);
+                    ClearBackground(GRAY);
+
+                    DrawSpriteFromVector(loadedMap.backgroundID, {0, 0}, {800, 600}, backgrounds);
+
+                    renderTiles(*tiles, sprites);
+                    RenderEntities(entities, sprites);
+
+                    if(!poweredUp)
+                        DrawSpriteFromVector("player", position, {40, 40}, sprites);
+                    else
+                        DrawSpriteFromVector("player_powered", position, {40, 40}, sprites);
+
+
+                    if(IndexOfFirstEntityOfType(6, entities) != -1 && entities[IndexOfFirstEntityOfType(6, entities)].target.y > 0)
+                    {
+                        Entity e = entities[IndexOfFirstEntityOfType(6, entities)];
+                        int alpha = 255;
+                        if(e.target.y <= 100)
+                            alpha = (int)(255 - (255 - (e.target.y * 2.55)));
+                        DrawSpriteFromVectorAlpha("shield", {e.pos.x - 20, e.pos.y - 40}, {120, 120}, sprites, alpha);
+                    }
+
+                    if(fadeoutCounter > 0)
+                        DrawRectangle(0, 0, SCREENWIDTH, SCREENHEIGHT, Color{0, 0, 0, (unsigned char)(fadeoutCounter)});
+
+                    if(debugMode)
+                    {
+                        debugDrawPlayerColliders(position);
+                        DrawText(std::format("Position: {}, {}", position.x, position.y).c_str(), 10, 10, 16, BLACK);
+                        DrawText(std::format("Velocity: {}, {}", playerVelocity.x, playerVelocity.y).c_str(), 10, 25, 16, BLACK);
+                        DrawText(std::format("JumpTime / FallTime: {} / {}", jumpTime, downVelocity).c_str(), 10, 40, 16, BLACK);
+                        DrawText(std::format("Map ID: {}", loadedMap.mapID).c_str(), 10, 55, 16, BLACK);
+                        DrawText(std::format("Entity count: {}", entities.size()).c_str(), 10, 70, 16, BLACK);
+                        DrawText(std::format("Player Physics: {}", playerPhysics).c_str(), 10, 85, 16, BLACK);
+                        DrawText(std::format("Background ID: {}", loadedMap.backgroundID).c_str(), 10, 100, 16, BLACK);
+                        DrawText(std::format("Frame: {}", frames).c_str(), 10, 115, 16, BLACK);
+                    }
+                // EndDrawing();
+                EndTextureMode();
             }
 
-            for(int i = 0; i < entities.size(); i++)
-            {
-                entities[i].ticks++;
-            }
-
-            checkPlayerWorldCollsions(*tiles, position, playerVelocity, canJump, playerJumping, downVelocity, loadedMap, entities, poweredUp, playerPhysics);
-
-            // BeginDrawing();
-            BeginTextureMode(screen);
-                ClearBackground(GRAY);
-
-                DrawSpriteFromVector(loadedMap.backgroundID, {0, 0}, {800, 600}, backgrounds);
-
-                renderTiles(*tiles, sprites);
-                RenderEntities(entities, sprites);
-
-                if(!poweredUp)
-                    DrawSpriteFromVector("player", position, {40, 40}, sprites);
-                else
-                    DrawSpriteFromVector("player_powered", position, {40, 40}, sprites);
-
-
-                if(IndexOfFirstEntityOfType(6, entities) != -1 && entities[IndexOfFirstEntityOfType(6, entities)].target.y > 0)
-                {
-                    Entity e = entities[IndexOfFirstEntityOfType(6, entities)];
-                    int alpha = 255;
-                    if(e.target.y <= 100)
-                        alpha = (int)(255 - (255 - (e.target.y * 2.55)));
-                    DrawSpriteFromVectorAlpha("shield", {e.pos.x - 20, e.pos.y - 40}, {120, 120}, sprites, alpha);
-                }
-
-                if(fadeoutCounter > 0)
-                    DrawRectangle(0, 0, SCREENWIDTH, SCREENHEIGHT, Color{0, 0, 0, (unsigned char)(fadeoutCounter)});
-
-                if(debugMode)
-                {
-                    debugDrawPlayerColliders(position);
-                    DrawText(std::format("Position: {}, {}", position.x, position.y).c_str(), 10, 10, 16, BLACK);
-                    DrawText(std::format("Velocity: {}, {}", playerVelocity.x, playerVelocity.y).c_str(), 10, 25, 16, BLACK);
-                    DrawText(std::format("JumpTime / FallTime: {} / {}", jumpTime, downVelocity).c_str(), 10, 40, 16, BLACK);
-                    DrawText(std::format("Map ID: {}", loadedMap.mapID).c_str(), 10, 55, 16, BLACK);
-                    DrawText(std::format("Entity count: {}", entities.size()).c_str(), 10, 70, 16, BLACK);
-                    DrawText(std::format("Player Physics: {}", playerPhysics).c_str(), 10, 85, 16, BLACK);
-                    DrawText(std::format("Background ID: {}", loadedMap.backgroundID).c_str(), 10, 100, 16, BLACK);
-                    DrawText(std::format("Frame: {}", frames).c_str(), 10, 115, 16, BLACK);
-                }
-            // EndDrawing();
-            EndTextureMode();
 
             BeginDrawing();
+                ClearBackground(BLACK);
+
+                // draw scaled render texture to screen
                 DrawSpriteDirect(screen.texture, {0, 0}, {(float)GetScreenWidth(), (float)GetScreenHeight()});
 
                 rlImGuiBegin();
+
+                    // error window
+                    if(errors.activeError)
+                    {
+                        ImGui::SetNextWindowSize({0, 0});
+                        if(ImGui::Begin(errors.isFatal ? "Fatal Error" : "Nonfatal Error"))   
+                        {
+                            ImGui::TextColored({255, 0, 0, 255}, errors.errorMessage.c_str());
+                            if(ImGui::Button("OK"))
+                            {
+                                if(errors.isFatal)
+                                    break;
+                                else
+                                {
+                                    errors.activeError = false;
+                                    errors.overridable = true;
+                                }
+                            }
+
+                            ImGui::End();
+                        }
+                    }
+
+                    // debug gui
                     if(debugMode)
                     {
                         ImGui::SetNextWindowSize({0, 0});
@@ -206,18 +242,34 @@ int main()
                         }
                         if(ImGui::Button("Load Map"))
                         {
-                            LoadMap(debugLoadMapID, maps, tiles, entities, loadedMap);
+                            LoadMap(debugLoadMapID, maps, tiles, entities, loadedMap, errors);
                             position = {loadedMap.playerSpawn.x * 40, loadedMap.playerSpawn.y * 40};
                         }
                         ImGui::Separator();
                         if(ImGui::Button("Refresh Map List"))
                         {
-                            RegisterMapsInDir("./maps", maps);
+                            RegisterMapsInDir(loadedPack.rootDir.string() + loadedPack.mapDir, maps, errors);
                         }
                         if(ImGui::Button("Reload Current Map"))
                         {
-                            RegisterMapsInDir("./maps", maps);
-                            LoadMap(loadedMap.mapID, maps, tiles, entities, loadedMap);
+                            RegisterMapsInDir(loadedPack.rootDir.string() + loadedPack.mapDir, maps, errors);
+                            LoadMap(loadedMap.mapID, maps, tiles, entities, loadedMap, errors);
+                            position = {loadedMap.playerSpawn.x * 40, loadedMap.playerSpawn.y * 40};
+                        }
+
+                        ImGui::End();
+
+                        ImGui::SetNextWindowSize({0, 0});
+                        ImGui::Begin("Pack Debug");
+
+                        if(ImGui::InputText("Pack Name", packnameBuf, IM_ARRAYSIZE(packnameBuf)))
+                        {
+                            debugLoadPackName = packnameBuf;
+                        }
+                        if(ImGui::Button("Load Pack"))
+                        {
+                            LoadPackToGame(debugLoadPackName, packs, maps, sprites, backgrounds, loadedPack, errors);
+                            LoadMap(loadedPack.firstMapID, maps, tiles, entities, loadedMap, errors);
                             position = {loadedMap.playerSpawn.x * 40, loadedMap.playerSpawn.y * 40};
                         }
 
@@ -226,9 +278,13 @@ int main()
                 rlImGuiEnd();
             EndDrawing();
         }
-        else
+        else if(inMapEditor)
         {
             Editor(inMapEditor, sprites);
+        }
+        else if(inMainMenu)
+        {
+            MainMenu(inMainMenu);
         }
 
         frames++;
@@ -239,6 +295,7 @@ int main()
     UnloadSpritesFromVector(sprites);
     UnloadSpritesFromVector(backgrounds);
     rlImGuiShutdown();
+    std::cout << "GAME: Shutting down\n";
     return 0;
 }
 
@@ -265,6 +322,9 @@ int RandomInt(int min, int max)
     return (rand() % max + min);
 }
 
+
+// dont let the name deceive you, this is actually the game's update function
+// it is a pretty huge mess but it gets the job done
 void checkPlayerWorldCollsions(std::vector<Tile>& tiles, Vector2& playerpos, Vector2 playervel, bool& canJump, 
     bool& jumping, int& downVelocity, Map& currentMap, std::vector<Entity>& entities, bool& poweredUp, bool& physicsToggle) {
     Vector2 cBottom = {5, 39};
@@ -293,7 +353,7 @@ void checkPlayerWorldCollsions(std::vector<Tile>& tiles, Vector2& playerpos, Vec
         {
             if(checkBoxCollison(playerpos, {40, 40}, tile.pos, {40, 40}))
             {
-                LoadMap(currentMap.nextMapID, maps, &tiles, entities, currentMap);
+                LoadMap(currentMap.nextMapID, maps, &tiles, entities, currentMap, errors);
                 playerpos = {currentMap.playerSpawn.x * 40, currentMap.playerSpawn.y * 40};
                 poweredUp = false;
             }
@@ -302,7 +362,7 @@ void checkPlayerWorldCollsions(std::vector<Tile>& tiles, Vector2& playerpos, Vec
         {
             if(checkBoxCollison(playerpos, {40, 40}, {tile.pos.x + 10, tile.pos.y + 10}, {20, 20}))
             {
-                LoadMap(currentMap.mapID, maps, &tiles, entities, currentMap);
+                LoadMap(currentMap.mapID, maps, &tiles, entities, currentMap, errors);
                 playerpos = {currentMap.playerSpawn.x * 40, currentMap.playerSpawn.y * 40};
                 poweredUp = false;
             }
@@ -344,7 +404,7 @@ void checkPlayerWorldCollsions(std::vector<Tile>& tiles, Vector2& playerpos, Vec
         {
             if(checkBoxCollison(playerpos, {40, 40}, entities[i].pos, entities[i].size))
             {
-                LoadMap(currentMap.mapID, maps, &tiles, entities, currentMap);
+                LoadMap(currentMap.mapID, maps, &tiles, entities, currentMap, errors);
                 playerpos = {currentMap.playerSpawn.x * 40, currentMap.playerSpawn.y * 40};
                 poweredUp = false;
                 return;
@@ -400,7 +460,7 @@ void checkPlayerWorldCollsions(std::vector<Tile>& tiles, Vector2& playerpos, Vec
                 fadeoutCounter = 0;
                 poweredUp = false;
                 physicsToggle = true;
-                LoadMap("map0", maps, &tiles, entities, currentMap);
+                LoadMap("map0", maps, &tiles, entities, currentMap, errors);
                 playerpos = {currentMap.playerSpawn.x * 40, currentMap.playerSpawn.y * 40};
                 return;
             }
@@ -447,7 +507,7 @@ void checkPlayerWorldCollsions(std::vector<Tile>& tiles, Vector2& playerpos, Vec
                 {
                     if(CheckBoxCircleCollision({entities[i].pos.x + 40, entities[i].pos.y + 20}, 60, {playerpos.x + 20, playerpos.y + 20}, {40, 40}))
                     {
-                        LoadMap(currentMap.mapID, maps, &tiles, entities, currentMap);
+                        LoadMap(currentMap.mapID, maps, &tiles, entities, currentMap, errors);
                         playerpos = {currentMap.playerSpawn.x * 40, currentMap.playerSpawn.y * 40};
                         poweredUp = false;
                     }
@@ -508,7 +568,7 @@ void checkPlayerWorldCollsions(std::vector<Tile>& tiles, Vector2& playerpos, Vec
 
             if(checkBoxCollison(playerpos, {40, 40}, entities[i].pos, {60, 600}) && physicsToggle && fadeoutCounter == 0)
             {
-                LoadMap(currentMap.mapID, maps, &tiles, entities, currentMap);
+                LoadMap(currentMap.mapID, maps, &tiles, entities, currentMap, errors);
                 playerpos = {currentMap.playerSpawn.x * 40, currentMap.playerSpawn.y * 40};
                 poweredUp = false;
                 return;

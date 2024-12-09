@@ -30,6 +30,7 @@ struct Pack {
     std::string mapDir;
     std::string assetDir;
     std::filesystem::path rootDir;
+    std::string firstMapID;
 };
 
 bool operator ==(const Entity& x, const Entity& y)
@@ -303,9 +304,8 @@ bool CheckBoxCircleCollision(Vector2 circleCenter, float circleRadius, Vector2 r
     return (cornerDistance <= (pow(circleRadius, 2)));
 }
 
-void LoadMap(std::string mapID, std::vector<Map>& maps, std::vector<Tile> *tiles, std::vector<Entity>& entities, Map &loadedMap)
+void LoadMap(std::string mapID, std::vector<Map>& maps, std::vector<Tile> *tiles, std::vector<Entity>& entities, Map &loadedMap, ErrorHandler &eh)
 {
-    std::cout << "GAME: Loading map " << mapID << "\n";
     for(Map m : maps)
     {
         if(m.mapID == mapID)
@@ -313,8 +313,13 @@ void LoadMap(std::string mapID, std::vector<Map>& maps, std::vector<Tile> *tiles
             makeTilesFromMap(m, tiles);
             entities = m.entities;
             loadedMap = m;
+            std::cout << "GAME: Loading map " << mapID << "\n";
+            return;
         }
     }
+
+    std::cout << "GAME: Failed to load map " << mapID << "\n";
+    ThrowNewError(std::format("Could not find map with id {}", mapID), ERROR_NONFATAL, true, eh);
 }
 
 void LoadMapToVector(Map map, std::vector<Map>& maps)
