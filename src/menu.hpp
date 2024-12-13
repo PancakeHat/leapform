@@ -13,75 +13,185 @@
 
 #pragma once
 
-void UpdateMainMenu();
-void StartGame();
-void RenderButtons();
-
-RenderTexture2D menuScreen;
-
 struct Button
 {
     Vector2 pos;
     Vector2 size;
+    int fontSize;
     std::string text;
     void (*onClicked)();
 };
 
+void UpdateButtons(std::vector<Button> buttons);
+void StartGame();
+void RenderButtons(std::vector<Button> buttons);
+void QuitGame();
+void OpenModMenu();
+void ModMenu();
+void PauseMenu(bool& paused, bool& mainMenu);
+void Resume();
+void ReturnToMenu();
+
+Font uiFont = LoadFontEx("./assets/fonts/retro.ttf", 40, 0, 0);
+
+// this is one of the weirdes solutions ive ever had to come upt with but i think itll work
+bool menuOpenSync = true;
+bool forceQuitSync = false;
+bool pauseMenuSync = false;
+
+bool modMenu = false;
+std::string modPackName = "";
+char nameBuf[48] = "";
+bool menuLoadPack = false;
+
+RenderTexture2D menuScreen;
+
 std::vector<Button> buttons;
+std::vector<Button> pauseButtons;
+std::vector<std::string> packNames;
 
 Vector2 menuMousePosition;
 
-void MenuInit()
+void MenuInit(bool menuOpen, std::vector<Pack>& packs)
 {
+    std::cout << "MENU: Starting menu\n";
+    menuOpenSync = menuOpen;
     menuScreen = LoadRenderTexture(800, 600);
 
-    buttons.push_back(Button{{100, 100}, {200, 50}, "Play", StartGame});
+    buttons.push_back(Button{{20, 120}, {200, 50}, 40, "Play", StartGame});
+    buttons.push_back(Button{{20, 180}, {200, 50}, 40, "Mods", OpenModMenu});
+    buttons.push_back(Button{{20, 240}, {200, 50}, 40, "Quit", QuitGame});
+
+    pauseButtons.push_back(Button{{20, 80}, {180, 40}, 30, "Resume", Resume});
+    pauseButtons.push_back(Button{{20, 130}, {180, 40}, 30, "Main Menu", ReturnToMenu});
+
+    packNames.clear();
+
+    for(Pack p : packs)
+    {
+        packNames.push_back(p.name);
+    }
 }
 
-int MainMenu(bool& menuOpen)
+int MainMenu(bool& menuOpen, bool& forceQuit, std::vector<Sprite>& sprites, std::vector<Sprite>& backgrounds)
 {
     menuMousePosition = {800 * (GetMousePosition().x / GetScreenWidth()), 600 * (GetMousePosition().y / GetScreenHeight())};
 
-    UpdateMainMenu();
+    menuOpen = menuOpenSync;
+    forceQuit = forceQuitSync;
+    UpdateButtons(buttons);
 
     BeginTextureMode(menuScreen);
-        ClearBackground(BLUE);
-        RenderButtons();
+        ClearBackground(BLACK);
+        DrawSpriteFromVectorAlpha("cave", {0, 0}, {800, 600}, backgrounds, 178);
+        DrawTextEx(uiFont, "Game", {20, 20}, 80, 8, BLACK);
+        RenderButtons(buttons);
     EndTextureMode();
 
     BeginDrawing();
         DrawSpriteDirect(menuScreen.texture, {0, 0}, {(float)GetScreenWidth(), (float)GetScreenHeight()});
+        rlImGuiBegin();
+            if(modMenu)
+            {
+                ModMenu();
+            }
+        rlImGuiEnd();
     EndDrawing();
 
     return 0;
 }
 
-void StartGame()
+void Resume()
 {
-    std::cout << "starting game\n";
+    pauseMenuSync = false;
 }
 
-void UpdateMainMenu()
+void ReturnToMenu()
+{
+    menuOpenSync = true;
+    pauseMenuSync = false;
+}
+
+void PauseMenu(bool& paused, bool& mainMenu)
+{
+    menuMousePosition = {800 * (GetMousePosition().x / GetScreenWidth()), 600 * (GetMousePosition().y / GetScreenHeight())};
+
+    paused = pauseMenuSync;
+    mainMenu = menuOpenSync;
+
+    UpdateButtons(pauseButtons);
+    DrawRectangle(0, 0, 800, 600, {0, 0, 0, 80});
+    DrawTextEx(uiFont, "Paused", {20, 20}, 50, 8, BLACK);
+    RenderButtons(pauseButtons);
+}
+
+void ModMenu()
+{
+    ImGui::SetNextWindowSize({0, 0});
+    if(ImGui::Begin("Mod Menu", &modMenu))
+    {
+        if(ImGui::InputText("Pack Name", nameBuf, IM_ARRAYSIZE(nameBuf)))
+        {
+            modPackName = nameBuf;
+        }
+        if(ImGui::Button("Load Pack"))
+        {
+            std::cout << std::format("MENU: Loading mod {}", modPackName);
+            menuLoadPack = true;
+            menuOpenSync = false;
+        }
+        ImGui::Separator();
+        ImGui::Text("Packs:");
+        for(std::string n : packNames)
+        {
+            ImGui::TextColored(ImVec4{0.6, 0.6, 0.6, 255}, n.c_str());
+        }
+        ImGui::End();
+    }
+}
+
+void OpenModMenu()
+{
+    modMenu = true;
+}
+
+void StartGame()
+{
+    std::cout << "MENU: Start pressed\n";
+    menuLoadPack = false;
+    menuOpenSync = false;
+}
+
+void QuitGame()
+{
+    forceQuitSync = true;
+}
+
+void UpdateButtons(std::vector<Button> buttons)
 {
     for(Button b : buttons)
     {
-        if(checkBoxCollison(menuMousePosition, {0, 0}, b.pos, b.size))
+        if(!ImGui::GetIO().WantCaptureMouse)
         {
-            if(IsMouseButtonDown(MOUSE_BUTTON_LEFT))
-                b.onClicked();
+            if(checkBoxCollison(menuMousePosition, {0, 0}, b.pos, b.size))
+            {
+                if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+                    b.onClicked();
+            }
         }
     }
 }
 
-void RenderButtons()
+void RenderButtons(std::vector<Button> buttons)
 {
     for(Button b : buttons)
     {
-        if(checkBoxCollison(menuMousePosition, {0, 0}, b.pos, b.size))
-            DrawRectangle(b.pos.x, b.pos.y, b.size.x, b.size.y, {180, 180, 180, 255});
+        if(checkBoxCollison(menuMousePosition, {0, 0}, b.pos, b.size) && !ImGui::GetIO().WantCaptureMouse)
+            DrawRectangle(b.pos.x, b.pos.y, b.size.x, b.size.y, {170, 170, 170, 255});
         else
             DrawRectangle(b.pos.x, b.pos.y, b.size.x, b.size.y, {128, 128, 128, 255});
 
-        DrawText(b.text.c_str(), b.pos.x + 5, b.pos.y + 5, 15, BLACK);
+        // DrawText(b.text.c_str(), b.pos.x + 5, b.pos.y + 5, b.fontSize, BLACK);
+        DrawTextEx(uiFont, b.text.c_str(), {b.pos.x + b.fontSize / 10, b.pos.y + b.fontSize / 10}, b.fontSize, b.fontSize / 10, BLACK);
     }
 }

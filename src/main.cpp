@@ -38,6 +38,7 @@ int fadeoutCounter;
 bool inMapEditor = false;
 bool inMainMenu = true;
 bool debugMode = false;
+bool pauseMenu = false;
 
 int frames = 0;
 
@@ -59,7 +60,7 @@ int main()
 
     SetExitKey(-1);
     EditorInit();
-    MenuInit();
+    MenuInit(inMainMenu, packs);
 
     srand(time(0));
 
@@ -82,79 +83,105 @@ int main()
     std::string debugLoadMapID;
     std::string debugLoadPackName;
 
+    bool forceCloseGame = false;
+
     // the texture we render to then scale
     RenderTexture2D screen = LoadRenderTexture(SCREENWIDTH, SCREENHEIGHT);
 
     while(!WindowShouldClose())
     {
+        if(forceCloseGame)
+        {
+            break;
+        }
+
         if(!inMapEditor && !inMainMenu)
         {
             if(!errors.activeError)
             {
-                playerVelocity = {0, 0};
-                if(!ImGui::GetIO().WantCaptureMouse)
+                if(!pauseMenu)
                 {
-                    if(playerPhysics)
+                    if(menuLoadPack)
                     {
-                        if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) { position.x += 4; playerVelocity.x = 1; }
-                        if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) { position.x -= 4; playerVelocity.x = -1; }
-                        if (IsKeyDown(KEY_UP)) { if(canJump) { playerJumping = true; jumpTime = 0; jumpKey = KEY_UP; } }
-                        if (IsKeyDown(KEY_W)) { if(canJump) { playerJumping = true; jumpTime = 0; jumpKey = KEY_W; } }
-                        if (IsKeyUp(jumpKey)) {if(playerJumping && jumpTime >= 24) {playerJumping = false; downVelocity = 0; } }
+                        std::cout << "test\n";
+                        LoadPackToGame(modPackName, packs, maps, sprites, backgrounds, loadedPack, errors);
+                        LoadMap(loadedPack.firstMapID, maps, tiles, entities, loadedMap, errors);
+                        position = {loadedMap.playerSpawn.x * 40, loadedMap.playerSpawn.y * 40};
+                        menuLoadPack = false;
+                        menuOpenSync = false;
                     }
-                    if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S))
+
+                    playerVelocity = {0, 0};
+                    if(!ImGui::GetIO().WantCaptureMouse)
                     {
-                        if(poweredUp)
+                        if(playerPhysics)
                         {
-                            entities.push_back({2, {position.x - 80, position.y + 45}, {200, 40}, 0});
+                            if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) { position.x += 4; playerVelocity.x = 1; }
+                            if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) { position.x -= 4; playerVelocity.x = -1; }
+                            if (IsKeyDown(KEY_UP)) { if(canJump) { playerJumping = true; jumpTime = 0; jumpKey = KEY_UP; } }
+                            if (IsKeyDown(KEY_W)) { if(canJump) { playerJumping = true; jumpTime = 0; jumpKey = KEY_W; } }
+                            if (IsKeyUp(jumpKey)) {if(playerJumping && jumpTime >= 24) {playerJumping = false; downVelocity = 0; } }
+                        }
+                        if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S))
+                        {
+                            if(poweredUp)
+                            {
+                                entities.push_back({2, {position.x - 80, position.y + 45}, {200, 40}, 0});
+                                poweredUp = false;
+                            }
+                        }
+                        if (IsKeyPressed(KEY_R)) 
+                        { 
+                            LoadMap(loadedMap.mapID, maps, tiles, entities, loadedMap, errors); 
+                            position = {loadedMap.playerSpawn.x * 40, loadedMap.playerSpawn.y * 40 - 40}; 
                             poweredUp = false;
                         }
+                        if (IsKeyPressed(KEY_GRAVE)) { debugMode = !debugMode; }
+                        if (IsKeyPressed(KEY_M)) { inMapEditor = true; SetWindowTitle("Map Editor"); }
+                        if (IsKeyPressed(KEY_ESCAPE)) { pauseMenu = true; pauseMenuSync = true; }
                     }
-                    if (IsKeyPressed(KEY_R)) 
-                    { 
-                        LoadMap(loadedMap.mapID, maps, tiles, entities, loadedMap, errors); 
-                        position = {loadedMap.playerSpawn.x * 40, loadedMap.playerSpawn.y * 40 - 40}; 
-                        poweredUp = false;
-                    }
-                    if (IsKeyPressed(KEY_GRAVE)) { debugMode = !debugMode; }
-                    if (IsKeyPressed(KEY_M)) { inMapEditor = true; SetWindowTitle("Map Editor"); }
-                }
 
-                if(playerPhysics)
-                {
-                    if(downVelocity > 1) canJump = false;
-
-                    if(playerJumping)
+                    if(playerPhysics)
                     {
-                        canJump = false;
+                        if(downVelocity > 1) canJump = false;
 
-                        int change = 10 - jumpTime / 4;
-                        if(change < 1) change = 1;
-                        position.y -= change;
-                        jumpTime++;
-
-                        if(jumpTime == 40)
+                        if(playerJumping)
                         {
-                            playerJumping = false;
-                            downVelocity = 0;
+                            canJump = false;
+
+                            int change = 10 - jumpTime / 4;
+                            if(change < 1) change = 1;
+                            position.y -= change;
+                            jumpTime++;
+
+                            if(jumpTime == 40)
+                            {
+                                playerJumping = false;
+                                downVelocity = 0;
+                            }
+                        }
+
+                        if(!playerJumping)
+                        {
+                            downVelocity += 1;
+                            if(downVelocity > 10) downVelocity = 10;
+                            position.y += downVelocity; 
+                            playerVelocity.y = 1;
                         }
                     }
 
-                    if(!playerJumping)
+                    for(int i = 0; i < entities.size(); i++)
                     {
-                        downVelocity += 1;
-                        if(downVelocity > 10) downVelocity = 10;
-                        position.y += downVelocity; 
-                        playerVelocity.y = 1;
+                        entities[i].ticks++;
                     }
-                }
 
-                for(int i = 0; i < entities.size(); i++)
+                    checkPlayerWorldCollsions(*tiles, position, playerVelocity, canJump, playerJumping, downVelocity, loadedMap, entities, poweredUp, playerPhysics);
+
+                }
+                else
                 {
-                    entities[i].ticks++;
+                    if (IsKeyPressed(KEY_ESCAPE)) { pauseMenu = false; pauseMenuSync = false; }
                 }
-
-                checkPlayerWorldCollsions(*tiles, position, playerVelocity, canJump, playerJumping, downVelocity, loadedMap, entities, poweredUp, playerPhysics);
 
                 // BeginDrawing();
                 BeginTextureMode(screen);
@@ -170,8 +197,7 @@ int main()
                     else
                         DrawSpriteFromVector("player_powered", position, {40, 40}, sprites);
 
-
-                    if(IndexOfFirstEntityOfType(6, entities) != -1 && entities[IndexOfFirstEntityOfType(6, entities)].target.y > 0)
+                    if(IndexOfFirstEntityOfType(6, entities) != -1 && entities[IndexOfFirstEntityOfType(6, entities)].target.y > 0 && !pauseMenu)
                     {
                         Entity e = entities[IndexOfFirstEntityOfType(6, entities)];
                         int alpha = 255;
@@ -182,6 +208,11 @@ int main()
 
                     if(fadeoutCounter > 0)
                         DrawRectangle(0, 0, SCREENWIDTH, SCREENHEIGHT, Color{0, 0, 0, (unsigned char)(fadeoutCounter)});
+
+                    if(pauseMenu)
+                    {
+                        PauseMenu(pauseMenu, inMainMenu);
+                    }
 
                     if(debugMode)
                     {
@@ -218,7 +249,7 @@ int main()
                             if(ImGui::Button("OK"))
                             {
                                 if(errors.isFatal)
-                                    break;
+                                    forceCloseGame = true;
                                 else
                                 {
                                     errors.activeError = false;
@@ -284,7 +315,7 @@ int main()
         }
         else if(inMainMenu)
         {
-            MainMenu(inMainMenu);
+            MainMenu(inMainMenu, forceCloseGame, sprites, backgrounds);
         }
 
         frames++;
@@ -458,6 +489,8 @@ void checkPlayerWorldCollsions(std::vector<Tile>& tiles, Vector2& playerpos, Vec
             if(fadeoutCounter >= 255)
             {
                 fadeoutCounter = 0;
+                inMainMenu = true;
+                menuOpenSync = true;
                 poweredUp = false;
                 physicsToggle = true;
                 LoadMap("map0", maps, &tiles, entities, currentMap, errors);
