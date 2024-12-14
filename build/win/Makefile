@@ -116,6 +116,58 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named debug
+
+# Build rule for target.
+debug: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 debug
+.PHONY : debug
+
+# fast build rule for target.
+debug/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\debug.dir\build.make CMakeFiles/debug.dir/build
+.PHONY : debug/fast
+
+#=============================================================================
+# Target rules for targets named release
+
+# Build rule for target.
+release: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 release
+.PHONY : release
+
+# fast build rule for target.
+release/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\release.dir\build.make CMakeFiles/release.dir/build
+.PHONY : release/fast
+
+#=============================================================================
+# Target rules for targets named clean-debug
+
+# Build rule for target.
+clean-debug: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 clean-debug
+.PHONY : clean-debug
+
+# fast build rule for target.
+clean-debug/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\clean-debug.dir\build.make CMakeFiles/clean-debug.dir/build
+.PHONY : clean-debug/fast
+
+#=============================================================================
+# Target rules for targets named clean-release
+
+# Build rule for target.
+clean-release: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 clean-release
+.PHONY : clean-release
+
+# fast build rule for target.
+clean-release/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\clean-release.dir\build.make CMakeFiles/clean-release.dir/build
+.PHONY : clean-release/fast
+
+#=============================================================================
 # Target rules for targets named app
 
 # Build rule for target.
@@ -328,6 +380,10 @@ help:
 	@echo ... depend
 	@echo ... edit_cache
 	@echo ... rebuild_cache
+	@echo ... clean-debug
+	@echo ... clean-release
+	@echo ... debug
+	@echo ... release
 	@echo ... app
 	@echo ... include/rlimgui/imgui.obj
 	@echo ... include/rlimgui/imgui.i

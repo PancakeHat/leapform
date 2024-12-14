@@ -28,6 +28,7 @@ std::vector<Sprite> backgrounds;
 std::vector<Entity> entities;
 std::vector<Map> maps;
 std::vector<Pack> packs;
+std::vector<GameSound> sounds;
 Pack loadedPack;
 Map loadedMap;
 
@@ -52,9 +53,10 @@ int main()
 
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(SCREENWIDTH, SCREENHEIGHT, "window");
+    InitAudioDevice();
     SetTargetFPS(60);
 
-    LoadPackToGame("Default Pack", packs, maps, sprites, backgrounds, loadedPack, errors);
+    LoadPackToGame("Default Pack", packs, maps, sprites, backgrounds, sounds, loadedPack, errors);
 
     rlImGuiSetup(true);
 
@@ -90,6 +92,7 @@ int main()
 
     while(!WindowShouldClose())
     {
+
         if(forceCloseGame)
         {
             break;
@@ -104,7 +107,7 @@ int main()
                     if(menuLoadPack)
                     {
                         std::cout << "test\n";
-                        LoadPackToGame(modPackName, packs, maps, sprites, backgrounds, loadedPack, errors);
+                        LoadPackToGame(modPackName, packs, maps, sprites, backgrounds, sounds, loadedPack, errors);
                         LoadMap(loadedPack.firstMapID, maps, tiles, entities, loadedMap, errors);
                         position = {loadedMap.playerSpawn.x * 40, loadedMap.playerSpawn.y * 40};
                         menuLoadPack = false;
@@ -118,14 +121,15 @@ int main()
                         {
                             if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) { position.x += 4; playerVelocity.x = 1; }
                             if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) { position.x -= 4; playerVelocity.x = -1; }
-                            if (IsKeyDown(KEY_UP)) { if(canJump) { playerJumping = true; jumpTime = 0; jumpKey = KEY_UP; } }
-                            if (IsKeyDown(KEY_W)) { if(canJump) { playerJumping = true; jumpTime = 0; jumpKey = KEY_W; } }
+                            if (IsKeyDown(KEY_UP)) { if(canJump) { playerJumping = true; jumpTime = 0; jumpKey = KEY_UP; PlaySound(GetSoundFromVector("jump", sounds).sound); } }
+                            if (IsKeyDown(KEY_W)) { if(canJump) { playerJumping = true; jumpTime = 0; jumpKey = KEY_W; PlaySound(GetSoundFromVector("jump", sounds).sound); } }
                             if (IsKeyUp(jumpKey)) {if(playerJumping && jumpTime >= 24) {playerJumping = false; downVelocity = 0; } }
                         }
                         if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S))
                         {
                             if(poweredUp)
                             {
+                                PlaySound(GetSoundFromVector("platform", sounds).sound);
                                 entities.push_back({2, {position.x - 80, position.y + 45}, {200, 40}, 0});
                                 poweredUp = false;
                             }
@@ -211,7 +215,7 @@ int main()
 
                     if(pauseMenu)
                     {
-                        PauseMenu(pauseMenu, inMainMenu);
+                        PauseMenu(pauseMenu, inMainMenu, GetSoundFromVector("select", sounds));
                     }
 
                     if(debugMode)
@@ -223,8 +227,9 @@ int main()
                         DrawText(std::format("Map ID: {}", loadedMap.mapID).c_str(), 10, 55, 16, BLACK);
                         DrawText(std::format("Entity count: {}", entities.size()).c_str(), 10, 70, 16, BLACK);
                         DrawText(std::format("Player Physics: {}", playerPhysics).c_str(), 10, 85, 16, BLACK);
-                        DrawText(std::format("Background ID: {}", loadedMap.backgroundID).c_str(), 10, 100, 16, BLACK);
-                        DrawText(std::format("Frame: {}", frames).c_str(), 10, 115, 16, BLACK);
+                        DrawText(std::format("Fadeout Counter: {}", fadeoutCounter).c_str(), 10, 100, 16, BLACK);
+                        DrawText(std::format("Background ID: {}", loadedMap.backgroundID).c_str(), 10, 115, 16, BLACK);
+                        DrawText(std::format("Frame: {}", frames).c_str(), 10, 130, 16, BLACK);
                     }
                 // EndDrawing();
                 EndTextureMode();
@@ -299,7 +304,7 @@ int main()
                         }
                         if(ImGui::Button("Load Pack"))
                         {
-                            LoadPackToGame(debugLoadPackName, packs, maps, sprites, backgrounds, loadedPack, errors);
+                            LoadPackToGame(debugLoadPackName, packs, maps, sprites, backgrounds, sounds, loadedPack, errors);
                             LoadMap(loadedPack.firstMapID, maps, tiles, entities, loadedMap, errors);
                             position = {loadedMap.playerSpawn.x * 40, loadedMap.playerSpawn.y * 40};
                         }
@@ -315,16 +320,18 @@ int main()
         }
         else if(inMainMenu)
         {
-            MainMenu(inMainMenu, forceCloseGame, sprites, backgrounds);
+            MainMenu(inMainMenu, forceCloseGame, sprites, backgrounds, GetSoundFromVector("select", sounds));
         }
 
         frames++;
     }
 
+    CloseAudioDevice();
     CloseWindow();
     delete tiles;
     UnloadSpritesFromVector(sprites);
     UnloadSpritesFromVector(backgrounds);
+    UnloadSoundsFromVector(sounds);
     rlImGuiShutdown();
     std::cout << "GAME: Shutting down\n";
     return 0;
@@ -393,6 +400,7 @@ void checkPlayerWorldCollsions(std::vector<Tile>& tiles, Vector2& playerpos, Vec
         {
             if(checkBoxCollison(playerpos, {40, 40}, {tile.pos.x + 10, tile.pos.y + 10}, {20, 20}))
             {
+                PlaySound(GetSoundFromVector("death", sounds).sound);
                 LoadMap(currentMap.mapID, maps, &tiles, entities, currentMap, errors);
                 playerpos = {currentMap.playerSpawn.x * 40, currentMap.playerSpawn.y * 40};
                 poweredUp = false;
@@ -409,6 +417,7 @@ void checkPlayerWorldCollsions(std::vector<Tile>& tiles, Vector2& playerpos, Vec
             {
                 if(!poweredUp)
                 {
+                    PlaySound(GetSoundFromVector("powerup", sounds).sound);
                     poweredUp = true;
                     entities.erase(std::find(entities.begin(), entities.end(), entities[i]));
                     return;
@@ -435,6 +444,7 @@ void checkPlayerWorldCollsions(std::vector<Tile>& tiles, Vector2& playerpos, Vec
         {
             if(checkBoxCollison(playerpos, {40, 40}, entities[i].pos, entities[i].size))
             {
+                PlaySound(GetSoundFromVector("death", sounds).sound);
                 LoadMap(currentMap.mapID, maps, &tiles, entities, currentMap, errors);
                 playerpos = {currentMap.playerSpawn.x * 40, currentMap.playerSpawn.y * 40};
                 poweredUp = false;
@@ -510,6 +520,7 @@ void checkPlayerWorldCollsions(std::vector<Tile>& tiles, Vector2& playerpos, Vec
             {
                 if(checkBoxCollison(playerpos, {40, 40}, { entities[i].pos.x + 20, entities[i].pos.y + 20 }, entities[i].size))
                 {
+                    PlaySound(GetSoundFromVector("boss_hurt", sounds).sound);
                     entities[IndexOfFirstEntityOfType(5, entities)].target.x--;
                     entities[IndexOfFirstEntityOfType(5, entities)].target.y = 60;
                     physicsToggle = false;
@@ -540,6 +551,7 @@ void checkPlayerWorldCollsions(std::vector<Tile>& tiles, Vector2& playerpos, Vec
                 {
                     if(CheckBoxCircleCollision({entities[i].pos.x + 40, entities[i].pos.y + 20}, 60, {playerpos.x + 20, playerpos.y + 20}, {40, 40}))
                     {
+                        PlaySound(GetSoundFromVector("death", sounds).sound);
                         LoadMap(currentMap.mapID, maps, &tiles, entities, currentMap, errors);
                         playerpos = {currentMap.playerSpawn.x * 40, currentMap.playerSpawn.y * 40};
                         poweredUp = false;
@@ -582,6 +594,9 @@ void checkPlayerWorldCollsions(std::vector<Tile>& tiles, Vector2& playerpos, Vec
         {
             if(entities[i].target.x > 0)
                 entities[i].target.x--;
+            
+            if(entities[i].target.x == 140)
+                PlaySound(GetSoundFromVector("laser", sounds).sound); 
 
             if(entities[i].target.x <= 140 && entities[i].target.x > 0)
             {
@@ -599,8 +614,9 @@ void checkPlayerWorldCollsions(std::vector<Tile>& tiles, Vector2& playerpos, Vec
                 entities[i].pos.y = -600;
             }
 
-            if(checkBoxCollison(playerpos, {40, 40}, entities[i].pos, {60, 600}) && physicsToggle && fadeoutCounter == 0)
+            if(checkBoxCollison(playerpos, {40, 40}, entities[i].pos, {60, 600}) && physicsToggle && fadeoutCounter <= 1)
             {
+                PlaySound(GetSoundFromVector("death", sounds).sound);
                 LoadMap(currentMap.mapID, maps, &tiles, entities, currentMap, errors);
                 playerpos = {currentMap.playerSpawn.x * 40, currentMap.playerSpawn.y * 40};
                 poweredUp = false;

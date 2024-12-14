@@ -10,31 +10,11 @@
 #include <fstream>
 #include "maps.hpp"
 #include <regex>
+#include "sounds.hpp"
 #include "errors.hpp"
+#include "stringutils.hpp"
 
 #pragma once
-
-bool StringEndsIn(std::string str, std::string ending)
-{
-    for(int i = 0; i < ending.length(); i++)
-    {
-        if(ending[i] != str[str.length() - ending.length() + i])
-            return false;
-    }
-
-    return true;
-}
-
-bool StringStartsWith(std::string str, std::string beginning)
-{
-    for(int i = 0; i < beginning.length(); i++)
-    {
-        if(beginning[i] != str[i])
-            return false;
-    }
-
-    return true;
-}
 
 Entity DeserializeEntity(std::string entityString)
 {
@@ -95,22 +75,6 @@ Entity DeserializeEntity(std::string entityString)
 std::string SerializeEntity(Entity entity)
 {
     return std::format("{},{},{},{},{};", entity.type, entity.pos.x, entity.pos.y, entity.size.x, entity.size.y);
-}
-
-std::string RemoveFileEnding(std::string name)
-{
-    std::string n = name;
-    for(int i = name.length() - 1; i > 0; i--)
-    {
-        if(n[i] == '.')
-        {
-            n.pop_back();
-            return n;
-        }
-        n.pop_back();
-    }
-
-    return "";
 }
 
 // loads sprites and backgrounds into their respective lists
@@ -371,7 +335,7 @@ void RegisterAllPacks(std::string packDir, std::vector<Pack>& packs, ErrorHandle
     }
 }
 
-void LoadPackToGame(std::string packName, std::vector<Pack> packs, std::vector<Map>& maps, std::vector<Sprite>& sprites, std::vector<Sprite>& backgrounds, Pack& currentPack, ErrorHandler& eh)
+void LoadPackToGame(std::string packName, std::vector<Pack> packs, std::vector<Map>& maps, std::vector<Sprite>& sprites, std::vector<Sprite>& backgrounds, std::vector<GameSound>& sounds, Pack& currentPack, ErrorHandler& eh)
 {
     for(Pack p : packs)
     {
@@ -380,6 +344,7 @@ void LoadPackToGame(std::string packName, std::vector<Pack> packs, std::vector<M
             std::cout << "GAME: Loading pack " << p.name << "\n";
             LoadSpritesFromDir(p.rootDir.string() + p.assetDir, sprites, backgrounds, eh);
             RegisterMapsInDir(p.rootDir.string() + p.mapDir, maps, eh);
+            LoadSoundsFromDir(p.rootDir.string() + p.assetDir, sounds, eh);
             currentPack = p;
             return;
         }

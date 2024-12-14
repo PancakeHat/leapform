@@ -22,13 +22,13 @@ struct Button
     void (*onClicked)();
 };
 
-void UpdateButtons(std::vector<Button> buttons);
+void UpdateButtons(std::vector<Button> buttons, GameSound selectionSound);
 void StartGame();
 void RenderButtons(std::vector<Button> buttons);
 void QuitGame();
 void OpenModMenu();
 void ModMenu();
-void PauseMenu(bool& paused, bool& mainMenu);
+void PauseMenu(bool& paused, bool& mainMenu, GameSound clickSound);
 void Resume();
 void ReturnToMenu();
 
@@ -73,13 +73,13 @@ void MenuInit(bool menuOpen, std::vector<Pack>& packs)
     }
 }
 
-int MainMenu(bool& menuOpen, bool& forceQuit, std::vector<Sprite>& sprites, std::vector<Sprite>& backgrounds)
+int MainMenu(bool& menuOpen, bool& forceQuit, std::vector<Sprite>& sprites, std::vector<Sprite>& backgrounds, GameSound clickSound)
 {
     menuMousePosition = {800 * (GetMousePosition().x / GetScreenWidth()), 600 * (GetMousePosition().y / GetScreenHeight())};
 
     menuOpen = menuOpenSync;
     forceQuit = forceQuitSync;
-    UpdateButtons(buttons);
+    UpdateButtons(buttons, clickSound);
 
     BeginTextureMode(menuScreen);
         ClearBackground(BLACK);
@@ -112,14 +112,14 @@ void ReturnToMenu()
     pauseMenuSync = false;
 }
 
-void PauseMenu(bool& paused, bool& mainMenu)
+void PauseMenu(bool& paused, bool& mainMenu, GameSound clickSound)
 {
     menuMousePosition = {800 * (GetMousePosition().x / GetScreenWidth()), 600 * (GetMousePosition().y / GetScreenHeight())};
 
     paused = pauseMenuSync;
     mainMenu = menuOpenSync;
 
-    UpdateButtons(pauseButtons);
+    UpdateButtons(pauseButtons, clickSound);
     DrawRectangle(0, 0, 800, 600, {0, 0, 0, 80});
     DrawTextEx(uiFont, "Paused", {20, 20}, 50, 8, BLACK);
     RenderButtons(pauseButtons);
@@ -167,7 +167,7 @@ void QuitGame()
     forceQuitSync = true;
 }
 
-void UpdateButtons(std::vector<Button> buttons)
+void UpdateButtons(std::vector<Button> buttons, GameSound selectionSound)
 {
     for(Button b : buttons)
     {
@@ -176,7 +176,10 @@ void UpdateButtons(std::vector<Button> buttons)
             if(checkBoxCollison(menuMousePosition, {0, 0}, b.pos, b.size))
             {
                 if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+                {
+                    PlaySound(selectionSound.sound);
                     b.onClicked();
+                }
             }
         }
     }
