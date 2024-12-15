@@ -106,7 +106,6 @@ int main()
                 {
                     if(menuLoadPack)
                     {
-                        std::cout << "test\n";
                         LoadPackToGame(modPackName, packs, maps, sprites, backgrounds, sounds, loadedPack, errors);
                         LoadMap(loadedPack.firstMapID, maps, tiles, entities, loadedMap, errors);
                         position = {loadedMap.playerSpawn.x * 40, loadedMap.playerSpawn.y * 40};

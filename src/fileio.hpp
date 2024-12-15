@@ -97,7 +97,10 @@ void LoadSpritesFromDir(std::string spriteDir, std::vector<Sprite>& sprites, std
 
     // check if using default assets
     if(StringEndsIn(spriteDir, "#default"))
+    {
         spriteDir = "./assets";
+        std::cout << "GAME: Loading default sprites\n";
+    }
 
     // check if dirs exist
     if(!std::filesystem::exists(std::filesystem::path(spriteDir)))
@@ -108,7 +111,7 @@ void LoadSpritesFromDir(std::string spriteDir, std::vector<Sprite>& sprites, std
 
     if(!std::filesystem::exists(std::filesystem::path((spriteDir + "/backgrounds"))))
     {
-        ThrowNewError(std::format("Can't find background directory {}", spriteDir + "/backgrounds"), ERROR_FATAL, false, eh); std::cout << "errd";
+        ThrowNewError(std::format("Can't find background directory {}", spriteDir + "/backgrounds"), ERROR_FATAL, false, eh);
         return;
     }
 
@@ -154,10 +157,27 @@ void LoadSpritesFromDir(std::string spriteDir, std::vector<Sprite>& sprites, std
         }
     }
 
+    // load default sprites
     for(std::string s : defaultIDs)
     {
         LoadSpriteToVector(std::format("./assets/{}.png", s), s, sprites, eh);
         std::cout << "GAME: Registered sprite " << s << " (default)\n";
+    }
+
+    defaultIDs.clear();
+
+    // make a list of all default backgrounds
+    for(const auto & entry : std::filesystem::directory_iterator("./assets/backgrounds/"))
+    {
+        std::string s = entry.path().string();
+        std::replace( s.begin(), s.end(), '\\', '/');
+        if(StringEndsIn(s, ".png"))
+        {
+            std::string id = s;
+            id.erase(id.begin(), id.begin() + 21);
+            id = RemoveFileEnding(id);
+            defaultIDs.push_back(id);
+        }
     }
 
     // load backgrounds from their directory
@@ -171,9 +191,25 @@ void LoadSpritesFromDir(std::string spriteDir, std::vector<Sprite>& sprites, std
             std::string id = s;
             id.erase(id.begin(), id.begin() + (backgroundDir + "/").length());
             id = RemoveFileEnding(id);
+            for(int i = 0; i < defaultIDs.size(); i++)
+            {
+                if(defaultIDs[i] == id)
+                {
+                    defaultIDs.erase(defaultIDs.begin() + i);
+                }
+            }
+            std::cout << "TEST: " << s << "\n";
             LoadSpriteToVector(s, id, backgrounds, eh);
-            std::cout << "GAME: Registered background " << id << "\n";
+            std::cout << "GAME: Registered background " << id << " (from pack)\n";
         }
+    }
+
+    // load default backgrounds
+    for(std::string s : defaultIDs)
+    {
+        std::cout << std::format("TEST2: ./assets/backgrounds/{}.png\n", s);
+        LoadSpriteToVector(std::format("./assets/backgrounds/{}.png", s), s, backgrounds, eh);
+        std::cout << "GAME: Registered background " << s << " (default)\n";
     }
 }
 

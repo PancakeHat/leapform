@@ -62,7 +62,10 @@ void LoadSoundsFromDir(std::string assetDir, std::vector<GameSound>& sounds, Err
 
     // check if using default assets
     if(StringEndsIn(assetDir, "#default"))
+    {
         assetDir = "./assets";
+        std::cout << "GAME: Loading default sounds\n";
+    }
 
     if(!std::filesystem::exists(std::filesystem::path(assetDir + "/sounds")))
     {
@@ -79,11 +82,12 @@ void LoadSoundsFromDir(std::string assetDir, std::vector<GameSound>& sounds, Err
     {
         std::string s = entry.path().string();
         std::replace( s.begin(), s.end(), '\\', '/');
-        if(StringEndsIn(s, ".png"))
+        if(StringEndsIn(s, ".wav"))
         {
             std::string id = s;
             id.erase(id.begin(), id.begin() + 9);
             id = RemoveFileEnding(id);
+            id.erase(id.begin(), id.begin() + 7);
             defaultIDs.push_back(id);
         }
     }
