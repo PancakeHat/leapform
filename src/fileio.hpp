@@ -198,7 +198,6 @@ void LoadSpritesFromDir(std::string spriteDir, std::vector<Sprite>& sprites, std
                     defaultIDs.erase(defaultIDs.begin() + i);
                 }
             }
-            std::cout << "TEST: " << s << "\n";
             LoadSpriteToVector(s, id, backgrounds, eh);
             std::cout << "GAME: Registered background " << id << " (from pack)\n";
         }

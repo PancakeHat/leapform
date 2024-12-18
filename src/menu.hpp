@@ -32,7 +32,7 @@ void PauseMenu(bool& paused, bool& mainMenu, GameSound clickSound);
 void Resume();
 void ReturnToMenu();
 
-Font uiFont = LoadFontEx("./assets/fonts/retro.ttf", 40, 0, 0);
+Font uiFont;
 
 // this is one of the weirdes solutions ive ever had to come upt with but i think itll work
 bool menuOpenSync = true;
@@ -54,6 +54,8 @@ Vector2 menuMousePosition;
 
 void MenuInit(bool menuOpen, std::vector<Pack>& packs)
 {
+    uiFont = LoadFontEx("./assets/fonts/retro.ttf", 100, 0, 0);
+
     std::cout << "MENU: Starting menu\n";
     menuOpenSync = menuOpen;
     menuScreen = LoadRenderTexture(800, 600);
@@ -86,6 +88,7 @@ int MainMenu(bool& menuOpen, bool& forceQuit, std::vector<Sprite>& sprites, std:
         DrawSpriteFromVectorAlpha("cave", {0, 0}, {800, 600}, backgrounds, 178);
         DrawTextEx(uiFont, "Game", {20, 20}, 80, 8, BLACK);
         RenderButtons(buttons);
+        DrawTextEx(uiFont, "A PancakeHat Game", {520, 580}, 20, 4, BLACK);
     EndTextureMode();
 
     BeginDrawing();
@@ -136,7 +139,7 @@ void ModMenu()
         }
         if(ImGui::Button("Load Pack"))
         {
-            std::cout << std::format("MENU: Loading mod {}", modPackName);
+            std::cout << std::format("MENU: Loading mod {} from menu\n", modPackName);
             menuLoadPack = true;
             menuOpenSync = false;
         }
@@ -157,7 +160,6 @@ void OpenModMenu()
 
 void StartGame()
 {
-    std::cout << "MENU: Start pressed\n";
     menuLoadPack = false;
     menuOpenSync = false;
 }
@@ -178,6 +180,7 @@ void UpdateButtons(std::vector<Button> buttons, GameSound selectionSound)
                 if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
                 {
                     PlaySound(selectionSound.sound);
+                    std::cout << std::format("MENU: Button {} clicked\n", b.text);
                     b.onClicked();
                 }
             }
