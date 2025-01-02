@@ -29,6 +29,8 @@ void LoadWindow();
 void SaveMap(std::string fileName);
 void InfoWindow();
 void SetAllArrayFalse(bool *array, int length);
+void CreatePackWindow(std::vector<Pack> &packs);
+void EditPackWindow(std::vector<Pack> &packs);
 
 bool createMapWindow = false;
 bool tileSelectorWindow = false;
@@ -38,6 +40,9 @@ bool helpWindow = false;
 bool saveWindow = false;
 bool loadWindow = false;
 bool infoWindow = false;
+bool createPackWindow = false;
+bool editPackWindow = false;
+bool packLoadingError = false;
 
 // 0 = tiles
 // 1 = entities
@@ -49,6 +54,14 @@ std::string buf2 = "";
 std::string buf3 = "";
 
 std::string packName = "";
+std::string oldPackName = "";
+std::string loadPackName = "";
+bool packDefaultAssets = false;
+bool packDefaultMaps = false;
+bool oldPackDefaultAssets = false;
+bool oldPackDefaultMaps = false;
+std::string packFirstMap = "";
+std::filesystem::path editingPackRootDir = "";
 
 char filenamebuf[32] = "";
 std::string filename = "";
@@ -63,6 +76,8 @@ bool entitySelectorChecked[8];
 bool pickingHoldBuffer = false;
 
 int saveIndicatorCountdown = 0;
+std::string indicatorText = "";
+Color indicatorColor = DARKGREEN;
 
 std::vector<Tile> mapTiles;
 std::vector<Entity> mapEntities;
@@ -84,7 +99,7 @@ void EditorInit()
     entitySelectorChecked[0] = true;
 }
 
-int Editor(bool& editorOpen, std::vector<Sprite> sprites)
+int Editor(bool& editorOpen, std::vector<Sprite> sprites, std::vector<Pack> &packs)
 {
     mousePosition = {800 * (GetMousePosition().x / GetScreenWidth()), 600 * (GetMousePosition().y / GetScreenHeight())};
     Vector2 tSize = {40, 40};
@@ -194,7 +209,7 @@ int Editor(bool& editorOpen, std::vector<Sprite> sprites)
         if(saveIndicatorCountdown > 0)
         {
             // DrawText(std::format("Saved to ./maps/{}.map", filename).c_str(), 10, 20, 15, GREEN);
-            DrawOutlinedText(std::format("Saved to ./{}.map", filename).c_str(), 5, 20, 20, DARKGREEN, 1, BLACK);
+            DrawOutlinedText(indicatorText.c_str(), 5, 20, 20, indicatorColor, 1, BLACK);
             saveIndicatorCountdown--;
         }
     // EndDrawing();
@@ -237,6 +252,14 @@ int Editor(bool& editorOpen, std::vector<Sprite> sprites)
                     ImGui::EndMenu();
                 }
 
+                if(ImGui::BeginMenu("Pack"))
+                {
+                    if(ImGui::MenuItem("New")) { createPackWindow = true; }
+                    if(ImGui::MenuItem("Edit Pack")) { editPackWindow = true; }
+
+                    ImGui::EndMenu();
+                }
+
                 if(mapOpen)
                 {
                     if(ImGui::BeginMenu("Tiles"))
@@ -267,6 +290,8 @@ int Editor(bool& editorOpen, std::vector<Sprite> sprites)
             if(saveWindow) { SaveWindow(); }
             if(loadWindow) { LoadWindow(); }
             if(infoWindow) { InfoWindow(); }
+            if(createPackWindow) { CreatePackWindow(packs); }
+            if(editPackWindow) { EditPackWindow(packs); }
         rlImGuiEnd();
     EndDrawing();
 
@@ -328,7 +353,7 @@ void EditorLoadMap(std::string fileName)
     mapOpen = true;
     filename = loadfilename;
     
-    SetWindowTitle(std::format("Map Editor - ./{}.map", fileName).c_str());
+    SetWindowTitle(std::format("Map Editor - {}.map", fileName).c_str());
 
     buf1 = map.mapID.c_str();
     buf2 = map.nextMapID.c_str();
@@ -424,6 +449,8 @@ void SaveMap(std::string fileName)
 
     file.close();
 
+    indicatorColor = DARKGREEN;
+    indicatorText = std::format("Saved map to {}.map", fileName);
     saveIndicatorCountdown = 90;
     std::cout << "Saved map " << map.mapID << std::format(" to ./{}.map\n", fileName);
 }
@@ -451,7 +478,7 @@ void PlaceEntity()
     RemoveEntityFromVectorByPos(tilePosition, mapEntities);
     if(GetTileType(entitySelectorChecked, sizeof(entitySelectorChecked)) == 5)
     {
-        mapEntities.push_back({5, tilePosition, {160, 160}, 0});
+        mapEntities.push_back({5, tilePosition, {160, 160}, 0, {5, 0}});
     }
     else
     {
@@ -508,6 +535,198 @@ void TileSelectorWindow()
     ImGui::SameLine();
     if(ImGui::Checkbox("270°", &tileSelectorChecked[5])) { SetAllArrayFalse(tileSelectorChecked, sizeof(tileSelectorChecked)); tileSelectorChecked[5] = true; }
     if(ImGui::Checkbox("Boss Door", &tileSelectorChecked[6])) { SetAllArrayFalse(tileSelectorChecked, sizeof(tileSelectorChecked)); tileSelectorChecked[6] = true; }
+
+    ImGui::End();
+}
+
+void ApplyChangesToPack(std::vector<Pack> &packs)
+{
+    std::string packDir = "./packs/" + packName;
+
+    if(oldPackName != packName)
+    {
+        std::cout << "EDITOR: Renaming pack " << oldPackName << " to " << packName << "\n";
+
+        if(std::filesystem::exists(std::filesystem::path(editingPackRootDir.c_str())))
+        {
+            std::filesystem::rename(std::filesystem::path(editingPackRootDir.c_str()), std::filesystem::path("./packs/" + packName));
+        }
+        else
+        {
+            indicatorColor = RED;
+            indicatorText = std::format("Couldn't find pack at {}", ("./packs/" + oldPackName + "/"));
+            saveIndicatorCountdown = 90;
+            return;
+        }
+    }
+
+    std::ofstream file(packDir + "/.pack");
+
+    file << packName << std::endl;
+
+    if(!packDefaultMaps)
+    {
+        file << "/maps" << std::endl;
+        if(oldPackDefaultMaps)
+        {
+            std::cout << "EDITOR: Creating maps dir for existing pack " << "\n";
+            std::filesystem::create_directory(std::filesystem::path(packDir + "/maps"));
+        }
+    }
+    else
+    {
+        file << "#default" << std::endl;
+    }
+
+    if(!packDefaultAssets)
+    {
+        file << "/assets" << std::endl;
+        if(oldPackDefaultAssets)
+        {
+            std::cout << "EDITOR: Creating assets dir for existing pack " << "\n";
+            std::filesystem::create_directory(std::filesystem::path(packDir + "/assets"));
+            std::filesystem::create_directory(std::filesystem::path(packDir + "/assets/sounds"));
+            std::filesystem::create_directory(std::filesystem::path(packDir + "/assets/backgrounds"));
+        }
+    }
+    else 
+    {
+        file << "#default" << std::endl;
+    }
+
+    file << packFirstMap << std::endl;
+
+    file.close();
+
+    RegisterAllPacks("./packs", packs, EH_EXEMPT);
+    
+    indicatorColor = DARKGREEN;
+    indicatorText = std::format("Saved pack to {}", ("./packs/" + packName + "/"));
+    saveIndicatorCountdown = 90;
+
+    std::cout << "EDITOR: Edited pack " << packName << "\n";
+}
+
+void EditPackWindow(std::vector<Pack> &packs)
+{   
+    Pack p;
+
+    ImGui::SetNextWindowSize({0, 0});
+    ImGui::Begin("Edit Pack", &editPackWindow);
+
+    ImGui::InputText("Pack To Edit", &loadPackName, 32);
+    if(ImGui::Button("Choose"))
+    {
+        p = GetPackByName(loadPackName, packs, packLoadingError);
+        if(!packLoadingError)
+        {
+            oldPackName = loadPackName;
+            packName = p.name;
+            packFirstMap = p.firstMapID;
+            if(p.assetDir == "#default") { packDefaultAssets = true; oldPackDefaultAssets = true; } else { packDefaultAssets = false; oldPackDefaultAssets = false; }
+            if(p.mapDir == "#default") { packDefaultMaps = true; oldPackDefaultMaps = true; } else { packDefaultMaps = false; oldPackDefaultMaps = false; }
+            editingPackRootDir = p.rootDir;
+        }
+    }
+
+    if(packLoadingError)
+    {
+        ImGui::TextColored(ImVec4{255, 0, 0, 255}, "Couldn't find that pack");
+    }
+
+    ImGui::Separator();
+
+    ImGui::InputText("Pack Name", &packName, 32);
+    ImGui::InputText("First Map ID", &packFirstMap, 32);
+
+    ImGui::Checkbox("Use Default Assets", &packDefaultAssets);
+    ImGui::Checkbox("Use Default Maps", &packDefaultMaps);
+
+    if(ImGui::Button("Apply"))
+    {
+        if(packName != "")
+        {
+            ApplyChangesToPack(packs);
+            editPackWindow = false;
+        }   
+    }
+
+    ImGui::End();
+}
+
+void CreatePack(std::vector<Pack> &packs)
+{
+    std::string packDir = "./packs/" + packName;
+
+    std::filesystem::path packDirectory(packDir);
+    std::filesystem::create_directory(packDir);
+
+    if(!packDefaultAssets)
+    {
+        std::filesystem::create_directory(std::filesystem::path(packDir + "/assets"));
+        std::filesystem::create_directory(std::filesystem::path(packDir + "/assets/sounds"));
+        std::filesystem::create_directory(std::filesystem::path(packDir + "/assets/backgrounds"));
+    }
+
+    if(!packDefaultMaps)
+    {
+        std::filesystem::create_directory(std::filesystem::path(packDir + "/maps"));
+    }
+
+    std::ofstream file(packDir + "/.pack");
+
+    file << packName << std::endl;
+
+    if(!packDefaultMaps)
+    {
+        file << "/maps" << std::endl;
+    }
+    else
+    {
+        file << "#default" << std::endl;
+    }
+
+    if(!packDefaultAssets)
+    {
+        file << "/assets" << std::endl;
+    }
+    else 
+    {
+        file << "#default" << std::endl;
+    }
+
+    file << packFirstMap << std::endl;
+
+    file.close();
+
+    RegisterAllPacks("./packs", packs, EH_EXEMPT);
+    
+    indicatorColor = DARKGREEN;
+    indicatorText = std::format("Created pack at {}", ("./packs/" + packName + "/"));
+    saveIndicatorCountdown = 90;
+
+    std::cout << "EDITOR: Created pack " << packName << "\n";
+}
+
+void CreatePackWindow(std::vector<Pack> &packs)
+{
+    ImGui::SetNextWindowSize({0, 0});
+    ImGui::Begin("Create Pack", &createPackWindow);
+
+    ImGui::InputText("Pack Name", &packName, 32);
+    ImGui::InputText("First Map ID", &packFirstMap, 32);
+
+    ImGui::Checkbox("Use Default Assets", &packDefaultAssets);
+    ImGui::Checkbox("Use Default Maps", &packDefaultMaps);
+
+    if(ImGui::Button("Create"))
+    {
+        if(packName != "" && packFirstMap != "")
+        {
+            CreatePack(packs);
+            createPackWindow = false;
+        }
+    }
 
     ImGui::End();
 }

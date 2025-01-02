@@ -315,7 +315,7 @@ int main()
         }
         else if(inMapEditor)
         {
-            Editor(inMapEditor, sprites);
+            Editor(inMapEditor, sprites, packs);
         }
         else if(inMainMenu)
         {

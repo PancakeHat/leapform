@@ -304,6 +304,21 @@ bool CheckBoxCircleCollision(Vector2 circleCenter, float circleRadius, Vector2 r
     return (cornerDistance <= (pow(circleRadius, 2)));
 }
 
+Pack GetPackByName(std::string packName, std::vector<Pack> &packs, bool &error)
+{
+    for(Pack p : packs)
+    {
+        if(p.name == packName)
+        {
+            error = false;
+            return p;
+        }
+    }
+
+    error = true;
+    return {};
+}
+
 void LoadMap(std::string mapID, std::vector<Map>& maps, std::vector<Tile> *tiles, std::vector<Entity>& entities, Map &loadedMap, ErrorHandler &eh)
 {
     for(Map m : maps)

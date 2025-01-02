@@ -206,7 +206,6 @@ void LoadSpritesFromDir(std::string spriteDir, std::vector<Sprite>& sprites, std
     // load default backgrounds
     for(std::string s : defaultIDs)
     {
-        std::cout << std::format("TEST2: ./assets/backgrounds/{}.png\n", s);
         LoadSpriteToVector(std::format("./assets/backgrounds/{}.png", s), s, backgrounds, eh);
         std::cout << "GAME: Registered background " << s << " (default)\n";
     }
@@ -341,6 +340,8 @@ void RegisterMapsInDir(std::string mapDir, std::vector<Map>& maps, ErrorHandler&
 
 void RegisterAllPacks(std::string packDir, std::vector<Pack>& packs, ErrorHandler& eh)
 {
+    packs.clear();
+
     if(!std::filesystem::exists(std::filesystem::path(packDir)))
     {
         ThrowNewError(std::format("Pack directory {} does not exist", packDir), ERROR_FATAL, false, eh);

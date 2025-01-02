@@ -17,6 +17,11 @@ struct ErrorHandler {
     bool overridable;
 };
 
+// Use for cases where error handling is unnecessary
+// Also applicable where errors cannot be reasonably handled
+// Going to need a rehaul in PT2
+ErrorHandler EH_EXEMPT;
+
 void ThrowNewError(std::string message, int severity, bool overridable, ErrorHandler& errorHandler)
 {
     if(errorHandler.overridable)
