@@ -140,5 +140,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/release.dir/DependInfo.cmake"
   "CMakeFiles/clean-debug.dir/DependInfo.cmake"
   "CMakeFiles/clean-release.dir/DependInfo.cmake"
-  "CMakeFiles/app.dir/DependInfo.cmake"
+  "CMakeFiles/game.dir/DependInfo.cmake"
   )

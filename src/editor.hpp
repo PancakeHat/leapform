@@ -11,6 +11,7 @@
 #include <fstream>
 #include <filesystem>
 #include "fileio.hpp"
+#include "menu.hpp"
 
 #pragma once
 
@@ -43,6 +44,9 @@ bool infoWindow = false;
 bool createPackWindow = false;
 bool editPackWindow = false;
 bool packLoadingError = false;
+
+bool mapIsSaved = false;
+std::string currentMapOpenName = "";
 
 // 0 = tiles
 // 1 = entities
@@ -88,6 +92,27 @@ Vector2 tilePosition;
 
 RenderTexture2D editorScreen;
 
+std::string MapSaveIndicatorHelper(bool saved)
+{
+    if(!saved)
+        return "*";
+    
+    return "";
+}
+
+std::string MapNameIndicatorHelper(std::string name)
+{
+    if(name != "")
+        return ".map";
+    
+    return "";
+}
+
+void RegisterMapSaveChange()
+{
+    SetWindowTitle(std::format("Map Editor - {}{}{}", currentMapOpenName, MapNameIndicatorHelper(currentMapOpenName), MapSaveIndicatorHelper(mapIsSaved)).c_str());
+}
+
 void EditorInit()
 {
     editorScreen = LoadRenderTexture(800, 600);
@@ -123,6 +148,9 @@ int Editor(bool& editorOpen, std::vector<Sprite> sprites, std::vector<Pack> &pac
                 }
                 else
                     PickSpawnPoint();
+
+                mapIsSaved = false;
+                RegisterMapSaveChange();
             }
             if(IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) 
             { 
@@ -133,6 +161,9 @@ int Editor(bool& editorOpen, std::vector<Sprite> sprites, std::vector<Pack> &pac
                     else
                         RemoveEntity();
                 }
+
+                mapIsSaved = false;
+                RegisterMapSaveChange();
             }
             if(GetMouseWheelMove() != 0) 
                 placingMode = !placingMode;
@@ -169,6 +200,7 @@ int Editor(bool& editorOpen, std::vector<Sprite> sprites, std::vector<Pack> &pac
             loadWindow = true;
         if(IsKeyPressed(KEY_Q))
         {
+            mapEditorSync = false;
             editorOpen = false;
             SetWindowTitle("window");
         }
@@ -224,7 +256,7 @@ int Editor(bool& editorOpen, std::vector<Sprite> sprites, std::vector<Pack> &pac
                 if(ImGui::BeginMenu("Editor"))
                 {
                     if(ImGui::MenuItem("Help")) { helpWindow = true; }
-                    if(ImGui::MenuItem("Close", "Ctrl+Q")) { editorOpen = false; SetWindowTitle("window"); }
+                    if(ImGui::MenuItem("Close", "Ctrl+Q")) { editorOpen = false; mapEditorSync = false; SetWindowTitle("window"); }
 
                     ImGui::EndMenu();
                 }
@@ -265,7 +297,7 @@ int Editor(bool& editorOpen, std::vector<Sprite> sprites, std::vector<Pack> &pac
                     if(ImGui::BeginMenu("Tiles"))
                     {
                         if(ImGui::MenuItem("Open Tile Window", "Ctrl+T")) { tileSelectorWindow = !tileSelectorWindow; }
-                        if(ImGui::MenuItem("Clear All Tiles")) { mapTiles.clear(); }
+                        if(ImGui::MenuItem("Clear All Tiles")) { mapTiles.clear(); mapIsSaved = false; RegisterMapSaveChange(); }
 
                         ImGui::EndMenu();
                     }
@@ -274,7 +306,7 @@ int Editor(bool& editorOpen, std::vector<Sprite> sprites, std::vector<Pack> &pac
                     {
                         if(ImGui::MenuItem("Open Entity Window", "Ctrl+E")) { entityWindow = !entityWindow; }
                         if(ImGui::MenuItem("Choose Spawn Point")) { pickingSpawnPoint = true; }
-                        if(ImGui::MenuItem("Clear All Entities")) { mapEntities.clear(); }
+                        if(ImGui::MenuItem("Clear All Entities")) { mapEntities.clear(); mapIsSaved = false; RegisterMapSaveChange(); }
 
                         ImGui::EndMenu();
                     }
@@ -339,6 +371,10 @@ void HelpWindow()
     ImGui::Text("       If the placement icon is a square, you are in Tile Mode");
     ImGui::Text("       If the placement icon is a circle, you are in Entity Mode");
     ImGui::Text("       The little red circles that appear in Entity Mode are the origin of each entity");
+    ImGui::SeparatorText("Editing Packs");
+    ImGui::Text("       You can create a pack by going to Pack > New");
+    ImGui::Text("       Packs are basically mods. They can contain custom maps and assets.");
+    ImGui::Text("       Packs are loaded through the mods button in the main menu.");
 
     ImGui::End();
 }
@@ -353,7 +389,10 @@ void EditorLoadMap(std::string fileName)
     mapOpen = true;
     filename = loadfilename;
     
-    SetWindowTitle(std::format("Map Editor - {}.map", fileName).c_str());
+    // SetWindowTitle(std::format("Map Editor - {}.map", fileName).c_str());
+    currentMapOpenName = fileName;
+    mapIsSaved = false;
+    RegisterMapSaveChange();
 
     buf1 = map.mapID.c_str();
     buf2 = map.nextMapID.c_str();
@@ -452,7 +491,11 @@ void SaveMap(std::string fileName)
     indicatorColor = DARKGREEN;
     indicatorText = std::format("Saved map to {}.map", fileName);
     saveIndicatorCountdown = 90;
-    std::cout << "Saved map " << map.mapID << std::format(" to ./{}.map\n", fileName);
+    std::cout << "EDITOR: Saved map " << map.mapID << std::format(" to ./{}.map\n", fileName);
+    // SetWindowTitle(std::format("Map Editor - {}.map", filename).c_str());
+    currentMapOpenName = fileName;
+    mapIsSaved = true;
+    RegisterMapSaveChange();
 }
 
 void SaveWindow()
@@ -773,7 +816,10 @@ void CreateNewMap()
     createMapWindow = false;
     mapOpen = true;
 
-    SetWindowTitle("Map Editor - Unsaved");
+    // SetWindowTitle("Map Editor - Unsaved");
+    currentMapOpenName = "";
+    mapIsSaved = false;
+    RegisterMapSaveChange();
 
     mapTiles.clear();
     mapEntities.clear();

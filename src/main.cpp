@@ -220,15 +220,15 @@ int main()
                     if(debugMode)
                     {
                         debugDrawPlayerColliders(position);
-                        DrawText(std::format("Position: {}, {}", position.x, position.y).c_str(), 10, 10, 16, BLACK);
-                        DrawText(std::format("Velocity: {}, {}", playerVelocity.x, playerVelocity.y).c_str(), 10, 25, 16, BLACK);
-                        DrawText(std::format("JumpTime / FallTime: {} / {}", jumpTime, downVelocity).c_str(), 10, 40, 16, BLACK);
-                        DrawText(std::format("Map ID: {}", loadedMap.mapID).c_str(), 10, 55, 16, BLACK);
-                        DrawText(std::format("Entity count: {}", entities.size()).c_str(), 10, 70, 16, BLACK);
-                        DrawText(std::format("Player Physics: {}", playerPhysics).c_str(), 10, 85, 16, BLACK);
-                        DrawText(std::format("Fadeout Counter: {}", fadeoutCounter).c_str(), 10, 100, 16, BLACK);
-                        DrawText(std::format("Background ID: {}", loadedMap.backgroundID).c_str(), 10, 115, 16, BLACK);
-                        DrawText(std::format("Frame: {}", frames).c_str(), 10, 130, 16, BLACK);
+                        DrawText(std::format("Position: {}, {}", position.x, position.y).c_str(), 10, 10, 16, DARKGRAY);
+                        DrawText(std::format("Velocity: {}, {}", playerVelocity.x, playerVelocity.y).c_str(), 10, 25, 16, DARKGRAY);
+                        DrawText(std::format("JumpTime / FallTime: {} / {}", jumpTime, downVelocity).c_str(), 10, 40, 16, DARKGRAY);
+                        DrawText(std::format("Map ID: {}", loadedMap.mapID).c_str(), 10, 55, 16, DARKGRAY);
+                        DrawText(std::format("Entity count: {}", entities.size()).c_str(), 10, 70, 16, DARKGRAY);
+                        DrawText(std::format("Player Physics: {}", playerPhysics).c_str(), 10, 85, 16, DARKGRAY);
+                        DrawText(std::format("Fadeout Counter: {}", fadeoutCounter).c_str(), 10, 100, 16, DARKGRAY);
+                        DrawText(std::format("Background ID: {}", loadedMap.backgroundID).c_str(), 10, 115, 16, DARKGRAY);
+                        DrawText(std::format("Frame: {}", frames).c_str(), 10, 130, 16, DARKGRAY);
                     }
                 // EndDrawing();
                 EndTextureMode();
@@ -317,9 +317,9 @@ int main()
         {
             Editor(inMapEditor, sprites, packs);
         }
-        else if(inMainMenu)
+        else if(inMainMenu && !inMapEditor)
         {
-            MainMenu(inMainMenu, forceCloseGame, sprites, backgrounds, GetSoundFromVector("select", sounds));
+            MainMenu(inMainMenu, forceCloseGame, sprites, backgrounds, GetSoundFromVector("select", sounds), inMapEditor);
         }
 
         frames++;
@@ -397,7 +397,7 @@ void checkPlayerWorldCollsions(std::vector<Tile>& tiles, Vector2& playerpos, Vec
         }
         else if(tile.type == 3 || tile.type == 4 || tile.type == 5 || tile.type == 6)
         {
-            if(checkBoxCollison(playerpos, {40, 40}, {tile.pos.x + 10, tile.pos.y + 10}, {20, 20}))
+            if(checkBoxCollison(playerpos, {40, 40}, {tile.pos.x + 10, tile.pos.y + 10}, {20, 20}) && physicsToggle)
             {
                 PlaySound(GetSoundFromVector("death", sounds).sound);
                 LoadMap(currentMap.mapID, maps, &tiles, entities, currentMap, errors);

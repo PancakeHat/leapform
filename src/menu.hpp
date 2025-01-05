@@ -31,6 +31,7 @@ void ModMenu();
 void PauseMenu(bool& paused, bool& mainMenu, GameSound clickSound);
 void Resume();
 void ReturnToMenu();
+void OpenMapEditor();
 
 Font uiFont;
 
@@ -38,6 +39,7 @@ Font uiFont;
 bool menuOpenSync = true;
 bool forceQuitSync = false;
 bool pauseMenuSync = false;
+bool mapEditorSync = false;
 
 bool modMenu = false;
 std::string modPackName = "";
@@ -62,7 +64,8 @@ void MenuInit(bool menuOpen, std::vector<Pack>& packs)
 
     buttons.push_back(Button{{20, 120}, {200, 50}, 40, "Play", StartGame});
     buttons.push_back(Button{{20, 180}, {200, 50}, 40, "Mods", OpenModMenu});
-    buttons.push_back(Button{{20, 240}, {200, 50}, 40, "Quit", QuitGame});
+    buttons.push_back(Button{{20, 240}, {200, 50}, 40, "Editor", OpenMapEditor});
+    buttons.push_back(Button{{20, 300}, {200, 50}, 40, "Quit", QuitGame});
 
     pauseButtons.push_back(Button{{20, 80}, {180, 40}, 30, "Resume", Resume});
     pauseButtons.push_back(Button{{20, 130}, {180, 40}, 30, "Main Menu", ReturnToMenu});
@@ -75,13 +78,16 @@ void MenuInit(bool menuOpen, std::vector<Pack>& packs)
     }
 }
 
-int MainMenu(bool& menuOpen, bool& forceQuit, std::vector<Sprite>& sprites, std::vector<Sprite>& backgrounds, GameSound clickSound)
+int MainMenu(bool& menuOpen, bool& forceQuit, std::vector<Sprite>& sprites, std::vector<Sprite>& backgrounds, GameSound clickSound, bool& inMapEditor)
 {
     menuMousePosition = {800 * (GetMousePosition().x / GetScreenWidth()), 600 * (GetMousePosition().y / GetScreenHeight())};
 
     menuOpen = menuOpenSync;
     forceQuit = forceQuitSync;
+    inMapEditor = mapEditorSync;
     UpdateButtons(buttons, clickSound);
+
+    if (IsKeyPressed(KEY_M) && !ImGui::GetIO().WantCaptureMouse) { inMapEditor = true; mapEditorSync = true; SetWindowTitle("Map Editor"); }
 
     BeginTextureMode(menuScreen);
         ClearBackground(BLACK);
@@ -126,6 +132,12 @@ void PauseMenu(bool& paused, bool& mainMenu, GameSound clickSound)
     DrawRectangle(0, 0, 800, 600, {0, 0, 0, 80});
     DrawTextEx(uiFont, "Paused", {20, 20}, 50, 8, BLACK);
     RenderButtons(pauseButtons);
+}
+
+void OpenMapEditor()
+{
+    SetWindowTitle("Map Editor");
+    mapEditorSync = true;
 }
 
 void ModMenu()

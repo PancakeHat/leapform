@@ -2,6 +2,6 @@ D:/dev/platformer game/build/win/release/CMakeFiles/debug.dir
 D:/dev/platformer game/build/win/release/CMakeFiles/release.dir
 D:/dev/platformer game/build/win/release/CMakeFiles/clean-debug.dir
 D:/dev/platformer game/build/win/release/CMakeFiles/clean-release.dir
-D:/dev/platformer game/build/win/release/CMakeFiles/app.dir
+D:/dev/platformer game/build/win/release/CMakeFiles/game.dir
 D:/dev/platformer game/build/win/release/CMakeFiles/edit_cache.dir
 D:/dev/platformer game/build/win/release/CMakeFiles/rebuild_cache.dir
