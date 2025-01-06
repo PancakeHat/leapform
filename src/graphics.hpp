@@ -73,6 +73,14 @@ void DrawOutlinedText(const char *text, int posX, int posY, int fontSize, Color 
     DrawText(text, posX, posY, fontSize, color);
 }
 
+void DrawOutlinedTextEx(const char *text, int posX, int posY, int fontSize, Color color, int outlineSize, Color outlineColor, Font font, float spacing) {
+    DrawTextEx(font, text, {(float)posX - (float)outlineSize, (float)posY - (float)outlineSize}, fontSize, spacing, outlineColor);
+    DrawTextEx(font, text, {(float)posX + (float)outlineSize, (float)posY - (float)outlineSize}, fontSize, spacing, outlineColor);
+    DrawTextEx(font, text, {(float)posX - (float)outlineSize, (float)posY + (float)outlineSize}, fontSize, spacing, outlineColor);
+    DrawTextEx(font, text, {(float)posX + (float)outlineSize, (float)posY + (float)outlineSize}, fontSize, spacing, outlineColor);
+    DrawTextEx(font, text, {(float)posX, + (float)posY}, fontSize, spacing, color);
+}
+
 Sprite GetSpriteFromVector(std::string id, std::vector<Sprite> sprites)
 {
     for(Sprite sprite : sprites)

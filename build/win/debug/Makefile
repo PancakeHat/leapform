@@ -168,24 +168,24 @@ clean-release/fast:
 .PHONY : clean-release/fast
 
 #=============================================================================
-# Target rules for targets named app
+# Target rules for targets named leapform
 
 # Build rule for target.
-app: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 app
-.PHONY : app
+leapform: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 leapform
+.PHONY : leapform
 
 # fast build rule for target.
-app/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/build
-.PHONY : app/fast
+leapform/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/build
+.PHONY : leapform/fast
 
 include/rlimgui/imgui.obj: include/rlimgui/imgui.cpp.obj
 .PHONY : include/rlimgui/imgui.obj
 
 # target to build an object file
 include/rlimgui/imgui.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/include/rlimgui/imgui.cpp.obj
 .PHONY : include/rlimgui/imgui.cpp.obj
 
 include/rlimgui/imgui.i: include/rlimgui/imgui.cpp.i
@@ -193,7 +193,7 @@ include/rlimgui/imgui.i: include/rlimgui/imgui.cpp.i
 
 # target to preprocess a source file
 include/rlimgui/imgui.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/include/rlimgui/imgui.cpp.i
 .PHONY : include/rlimgui/imgui.cpp.i
 
 include/rlimgui/imgui.s: include/rlimgui/imgui.cpp.s
@@ -201,7 +201,7 @@ include/rlimgui/imgui.s: include/rlimgui/imgui.cpp.s
 
 # target to generate assembly for a file
 include/rlimgui/imgui.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/include/rlimgui/imgui.cpp.s
 .PHONY : include/rlimgui/imgui.cpp.s
 
 include/rlimgui/imgui_demo.obj: include/rlimgui/imgui_demo.cpp.obj
@@ -209,7 +209,7 @@ include/rlimgui/imgui_demo.obj: include/rlimgui/imgui_demo.cpp.obj
 
 # target to build an object file
 include/rlimgui/imgui_demo.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/include/rlimgui/imgui_demo.cpp.obj
 .PHONY : include/rlimgui/imgui_demo.cpp.obj
 
 include/rlimgui/imgui_demo.i: include/rlimgui/imgui_demo.cpp.i
@@ -217,7 +217,7 @@ include/rlimgui/imgui_demo.i: include/rlimgui/imgui_demo.cpp.i
 
 # target to preprocess a source file
 include/rlimgui/imgui_demo.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/include/rlimgui/imgui_demo.cpp.i
 .PHONY : include/rlimgui/imgui_demo.cpp.i
 
 include/rlimgui/imgui_demo.s: include/rlimgui/imgui_demo.cpp.s
@@ -225,7 +225,7 @@ include/rlimgui/imgui_demo.s: include/rlimgui/imgui_demo.cpp.s
 
 # target to generate assembly for a file
 include/rlimgui/imgui_demo.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_demo.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/include/rlimgui/imgui_demo.cpp.s
 .PHONY : include/rlimgui/imgui_demo.cpp.s
 
 include/rlimgui/imgui_draw.obj: include/rlimgui/imgui_draw.cpp.obj
@@ -233,7 +233,7 @@ include/rlimgui/imgui_draw.obj: include/rlimgui/imgui_draw.cpp.obj
 
 # target to build an object file
 include/rlimgui/imgui_draw.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/include/rlimgui/imgui_draw.cpp.obj
 .PHONY : include/rlimgui/imgui_draw.cpp.obj
 
 include/rlimgui/imgui_draw.i: include/rlimgui/imgui_draw.cpp.i
@@ -241,7 +241,7 @@ include/rlimgui/imgui_draw.i: include/rlimgui/imgui_draw.cpp.i
 
 # target to preprocess a source file
 include/rlimgui/imgui_draw.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/include/rlimgui/imgui_draw.cpp.i
 .PHONY : include/rlimgui/imgui_draw.cpp.i
 
 include/rlimgui/imgui_draw.s: include/rlimgui/imgui_draw.cpp.s
@@ -249,7 +249,7 @@ include/rlimgui/imgui_draw.s: include/rlimgui/imgui_draw.cpp.s
 
 # target to generate assembly for a file
 include/rlimgui/imgui_draw.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_draw.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/include/rlimgui/imgui_draw.cpp.s
 .PHONY : include/rlimgui/imgui_draw.cpp.s
 
 include/rlimgui/imgui_stdlib.obj: include/rlimgui/imgui_stdlib.cpp.obj
@@ -257,7 +257,7 @@ include/rlimgui/imgui_stdlib.obj: include/rlimgui/imgui_stdlib.cpp.obj
 
 # target to build an object file
 include/rlimgui/imgui_stdlib.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/include/rlimgui/imgui_stdlib.cpp.obj
 .PHONY : include/rlimgui/imgui_stdlib.cpp.obj
 
 include/rlimgui/imgui_stdlib.i: include/rlimgui/imgui_stdlib.cpp.i
@@ -265,7 +265,7 @@ include/rlimgui/imgui_stdlib.i: include/rlimgui/imgui_stdlib.cpp.i
 
 # target to preprocess a source file
 include/rlimgui/imgui_stdlib.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/include/rlimgui/imgui_stdlib.cpp.i
 .PHONY : include/rlimgui/imgui_stdlib.cpp.i
 
 include/rlimgui/imgui_stdlib.s: include/rlimgui/imgui_stdlib.cpp.s
@@ -273,7 +273,7 @@ include/rlimgui/imgui_stdlib.s: include/rlimgui/imgui_stdlib.cpp.s
 
 # target to generate assembly for a file
 include/rlimgui/imgui_stdlib.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_stdlib.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/include/rlimgui/imgui_stdlib.cpp.s
 .PHONY : include/rlimgui/imgui_stdlib.cpp.s
 
 include/rlimgui/imgui_tables.obj: include/rlimgui/imgui_tables.cpp.obj
@@ -281,7 +281,7 @@ include/rlimgui/imgui_tables.obj: include/rlimgui/imgui_tables.cpp.obj
 
 # target to build an object file
 include/rlimgui/imgui_tables.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/include/rlimgui/imgui_tables.cpp.obj
 .PHONY : include/rlimgui/imgui_tables.cpp.obj
 
 include/rlimgui/imgui_tables.i: include/rlimgui/imgui_tables.cpp.i
@@ -289,7 +289,7 @@ include/rlimgui/imgui_tables.i: include/rlimgui/imgui_tables.cpp.i
 
 # target to preprocess a source file
 include/rlimgui/imgui_tables.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/include/rlimgui/imgui_tables.cpp.i
 .PHONY : include/rlimgui/imgui_tables.cpp.i
 
 include/rlimgui/imgui_tables.s: include/rlimgui/imgui_tables.cpp.s
@@ -297,7 +297,7 @@ include/rlimgui/imgui_tables.s: include/rlimgui/imgui_tables.cpp.s
 
 # target to generate assembly for a file
 include/rlimgui/imgui_tables.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_tables.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/include/rlimgui/imgui_tables.cpp.s
 .PHONY : include/rlimgui/imgui_tables.cpp.s
 
 include/rlimgui/imgui_widgets.obj: include/rlimgui/imgui_widgets.cpp.obj
@@ -305,7 +305,7 @@ include/rlimgui/imgui_widgets.obj: include/rlimgui/imgui_widgets.cpp.obj
 
 # target to build an object file
 include/rlimgui/imgui_widgets.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/include/rlimgui/imgui_widgets.cpp.obj
 .PHONY : include/rlimgui/imgui_widgets.cpp.obj
 
 include/rlimgui/imgui_widgets.i: include/rlimgui/imgui_widgets.cpp.i
@@ -313,7 +313,7 @@ include/rlimgui/imgui_widgets.i: include/rlimgui/imgui_widgets.cpp.i
 
 # target to preprocess a source file
 include/rlimgui/imgui_widgets.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/include/rlimgui/imgui_widgets.cpp.i
 .PHONY : include/rlimgui/imgui_widgets.cpp.i
 
 include/rlimgui/imgui_widgets.s: include/rlimgui/imgui_widgets.cpp.s
@@ -321,7 +321,7 @@ include/rlimgui/imgui_widgets.s: include/rlimgui/imgui_widgets.cpp.s
 
 # target to generate assembly for a file
 include/rlimgui/imgui_widgets.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/imgui_widgets.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/include/rlimgui/imgui_widgets.cpp.s
 .PHONY : include/rlimgui/imgui_widgets.cpp.s
 
 include/rlimgui/rlImGui.obj: include/rlimgui/rlImGui.cpp.obj
@@ -329,7 +329,7 @@ include/rlimgui/rlImGui.obj: include/rlimgui/rlImGui.cpp.obj
 
 # target to build an object file
 include/rlimgui/rlImGui.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/include/rlimgui/rlImGui.cpp.obj
 .PHONY : include/rlimgui/rlImGui.cpp.obj
 
 include/rlimgui/rlImGui.i: include/rlimgui/rlImGui.cpp.i
@@ -337,7 +337,7 @@ include/rlimgui/rlImGui.i: include/rlimgui/rlImGui.cpp.i
 
 # target to preprocess a source file
 include/rlimgui/rlImGui.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/include/rlimgui/rlImGui.cpp.i
 .PHONY : include/rlimgui/rlImGui.cpp.i
 
 include/rlimgui/rlImGui.s: include/rlimgui/rlImGui.cpp.s
@@ -345,15 +345,23 @@ include/rlimgui/rlImGui.s: include/rlimgui/rlImGui.cpp.s
 
 # target to generate assembly for a file
 include/rlimgui/rlImGui.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/include/rlimgui/rlImGui.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/include/rlimgui/rlImGui.cpp.s
 .PHONY : include/rlimgui/rlImGui.cpp.s
+
+leapform.obj: leapform.rc.obj
+.PHONY : leapform.obj
+
+# target to build an object file
+leapform.rc.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/leapform.rc.obj
+.PHONY : leapform.rc.obj
 
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
 # target to build an object file
 src/main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/src/main.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/src/main.cpp.obj
 .PHONY : src/main.cpp.obj
 
 src/main.i: src/main.cpp.i
@@ -361,7 +369,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/src/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -369,7 +377,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\app.dir\build.make CMakeFiles/app.dir/src/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\leapform.dir\build.make CMakeFiles/leapform.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 # Help Target
@@ -384,7 +392,7 @@ help:
 	@echo ... clean-release
 	@echo ... debug
 	@echo ... release
-	@echo ... app
+	@echo ... leapform
 	@echo ... include/rlimgui/imgui.obj
 	@echo ... include/rlimgui/imgui.i
 	@echo ... include/rlimgui/imgui.s
@@ -406,6 +414,7 @@ help:
 	@echo ... include/rlimgui/rlImGui.obj
 	@echo ... include/rlimgui/rlImGui.i
 	@echo ... include/rlimgui/rlImGui.s
+	@echo ... leapform.obj
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s

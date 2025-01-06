@@ -41,6 +41,11 @@ bool inMainMenu = true;
 bool debugMode = false;
 bool pauseMenu = false;
 
+bool timerEnabled = false;
+bool timerStarted = false;
+bool speedrunFinished = false;
+int speedrunTime = 0;
+
 int frames = 0;
 
 int main()
@@ -52,9 +57,12 @@ int main()
     RegisterAllPacks("./packs", packs, errors);
 
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-    InitWindow(SCREENWIDTH, SCREENHEIGHT, "window");
+    InitWindow(SCREENWIDTH, SCREENHEIGHT, "Leapform");
     InitAudioDevice();
     SetTargetFPS(60);
+
+    // Image windowIcon = LoadImage("./assets/platyer.png");
+    // SetWindowIcon(windowIcon);
 
     LoadPackToGame("Default Pack", packs, maps, sprites, backgrounds, sounds, loadedPack, errors);
 
@@ -102,6 +110,11 @@ int main()
         {
             if(!errors.activeError)
             {
+                if(timerEnabled && timerStarted && !speedrunFinished)
+                {
+                    speedrunTime++;
+                }
+
                 if(!pauseMenu)
                 {
                     if(menuLoadPack)
@@ -118,10 +131,10 @@ int main()
                     {
                         if(playerPhysics)
                         {
-                            if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) { position.x += 4; playerVelocity.x = 1; }
-                            if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) { position.x -= 4; playerVelocity.x = -1; }
-                            if (IsKeyDown(KEY_UP)) { if(canJump) { playerJumping = true; jumpTime = 0; jumpKey = KEY_UP; PlaySound(GetSoundFromVector("jump", sounds).sound); } }
-                            if (IsKeyDown(KEY_W)) { if(canJump) { playerJumping = true; jumpTime = 0; jumpKey = KEY_W; PlaySound(GetSoundFromVector("jump", sounds).sound); } }
+                            if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) { position.x += 4; playerVelocity.x = 1; timerStarted = true; }
+                            if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) { position.x -= 4; playerVelocity.x = -1; timerStarted = true; }
+                            if (IsKeyDown(KEY_UP)) { if(canJump) { playerJumping = true; jumpTime = 0; jumpKey = KEY_UP; PlaySound(GetSoundFromVector("jump", sounds).sound); } timerStarted = true; }
+                            if (IsKeyDown(KEY_W)) { if(canJump) { playerJumping = true; jumpTime = 0; jumpKey = KEY_W; PlaySound(GetSoundFromVector("jump", sounds).sound); } timerStarted = true; }
                             if (IsKeyUp(jumpKey)) {if(playerJumping && jumpTime >= 24) {playerJumping = false; downVelocity = 0; } }
                         }
                         if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S))
@@ -141,7 +154,7 @@ int main()
                         }
                         if (IsKeyPressed(KEY_GRAVE)) { debugMode = !debugMode; }
                         if (IsKeyPressed(KEY_M)) { inMapEditor = true; SetWindowTitle("Map Editor"); }
-                        if (IsKeyPressed(KEY_ESCAPE)) { pauseMenu = true; pauseMenuSync = true; }
+                        if (IsKeyPressed(KEY_ESCAPE)) { pauseMenu = true; pauseMenuSync = true; timerStarted = false; }
                     }
 
                     if(playerPhysics)
@@ -183,7 +196,7 @@ int main()
                 }
                 else
                 {
-                    if (IsKeyPressed(KEY_ESCAPE)) { pauseMenu = false; pauseMenuSync = false; }
+                    if (IsKeyPressed(KEY_ESCAPE)) { pauseMenu = false; pauseMenuSync = false; timerStarted = true; }
                 }
 
                 // BeginDrawing();
@@ -215,6 +228,17 @@ int main()
                     if(pauseMenu)
                     {
                         PauseMenu(pauseMenu, inMainMenu, GetSoundFromVector("select", sounds));
+                    }
+
+                    if(timerEnabled)
+                    {
+                        std::string hdths = std::to_string((int)((float)speedrunTime / 0.6) % 10);
+
+                        Color textColor = (speedrunFinished) ? BLUE : DARKGREEN;
+
+                        DrawRectangle(660, 20, 140, 45, BLACK);
+                        DrawTextEx(uiFont, std::format("{}:{}:{}{}", (int)((speedrunTime / 60) / 60), (int)((speedrunTime / 60) % 60), (int)((speedrunTime / 6) % 10), hdths).c_str(), {665, 20}, 30, 2, textColor);
+                        DrawTextEx(uiFont, std::format("{}", speedrunTime).c_str(), {665, 45}, 20, 2, textColor);
                     }
 
                     if(debugMode)
@@ -319,7 +343,7 @@ int main()
         }
         else if(inMainMenu && !inMapEditor)
         {
-            MainMenu(inMainMenu, forceCloseGame, sprites, backgrounds, GetSoundFromVector("select", sounds), inMapEditor);
+            MainMenu(inMainMenu, forceCloseGame, sprites, backgrounds, GetSoundFromVector("select", sounds), inMapEditor, timerEnabled);
         }
 
         frames++;
@@ -328,6 +352,7 @@ int main()
     CloseAudioDevice();
     CloseWindow();
     delete tiles;
+    // UnloadImage(windowIcon);
     UnloadSpritesFromVector(sprites);
     UnloadSpritesFromVector(backgrounds);
     UnloadSoundsFromVector(sounds);
@@ -481,16 +506,22 @@ void checkPlayerWorldCollsions(std::vector<Tile>& tiles, Vector2& playerpos, Vec
         else if(entities[i].type == 5)
         {
             // only triggered when the map gets loaded
-            if(entities[i].ticks == 2)
+            // for some reason its 1 when loading from another map and 2 when loading directly
+            if(entities[i].ticks == 2 || entities[i].ticks == 1)
             {
                 entities[i].target.x = 5;
-                entities.push_back({7, {-40, 0}, {40, 40}, 0, {(float)RandomInt(0, 120) + 240, 1}});
-                entities.push_back({7, {-40, 0}, {40, 40}, 0, {(float)RandomInt(0, 120) + 240, 2}});
+                if(entities[i].ticks == 2)
+                {
+                    entities.push_back({7, {-40, 0}, {40, 40}, 0, {(float)RandomInt(0, 120) + 240, 1}});
+                    entities.push_back({7, {-40, 0}, {40, 40}, 0, {(float)RandomInt(0, 120) + 240, 2}});
+                }
             }
             entities[i].pos.y += 2 * sin((entities[i].ticks / 15));
 
             if(entities[i].target.x == 0)
             {
+                speedrunFinished = true;
+
                 if(fadeoutCounter < 255)
                     fadeoutCounter++;
             }
@@ -502,6 +533,16 @@ void checkPlayerWorldCollsions(std::vector<Tile>& tiles, Vector2& playerpos, Vec
                 menuOpenSync = true;
                 poweredUp = false;
                 physicsToggle = true;
+
+                if(timerEnabled)
+                {
+                    showFinalTime = true;
+                    finalTime = speedrunTime;
+                    speedrunFinished = false;
+                    speedrunTime = 0;
+                    timerStarted = false;
+                }
+
                 LoadMap("map0", maps, &tiles, entities, currentMap, errors);
                 playerpos = {currentMap.playerSpawn.x * 40, currentMap.playerSpawn.y * 40};
                 return;

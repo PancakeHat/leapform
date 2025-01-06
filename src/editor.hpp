@@ -202,7 +202,7 @@ int Editor(bool& editorOpen, std::vector<Sprite> sprites, std::vector<Pack> &pac
         {
             mapEditorSync = false;
             editorOpen = false;
-            SetWindowTitle("window");
+            SetWindowTitle("Leapform");
         }
 
     // BeginDrawing();
@@ -256,7 +256,7 @@ int Editor(bool& editorOpen, std::vector<Sprite> sprites, std::vector<Pack> &pac
                 if(ImGui::BeginMenu("Editor"))
                 {
                     if(ImGui::MenuItem("Help")) { helpWindow = true; }
-                    if(ImGui::MenuItem("Close", "Ctrl+Q")) { editorOpen = false; mapEditorSync = false; SetWindowTitle("window"); }
+                    if(ImGui::MenuItem("Close", "Ctrl+Q")) { editorOpen = false; mapEditorSync = false; SetWindowTitle("Leapform"); }
 
                     ImGui::EndMenu();
                 }

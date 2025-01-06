@@ -83,11 +83,16 @@ CMakeFiles/game.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/main.cpp.s"
 	C:\mingw64-msvcrt\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\dev\platformer game\src\main.cpp" -o CMakeFiles\game.dir\src\main.cpp.s
 
+CMakeFiles/game.dir/leapform.rc.obj: CMakeFiles/game.dir/flags.make
+CMakeFiles/game.dir/leapform.rc.obj: D:/dev/platformer\ game/leapform.rc
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building RC object CMakeFiles/game.dir/leapform.rc.obj"
+	C:\mingw64-msvcrt\bin\windres.exe -O coff $(RC_DEFINES) $(RC_INCLUDES) $(RC_FLAGS) "D:\dev\platformer game\leapform.rc" CMakeFiles\game.dir\leapform.rc.obj
+
 CMakeFiles/game.dir/include/rlimgui/imgui.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/include/rlimgui/imgui.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
 CMakeFiles/game.dir/include/rlimgui/imgui.cpp.obj: D:/dev/platformer\ game/include/rlimgui/imgui.cpp
 CMakeFiles/game.dir/include/rlimgui/imgui.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/game.dir/include/rlimgui/imgui.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/game.dir/include/rlimgui/imgui.cpp.obj"
 	C:\mingw64-msvcrt\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/include/rlimgui/imgui.cpp.obj -MF CMakeFiles\game.dir\include\rlimgui\imgui.cpp.obj.d -o CMakeFiles\game.dir\include\rlimgui\imgui.cpp.obj -c "D:\dev\platformer game\include\rlimgui\imgui.cpp"
 
 CMakeFiles/game.dir/include/rlimgui/imgui.cpp.i: cmake_force
@@ -102,7 +107,7 @@ CMakeFiles/game.dir/include/rlimgui/imgui_demo.cpp.obj: CMakeFiles/game.dir/flag
 CMakeFiles/game.dir/include/rlimgui/imgui_demo.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
 CMakeFiles/game.dir/include/rlimgui/imgui_demo.cpp.obj: D:/dev/platformer\ game/include/rlimgui/imgui_demo.cpp
 CMakeFiles/game.dir/include/rlimgui/imgui_demo.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/game.dir/include/rlimgui/imgui_demo.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/game.dir/include/rlimgui/imgui_demo.cpp.obj"
 	C:\mingw64-msvcrt\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/include/rlimgui/imgui_demo.cpp.obj -MF CMakeFiles\game.dir\include\rlimgui\imgui_demo.cpp.obj.d -o CMakeFiles\game.dir\include\rlimgui\imgui_demo.cpp.obj -c "D:\dev\platformer game\include\rlimgui\imgui_demo.cpp"
 
 CMakeFiles/game.dir/include/rlimgui/imgui_demo.cpp.i: cmake_force
@@ -117,7 +122,7 @@ CMakeFiles/game.dir/include/rlimgui/imgui_draw.cpp.obj: CMakeFiles/game.dir/flag
 CMakeFiles/game.dir/include/rlimgui/imgui_draw.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
 CMakeFiles/game.dir/include/rlimgui/imgui_draw.cpp.obj: D:/dev/platformer\ game/include/rlimgui/imgui_draw.cpp
 CMakeFiles/game.dir/include/rlimgui/imgui_draw.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/game.dir/include/rlimgui/imgui_draw.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/game.dir/include/rlimgui/imgui_draw.cpp.obj"
 	C:\mingw64-msvcrt\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/include/rlimgui/imgui_draw.cpp.obj -MF CMakeFiles\game.dir\include\rlimgui\imgui_draw.cpp.obj.d -o CMakeFiles\game.dir\include\rlimgui\imgui_draw.cpp.obj -c "D:\dev\platformer game\include\rlimgui\imgui_draw.cpp"
 
 CMakeFiles/game.dir/include/rlimgui/imgui_draw.cpp.i: cmake_force
@@ -132,7 +137,7 @@ CMakeFiles/game.dir/include/rlimgui/imgui_stdlib.cpp.obj: CMakeFiles/game.dir/fl
 CMakeFiles/game.dir/include/rlimgui/imgui_stdlib.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
 CMakeFiles/game.dir/include/rlimgui/imgui_stdlib.cpp.obj: D:/dev/platformer\ game/include/rlimgui/imgui_stdlib.cpp
 CMakeFiles/game.dir/include/rlimgui/imgui_stdlib.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/game.dir/include/rlimgui/imgui_stdlib.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/game.dir/include/rlimgui/imgui_stdlib.cpp.obj"
 	C:\mingw64-msvcrt\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/include/rlimgui/imgui_stdlib.cpp.obj -MF CMakeFiles\game.dir\include\rlimgui\imgui_stdlib.cpp.obj.d -o CMakeFiles\game.dir\include\rlimgui\imgui_stdlib.cpp.obj -c "D:\dev\platformer game\include\rlimgui\imgui_stdlib.cpp"
 
 CMakeFiles/game.dir/include/rlimgui/imgui_stdlib.cpp.i: cmake_force
@@ -147,7 +152,7 @@ CMakeFiles/game.dir/include/rlimgui/imgui_tables.cpp.obj: CMakeFiles/game.dir/fl
 CMakeFiles/game.dir/include/rlimgui/imgui_tables.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
 CMakeFiles/game.dir/include/rlimgui/imgui_tables.cpp.obj: D:/dev/platformer\ game/include/rlimgui/imgui_tables.cpp
 CMakeFiles/game.dir/include/rlimgui/imgui_tables.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/game.dir/include/rlimgui/imgui_tables.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/game.dir/include/rlimgui/imgui_tables.cpp.obj"
 	C:\mingw64-msvcrt\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/include/rlimgui/imgui_tables.cpp.obj -MF CMakeFiles\game.dir\include\rlimgui\imgui_tables.cpp.obj.d -o CMakeFiles\game.dir\include\rlimgui\imgui_tables.cpp.obj -c "D:\dev\platformer game\include\rlimgui\imgui_tables.cpp"
 
 CMakeFiles/game.dir/include/rlimgui/imgui_tables.cpp.i: cmake_force
@@ -162,7 +167,7 @@ CMakeFiles/game.dir/include/rlimgui/imgui_widgets.cpp.obj: CMakeFiles/game.dir/f
 CMakeFiles/game.dir/include/rlimgui/imgui_widgets.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
 CMakeFiles/game.dir/include/rlimgui/imgui_widgets.cpp.obj: D:/dev/platformer\ game/include/rlimgui/imgui_widgets.cpp
 CMakeFiles/game.dir/include/rlimgui/imgui_widgets.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/game.dir/include/rlimgui/imgui_widgets.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/game.dir/include/rlimgui/imgui_widgets.cpp.obj"
 	C:\mingw64-msvcrt\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/include/rlimgui/imgui_widgets.cpp.obj -MF CMakeFiles\game.dir\include\rlimgui\imgui_widgets.cpp.obj.d -o CMakeFiles\game.dir\include\rlimgui\imgui_widgets.cpp.obj -c "D:\dev\platformer game\include\rlimgui\imgui_widgets.cpp"
 
 CMakeFiles/game.dir/include/rlimgui/imgui_widgets.cpp.i: cmake_force
@@ -177,7 +182,7 @@ CMakeFiles/game.dir/include/rlimgui/rlImGui.cpp.obj: CMakeFiles/game.dir/flags.m
 CMakeFiles/game.dir/include/rlimgui/rlImGui.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
 CMakeFiles/game.dir/include/rlimgui/rlImGui.cpp.obj: D:/dev/platformer\ game/include/rlimgui/rlImGui.cpp
 CMakeFiles/game.dir/include/rlimgui/rlImGui.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/game.dir/include/rlimgui/rlImGui.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/game.dir/include/rlimgui/rlImGui.cpp.obj"
 	C:\mingw64-msvcrt\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/include/rlimgui/rlImGui.cpp.obj -MF CMakeFiles\game.dir\include\rlimgui\rlImGui.cpp.obj.d -o CMakeFiles\game.dir\include\rlimgui\rlImGui.cpp.obj -c "D:\dev\platformer game\include\rlimgui\rlImGui.cpp"
 
 CMakeFiles/game.dir/include/rlimgui/rlImGui.cpp.i: cmake_force
@@ -191,6 +196,7 @@ CMakeFiles/game.dir/include/rlimgui/rlImGui.cpp.s: cmake_force
 # Object files for target game
 game_OBJECTS = \
 "CMakeFiles/game.dir/src/main.cpp.obj" \
+"CMakeFiles/game.dir/leapform.rc.obj" \
 "CMakeFiles/game.dir/include/rlimgui/imgui.cpp.obj" \
 "CMakeFiles/game.dir/include/rlimgui/imgui_demo.cpp.obj" \
 "CMakeFiles/game.dir/include/rlimgui/imgui_draw.cpp.obj" \
@@ -203,6 +209,7 @@ game_OBJECTS = \
 game_EXTERNAL_OBJECTS =
 
 game.exe: CMakeFiles/game.dir/src/main.cpp.obj
+game.exe: CMakeFiles/game.dir/leapform.rc.obj
 game.exe: CMakeFiles/game.dir/include/rlimgui/imgui.cpp.obj
 game.exe: CMakeFiles/game.dir/include/rlimgui/imgui_demo.cpp.obj
 game.exe: CMakeFiles/game.dir/include/rlimgui/imgui_draw.cpp.obj
@@ -215,7 +222,7 @@ game.exe: D:/dev/platformer\ game/lib/win/libraylib.a
 game.exe: CMakeFiles/game.dir/linkLibs.rsp
 game.exe: CMakeFiles/game.dir/objects1.rsp
 game.exe: CMakeFiles/game.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable game.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="D:\dev\platformer game\build\win\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable game.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\game.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
