@@ -1,3 +1,0 @@
-C:\mingw64-msvcrt\bin\cmake.exe -E rm -f CMakeFiles\leapform.dir/objects.a
-C:\mingw64-msvcrt\bin\ar.exe qc CMakeFiles\leapform.dir/objects.a @CMakeFiles\leapform.dir\objects1.rsp
-C:\mingw64-msvcrt\bin\c++.exe -O3 -DNDEBUG -static -static-libstdc++ -static-libgcc -mwindows -Wl,--whole-archive CMakeFiles\leapform.dir/objects.a -Wl,--no-whole-archive -o leapform.exe -Wl,--out-implib,libleapform.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\leapform.dir\linkLibs.rsp

@@ -1,7 +1,0 @@
-D:/dev/platformer game/build/win/debug/CMakeFiles/debug.dir
-D:/dev/platformer game/build/win/debug/CMakeFiles/release.dir
-D:/dev/platformer game/build/win/debug/CMakeFiles/clean-debug.dir
-D:/dev/platformer game/build/win/debug/CMakeFiles/clean-release.dir
-D:/dev/platformer game/build/win/debug/CMakeFiles/leapform.dir
-D:/dev/platformer game/build/win/debug/CMakeFiles/edit_cache.dir
-D:/dev/platformer game/build/win/debug/CMakeFiles/rebuild_cache.dir

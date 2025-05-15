@@ -1,0 +1,70 @@
+  _                       __                     
+ | |                     / _|                    
+ | |     ___  __ _ _ __ | |_ ___  _ __ _ __ ___  
+ | |    / _ \/ _` | '_ \|  _/ _ \| '__| '_ ` _ \ 
+ | |___|  __/ (_| | |_) | || (_) | |  | | | | | |
+ |______\___|\__,_| .__/|_| \___/|_|  |_| |_| |_|
+                  | |                            
+                  |_|                            
+
+*------------------*
+Controls
+*------------------*
+
+A/D or Left/Right - Move left and right
+W/Up - Jump (Hold for higher jump)
+S/Down - Activate powerup
+R - Restart level
+Esc - Pause the game
+Tilde (a.k.a. Grave) - Open debug menu
+
+*------------------*
+Gameplay
+*------------------*
+
+The powerup:
+    The powerup can be picked up only once unless it is being spawned
+    by a powerup generator. Once picked up, the player will turn blue
+    and it activating it will spawn a platform that can be stood on.
+    Be careful; though, because the platform will only last a short
+    amount of time before it fades away.
+
+The door:
+    The green door (sometimes a boss door) is present in all levels.
+    Once the player touches the door, he or she will be warped directly
+    to the next level.
+
+Enemies:
+    The smaller red enemies will wait for a little, and then charge the
+    player. Touching the enemy will result in a restart of the level.
+
+Boss:
+    The final boss of the game can be killed by touching his altar five
+    times. Once touched, the altar will summon a shield that takes a 
+    certain amount of time to disappear. The boss will also summon death
+    beams from the sky to kill the player.
+
+*------------------*
+Features
+*------------------*
+
+Levels:
+    The original levels contain 11 maps with the last one being the final
+    boss fight. The expansion pack (which can be opened through the mod
+    menu) contains an additional 17 maps.
+
+Map editor:
+    The game ships with an in-game editor that can be used for editing levels
+    and mods (also called packs).
+
+Mod menu:
+    In the main menu, there is a "Mods" button that opens a mod menu. This 
+    menu can be used to load mods created by the map editor. Any mods in the
+    folder called "packs" will be loaded when the game starts up (they will
+    not be reloaded any time while the game is open).
+
+Timer:
+    The game includes a speedrun timer that can be toggled in the main menu.
+    This timer is accurate down to the hundredth of a second and it tells
+    exactly how many frames the run has been going on for. It also
+    automatically pauses when the game is paused.
